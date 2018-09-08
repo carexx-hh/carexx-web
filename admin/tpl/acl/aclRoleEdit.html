@@ -1,0 +1,25 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>系统管理</li>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.aclRoleList">角色管理</a>
+		</li>
+		<li>{{title}}系统角色</li>
+	</ul>
+	<div class="box">
+		<form class="formgroup" name="aclRoleForm">
+			<div class="formrow">
+				<label class="labtext-left">系统角色名称</label> <input type="text" name="name" ng-model="data.name" required="required" maxlength="50" placeholder="请输入50位以内系统角色名称"/>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">系统角色说明</label> <input type="text" name="remark" ng-model="data.remark" required="required" maxlength="255" placeholder="请输入255位以内系统角色说明"/>
+			</div>
+			<div class="fllab">
+				<input type="submit" class="submit" value="保存" ng-click="save()" ng-disabled="aclRoleForm.$invalid" />
+			</div>
+		</form>
+	</div>
+</div>

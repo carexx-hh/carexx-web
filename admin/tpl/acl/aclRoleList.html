@@ -1,0 +1,62 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>系统角色管理</li>
+		</li>
+		<li>系统角色列表</li>
+	</ul>
+	<div class="box">
+		<div class="filterForm">
+			<ul class="clearfix">
+				<li>名称：<input type="text" placeholder="请输入名称" ng-model="data.name"></li>
+				<li>状态：
+					<select ng-model="data.status" ng-change="query()">
+						<option value="">全部</option>
+						<option value="1">已启用</option>
+						<option value="0">未启用</option>
+					</select>
+				</li>
+				<li><button type="button" class="searchbtn" ng-click="query()">查询</button></li>
+				<li><button type="button" class="searchbtn" ng-click="reset()">重置</button></li>
+			</ul>
+		</div>
+		<div class="signList">
+			<div class="operation">
+				<a href="javascript:void(0)" ng-click="add()" class="addSign" ng-if="ops['O_SYS_ROLE_ADD']"><i class="fa fa-plus"></i>新增</a>
+				<a href="javascript:void(0)" ng-click="refresh()" class="addSign" ><i class="fa fa-refresh"></i>刷新</a>
+			</div>
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th class="cell-seq">序号</th>
+						<th class="cell-text">名称</th>
+						<th class="cell-text">说明</th>
+						<th class="cell-text">状态</th>
+						<th class="cell-text">创建时间</th>
+						<th class="cell-con">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in items">
+						<td class="cell-seq">{{$index + 1}}</td>
+						<td class="cell-text">{{item.name}}</td>
+						<td class="cell-text">{{item.remark}}</td>
+						<td class="cell-text">{{item.status | UseStatusFilter}}</td>
+						<td class="cell-text">{{item.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-con">
+							<a href="javascript:void(0)" ng-click="edit(item)" ng-if="ops['O_SYS_ROLE_EDIT']">编辑</a>
+							<a href="javascript:void(0)" ng-click="enable(item.id)" ng-if="ops['O_SYS_ROLE_STATUS_CTRL'] && item.status == 0">启用</a>
+							<a href="javascript:void(0)" ng-click="disable(item.id)" ng-if="ops['O_SYS_ROLE_STATUS_CTRL'] && item.status == 1">停用</a>
+							<a href="javascript:void(0)" ng-click="editAuth(item)" ng-if="ops['O_SYS_ROLE_EDIT_AUTH']">权限管理</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="defaultPage" ng-show="items == null">
+		<img src="img/nodata.png" /> <span>暂无数据</span>
+	</div>
+	<uib-pagination total-items="pagerConf.totalItems" ng-model="pagerConf.currentPage" max-size="pagerConf.maxSize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true"></uib-pagination>
+</div>

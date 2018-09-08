@@ -1,0 +1,86 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li><i class="fa fa-home"></i>
+			<li>业务管理</li>
+		</li>
+		<li>账务管理</li>
+	</ul>
+	<div class="box">
+		<div class="filterForm">
+			<ul class="clearfix">
+				<li>开始时间：
+					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.settleStartDate" />
+				</li>
+				<li>结束时间：
+					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.settleEndDate" />
+				</li>
+				<li>账单状态：
+					<select ng-model="data.settleStatus">
+							<option value="">全部</option>
+							<option value="0">未关账</option>
+							<option value="1">已关账</option>
+					</select>
+				</li>
+				<li><button type="button" class="searchbtn" ng-click="query()" ng-if="ops['O_BILL_QUERY']"><i class="fa fa-search"></i>&nbsp查询</button></li>
+				<li><button type="button" class="addbtn" ng-click="add()" ng-if="ops['O_BILL_ADD']"><i class="fa fa-plus"></i>&nbsp新增</button></li>
+			</ul>
+		</div>
+		<div class="signList">
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th class="cell-number">关账时间</th>
+						<th class="cell-number">状态</th>
+						<th class="cell-number">创建时间</th>
+						<th class="cell-number">修改时间</th>
+						<th class="cell-text">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in billList">
+						<td class="cell-number">{{item.settleDate | date:'yyyy-MM-dd'}}</td>
+						<td class="cell-number">{{item.settleStatus | BillStatusFilter}}</td>
+						<td class="cell-number">{{item.createTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-number">{{item.modifyTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-text">
+							<button type="button" class="btn btn-danger" ng-click="open(item.id)" ng-if="ops['O_BILL_STATUS_CTRL']&&item.settleStatus==1">
+								<i class="fa fa-lock"></i>&nbsp&nbsp开账&nbsp
+							</button>
+							<button type="button" class="btn btn-success" ng-click="close(item.id)" ng-if="ops['O_BILL_STATUS_CTRL']&&item.settleStatus==0">
+								<i class="fa fa-unlock-alt"></i>&nbsp&nbsp关账&nbsp
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="defaultPage" ng-show="billList== null">
+		<img src="img/nodata.png" /> <span>暂无数据</span>
+	</div>
+	<uib-pagination total-items="pagerConf.totalItems" ng-model="pagerConf.currentPage" max-size="pagerConf.maxSize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true"></uib-pagination>
+</div>
+<!--弹出层-->
+<script type="text/ng-template" id="billAdd.html"> 
+<div class="content" style="margin: 0px;min-height: auto;">
+	<ul class="breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<li>业务管理</li>
+			</li>
+			<li>账务管理</li>
+			<li>关账日期新增</li>
+			<i class="fa fa-times" aria-hidden="true" ng-click="close()" style="float: right;font-size: 36px;color: #8aafe4;margin-right: -15px;margin-top: -5px;"></i>
+	</ul>	
+		<div class="box">
+			<ng-form class="formgroup" name="billForm">			
+				<div class="formrow">
+					<label class="labtext-left"><sup class="required-flag">*</sup>关账日期</label> <input type="text" style="width:110px" class="startdate" required="required" onfocus="MyDatePicker()" ng-model="data.settleDate" />
+				</div>
+				<div class="fllab">
+					<input type="submit" class="submit" value="保存" ng-click="save()" ng-disabled="billForm.$invalid" />
+				</div>
+			</ng-form>
+		</div>	
+</div>
+</script>

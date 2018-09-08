@@ -1,0 +1,49 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>系统管理</li>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.instList">单位管理</a>
+		</li>
+		<li>单位管理编辑</li>
+	</ul>
+	<div class="box">
+		<ng-form class="formgroup" name="instForm">			
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>单位名称</label> <input type="text"  ng-model="data.instName" required="required" maxlength="50" placeholder="请输入单位名称"/>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>类型</label>
+				<select ng-model="data.instType" required="required">	
+					<option value="">请选择</option>
+					<option value="1">医院</option>
+					<option value="2">社区</option>
+				</select>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">地区</label> <input type="text"  ng-model="data.instRegion"  maxlength="100" placeholder="请输入地区"/>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">地址</label> <input type="text"  ng-model="data.instAddr"  maxlength="255" placeholder="请输入地址"/>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>经度</label>
+				<input type="text" name="instLng" ng-model="data.instLng" ng-pattern="/^(?:[1-9]\d*|0)(?:\.\d+)?$/" placeholder="请输入经度" required="required" />
+				<label class="error" ng-show="instForm.instLng.$error.pattern">经度格式输入错误</label>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>纬度</label>
+				<input type="text" name="instLat" ng-model="data.instLat" ng-pattern="/^(?:[1-9]\d*|0)(?:\.\d+)?$/" placeholder="请输入纬度" required="required" />
+				<label class="error" ng-show="instForm.instLat.$error.pattern">纬度格式输入错误</label>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">简介</label> <input type="text"  ng-model="data.introduce"  maxlength="255" placeholder="请输入简介"/>
+			</div>
+			<div class="fllab">
+				<input type="submit" class="submit" value="保存" ng-click="save()" ng-disabled="instForm.$invalid" />
+			</div>
+		</ng-form>
+	</div>
+</div>

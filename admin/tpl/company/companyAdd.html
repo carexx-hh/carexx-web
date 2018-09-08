@@ -1,0 +1,25 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>系统管理</li>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.companyList">单位管理</a>
+		</li>
+		<li>单位管理新增</li>
+	</ul>
+	<div class="box">
+		<ng-form class="formgroup" name="instForm">			
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>公司名称</label> <input type="text"  ng-model="data.instSysName" required="required" maxlength="50" placeholder="请输入单位名称"/>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">简介</label> <input type="text"  ng-model="data.introduce"  maxlength="255" placeholder="请输入简介"/>
+			</div>
+			<div class="fllab">
+				<input type="submit" class="submit" value="保存" ng-click="save()" ng-disabled="instForm.$invalid" />
+			</div>
+		</ng-form>
+	</div>
+</div>

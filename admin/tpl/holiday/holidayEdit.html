@@ -1,0 +1,29 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>系统管理</li>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.holidayList">节假管理</a>
+		</li>
+		<li>节假管理编辑</li>
+	</ul>
+	<div class="box">
+		<ng-form class="formgroup" name="holidayForm">			
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>节假名称</label> <input type="text"  ng-model="data.holidayName" required="required" maxlength="50" placeholder="请输入单位名称"/>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>开始日期</label> <input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" required="required" onfocus="MyDatePicker({maxDate:'#F{$dp.$D(\'endRegDate\')}'})" ng-model="data.holidayStartTime" />
+
+			</div>
+			<div class="formrow">				
+				<label class="labtext-left"><sup class="required-flag">*</sup>结束日期</label> <input type="text" id="endRegDate" style="width:110px" class="startdate" onchange="" required="required" onfocus="MyDatePicker({minDate:'#F{$dp.$D(\'startRegDate\')}'})" ng-model="data.holidayEndTime" />
+			</div>
+			<div class="fllab">
+				<input type="submit" class="submit" value="保存" ng-click="save()" ng-disabled="holidayForm.$invalid" />
+			</div>
+		</ng-form>
+	</div>
+</div>

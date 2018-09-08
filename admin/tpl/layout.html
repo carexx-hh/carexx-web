@@ -1,0 +1,40 @@
+<div class="nav-container" data-ng-include=" 'tpl/block/nav.html' "></div>
+
+<div class="main-wrapper" data-ng-include=" 'tpl/block/menu.html' "></div>
+
+<div class="content-wrapper" ui-view></div>
+
+<!--弹出层-->
+<script type="text/ng-template" id="modifyPwPopup.html">
+<div class="content" style="margin: 0px;">
+    <ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>安全管理</li>
+		</li>
+		<li>修改密码</li>
+		<i class="fa fa-times" aria-hidden="true" ng-click="close()" style="float: right;font-size: 36px;color: #8aafe4;margin-right: -15px;margin-top: -5px;"></i>
+	</ul>
+	<div class="box">
+		<ng-form class="formgroup" name="modifyPwdForm">
+    		<div class="formrow">
+    			<label class="labtext-left">原密码</label>
+    			<input type="password" class="rowInput" placeholder="密码为6-20位字母、数字、特殊符号的组合" ng-model="data.oldPwd" ng-minlength="6" ng-maxlength="20" maxlength="20" required />
+    		</div>
+    		<div class="formrow">
+    			<label class="labtext-left">新密码</label>
+    			<input type="password" class="rowInput" placeholder="密码为6-20位字母、数字、特殊符号的组合" ng-model="data.newPwd" ng-minlength="6" ng-maxlength="20" maxlength="20" required />
+    			<label class="error" ng-show="data.oldPwd != null && data.newPwd != null && data.oldPwd == data.newPwd">新密码不能和原密码相同</label>
+    		</div>
+    		<div class="formrow">
+    			<label class="labtext-left">确认密码</label>
+    			<input type="password" class="rowInput" placeholder="密码为6-20位字母、数字、特殊符号的组合" ng-model="data.newPwdConfirm" ng-minlength="6" ng-maxlength="20" maxlength="20" required />
+    			<label class="error" ng-show="data.newPwd != null && data.newPwdConfirm != null && data.newPwd != data.newPwdConfirm">两次新密码输入不一致</label>
+    		</div>
+    		<div class="fllab">
+    			<input type="submit" class="submit" value="提交" ng-click="save()"  ng-disabled="modifyPwdForm.$invalid || data.oldPwd == data.newPwd || data.newPwd != data.newPwdConfirm" />
+    		</div>
+    	</ng-form>
+	</div>
+</div>
+</script>

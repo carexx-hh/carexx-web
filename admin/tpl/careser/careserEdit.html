@@ -1,0 +1,38 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>信息维护</li>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.careserList">服务项目</a>
+		</li>
+		<li>服务项目编辑</li>
+	</ul>
+	<div class="box">
+		<ng-form class="formgroup" name="serForm">			
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>服务名称</label>
+				<input type="text" ng-model="data.serviceName"  readonly="readonly" />				
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>单位</label>
+				<select ng-model="data.serviceUnit" required="required">	
+					<option value="">请选择</option>
+					<!--<option value="1">时</option>-->
+					<option value="2">天</option>
+					<!--<option value="3">周</option>-->
+					<!--<option value="4">月</option>-->
+					<!--<option value="5">年</option>-->
+				</select>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>单价(元)</label> 
+				<input type="text" name="servicePrice" ng-model="data.servicePrice" placeholder="请输入单价" required="required" />
+			</div>
+			<div class="fllab">
+				<input type="submit" class="submit" value="保存" ng-click="save()" ng-disabled="serForm.$invalid" />
+			</div>
+		</ng-form>
+	</div>
+</div>

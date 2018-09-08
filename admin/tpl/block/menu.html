@@ -1,0 +1,43 @@
+<div class="sidebar">
+	<nav class="sidenav">
+		<i class="fa fa-chevron-left hidden-h" id="change" style="font-size: 25px;"></i>
+		<ul>
+			<li class="navgroup" ng-repeat="menu in roleMenuList" repeat-finish>
+				<a class="navlevel"><i><img src="img/menu.png"/></i>{{menu.name}}</a>
+				<ul class="navlist">
+					<li ng-repeat="subMenu in menu.subMenuList">
+						<a class="navitem" href="javascript:void(0)" ui-sref="{{subMenu.visitUrl}}">{{subMenu.name}}</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</div>
+<script type="text/javascript">
+	function initMenuAnimate() {
+		$('.navgroup').on('click', function(e) {
+			e.stopPropagation();
+			$(this).find('.navlist').slideToggle();
+		});
+		$('.navitem').on('click', function(e) {
+			e.stopPropagation();
+			$(this).addClass('current');
+			$(this).parent('li').siblings().find('.current').removeClass('current');
+			$(this).parents('.navgroup').siblings().find('.current').removeClass('current');
+		});
+		$('#change').click(function(){
+			if($(this).attr("class")=="fa fa-chevron-left hidden-h"){
+				$(this).addClass("hidden-d").removeClass("hidden-h").addClass("fa-chevron-right").removeClass("fa-chevron-left");
+				$('.sidebar').css("width","50px");
+				$('.content').css("margin-left","60px");
+				$('.navitem').css("display","none");
+			}else{
+				$(this).removeClass("fa-chevron-right").addClass("fa-chevron-left").removeClass("hidden-d").addClass("hidden-h");
+				$('.sidebar').css("width","200px");
+				$('.content').css("margin-left","210px");
+				$('.navitem').css("display","block");
+			}
+//			alert($(this).attr("class"));
+		})
+	}
+</script>

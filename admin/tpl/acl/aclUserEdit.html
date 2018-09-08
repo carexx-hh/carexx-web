@@ -1,0 +1,117 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>系统用户管理</li>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.aclUserList">系统用户列表</a>
+		</li>
+		<li>{{title}}系统用户</li>
+	</ul>
+	<div class="box">
+		<form class="formgroup" name="aclUserForm">
+			<div class="formrow">
+				<label class="labtext-left">登录账号</label>
+				<input type="text" name="account" ng-model="data.account" ng-pattern="/^[A-Za-z0-9]+$/" maxlength="20" ng-disabled="editMode == '1'" placeholder="请输入20位以内字母数字组成的登录账号" required />
+				<label class="error" ng-show="aclUserForm.account.$error.pattern">登录账号格式输入错误</label>
+			</div>
+			<div class="formrow" ng-if="editMode == '0'">
+				<label class="labtext-left">登录密码</label>
+				<input type="password" name="loginPass" ng-model="data.loginPass"  placeholder="请输入6-20位登录密码" minlength="6" maxlength="20" required />
+			</div>
+			<div class="formrow" ng-if="editMode == '0'">
+				<label class="labtext-left">确认登录密码</label>
+				<input type="password" name="confirmLoginPass" ng-model="data.confirmLoginPass" placeholder="请输入6-20位登录密码" minlength="6" maxlength="20" required />
+				<label class="error" ng-show="aclUserForm.loginPass.$valid && aclUserForm.confirmLoginPass.$valid && data.loginPass != data.confirmLoginPass">两次密码输入不一致</label>
+			</div>
+			<div class="formrow" ng-if="userInfo.instId==0&&editMode == '0'">
+				<label class="labtext-left">所在单位</label>
+				<input type="text"  ng-model="data.serInstName" maxlength="20" placeholder="请选择服务单位" ng-click="choiceServiceInstId()" required="required" readonly="readonly"/>				
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">姓名</label>
+				<input type="text" name="name" ng-model="data.name" placeholder="请输入姓名" maxlength="20" required />
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">手机号</label>
+				<input type="text" name="mobile" ng-model="data.mobile" ng-pattern="/^(13[0-9]|15[0-9]|17[0-9]|18[0-9])\d{8}$/" placeholder="请输入手机号" maxlength="11" required />
+				<label class="error" ng-show="aclUserForm.mobile.$error.pattern">手机号格式输入错误</label>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">邮箱</label>
+				<input type="text" name="email" ng-model="data.email" ng-pattern="/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/" placeholder="请输入邮箱" maxlength="50" required />
+				<label class="error" ng-show="aclUserForm.email.$error.pattern">邮箱格式输入错误</label>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">角色</label>
+				<select name="roleId" ng-model="data.roleId"  ng-options="role.id as role.name for role in roles" required>
+				</select>
+			</div>
+			<div class="fllab">
+				<input type="submit" class="submit" value="提交" ng-click="save()" ng-disabled="aclUserForm.$invalid || data.loginPass != data.confirmLoginPass" />
+			</div>
+		</form>
+	</div>
+</div>
+<script type="text/ng-template" id="instChoice.html"> 
+<div class="content" style="margin:0;">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>信息维护</li>
+		</li>
+		<li>人员档案</li>
+		<li>人员档案新增</li>
+		<li>单位查询</li>
+		<i class="fa fa-times" aria-hidden="true" ng-click="close()" style="float: right;font-size: 36px;color: #8aafe4;margin-right: -15px;margin-top: -5px;"></i>
+	</ul>
+	<div class="box">
+		<div class="filterForm">
+			<ul class="clearfix">
+				<li>单位名称：<input type="text" placeholder="请输入单位名称" ng-model="data.instName"></li>				
+				<li>类型：
+					<select ng-model="data.instType">	
+						<option value="">全部</option>
+						<option value="1">医院</option>
+						<option value="2">社区</option>
+					</select>
+				</li>
+				<li><button type="button" class="searchbtn" ng-click="query()"><i class="fa fa-search"></i>&nbsp查询</button></li>
+			</ul>
+		</div>
+		<div class="signList">
+			<table class="tablelist" style="min-width: auto;">
+				<thead>
+					<tr>
+						<th class="cell-text">名称</th>
+						<th class="cell-number">类型</th>
+						<th class="cell-number">所属公司</th>
+						<th class="cell-number">地区</th>
+						<th class="cell-text">地址</th>
+						<th class="cell-number">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="list in instList">
+						<td class="cell-text">{{list.instName}}</td>
+						<td class="cell-number">{{list.instType |InstTypeFilter}}</td>
+						<td class="cell-number">{{list.instSysName}}</td>
+						<td class="cell-number">{{list.instRegion}}</td>
+						<td class="cell-text">{{list.instAddr}}</td>
+						<td class="cell-number">
+							<button type="button" class="btn btn-success" ng-click="choice(list)">
+								<i class="fa fa-check-square"></i>&nbsp选择
+							</button>							
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="defaultPage" ng-show="instList== null">
+		<img src="img/nodata.png" /> <span>暂无数据</span>
+	</div>
+	<uib-pagination total-items="pagerConf.totalItems" ng-model="pagerConf.currentPage" max-size="pagerConf.maxSize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true"></uib-pagination>
+</div>
+</script>

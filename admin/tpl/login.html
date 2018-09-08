@@ -1,0 +1,26 @@
+<link href="css/login.css" rel="stylesheet" type="text/css" />
+<link href="css/site.css" rel="stylesheet" type="text/css" />
+
+<div class="container bodyStyle">
+	<div class="row clearfix">
+		<div class="col-md-6 column">
+			<img src="../img/PClogo.png" class="systemlogo">
+			<ng-form name="loginForm">
+			
+			<input ng-model="data.acctNo" ng-keyup="onEnter($event)" type="text" class="loginuser" placeholder="请输入用户名" />
+			<input ng-model="data.loginPass" ng-keyup="onEnter($event)" type="password" class="loginpwd" placeholder="请输入密码" />
+			<input ng-click="submit()" class="loginbtn" value="登 录" type="button" />
+
+		</ng-form>
+		</div>
+		<div class="col-md-6 column">
+			<img src="../img/loginRight.png" class="imgright">
+		</div>
+		<div style="position: absolute; font-size: 14px; height: 25px; bottom: 10px; left: 10px; text-align: center; width: 98%;color:white;opacity: 0.6;">
+		技术支持：上海上晖信息科技有限公司
+		</div>
+	</div>
+</div>
+
+
+

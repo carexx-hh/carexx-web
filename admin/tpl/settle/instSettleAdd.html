@@ -1,0 +1,29 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>信息维护</li>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.instSettleList">结算管理</a>
+		</li>
+		<li>结算标准新增</li>
+	</ul>
+	<div class="box">
+		<ng-form class="formgroup" name="serForm">			
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>工种名称</label>
+				<select ng-model="data.workTypeId" required="required">	
+					<option value="">请选择</option>
+					<option ng-repeat="workTypeItem in workTypeList" value="{{workTypeItem.id}}">{{workTypeItem.workTypeName}}</option>
+				</select>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>结算比例</label> <input type="text"  ng-model="data.settleRatio"  maxlength="100" placeholder="请输入结算比例" required="required"/>
+			</div>
+			<div class="fllab">
+				<input type="submit" class="submit" value="保存" ng-click="save()" ng-disabled="serForm.$invalid" />
+			</div>
+		</ng-form>
+	</div>
+</div>

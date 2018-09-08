@@ -1,0 +1,29 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>系统管理</li>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.serviceList">项目管理</a>
+		</li>
+		<li>项目管理新增</li>
+	</ul>
+	<div class="box">
+		<ng-form class="formgroup" name="serForm">	
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>服务类别</label>
+				<select ng-model="data.workTypeId" required="required">	
+					<option value="">请选择</option>
+					<option ng-repeat="wtItem in workTypeList" value="{{wtItem.id}}">{{wtItem.workTypeName}}</option>
+				</select>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>服务名称</label> <input type="text"  ng-model="data.serviceName" required="required" maxlength="20" placeholder="请输入服务名称"/>
+			</div>		
+			<div class="fllab">
+				<input type="submit" class="submit" value="保存" ng-click="save()" ng-disabled="serForm.$invalid" />
+			</div>
+		</ng-form>
+	</div>
+</div>

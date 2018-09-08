@@ -1,0 +1,26 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>系统管理</li>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.lesionList">病区管理</a>
+		</li>
+		<li>病区管理编辑</li>
+	</ul>
+	<div class="box">
+		<ng-form class="formgroup" name="holidayForm">			
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>病区</label> <input type="text"  ng-model="data.inpatientArea" required="required" maxlength="50" placeholder="请输入病区"/>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">描述</label> <input type="text"  ng-model="data.introduce" maxlength="50" placeholder="请输入描述"/>
+			</div>
+			
+			<div class="fllab">
+				<input type="submit" class="submit" value="保存" ng-click="save()" ng-disabled="holidayForm.$invalid" />
+			</div>
+		</ng-form>
+	</div>
+</div>

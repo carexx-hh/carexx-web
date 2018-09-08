@@ -1,0 +1,238 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li><i class="fa fa-home"></i>
+			<li>信息维护</li>
+		</li>
+		<li>订单管理</li>
+	</ul>
+	<div class="box">
+		<div class="filterForm">
+			<ul class="clearfix">
+				<li>客户名称：<input type="text" placeholder="请输入客户名称" ng-model="data.realName"></li>
+				<li>开始时间：
+					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceStartTime" />
+				</li>
+				<li>结束时间：
+					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceEndTime" />
+				</li>
+				<li>订单状态：
+					<select ng-model="data.orderStatus">
+							<option value="">全部</option>
+							<option value="1">待排班</option>
+							<option value="2">已取消</option>
+							<option value="3">服务中</option>
+							<option value="4">待支付</option>
+							<option value="5">已支付</option>
+							<option value="6">已完成</option>
+					</select>
+				</li>
+				<li>订单类型：
+					<select ng-model="data.orderType">
+							<option value="">全部</option>
+							<option value="1">线上订单</option>
+							<option value="2">线下订单</option>
+					</select>
+				</li>
+				<li>支付方式：
+					<select ng-model="data.payType">
+							<option value="">全部</option>
+							<option value="1">在线支付</option>
+							<option value="2">现金支付</option>
+					</select>
+				</li>
+				<li>所属公司：
+					<select ng-model="data.instSysId">
+							<option value="">全部</option>
+							<option ng-repeat="cpItem in instSysList" value="{{cpItem.id}}">{{cpItem.instSysName}}</option>
+					</select>
+				</li>
+				<li>凭证类型：
+					<select ng-model="data.proofType">
+							<option value="">全部</option>
+							<option value="1">收据</option>
+							<option value="2">发票</option>
+					</select>
+				</li>
+				<li>凭证号：<input type="text" placeholder="请输入凭证号" ng-model="data.proofNo"></li>
+				<li><button type="button" class="searchbtn" ng-click="query()" ng-if="ops['O_ORDER_QUERY']"><i class="fa fa-search"></i>&nbsp查询</button></li>
+				<li><button type="button" class="addbtn" ng-click="add()" ng-if="ops['O_ORDER_ADD']"><i class="fa fa-plus"></i>&nbsp新增</button></li>
+				<li><button type="button" class="searchbtn" ng-click="reset()"><i class="fa fa-refresh"></i>&nbsp重置</button></li>
+			</ul>
+		</div>
+		<div class="signList">
+			
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th class="cell-text">订单号</th>
+						<th class="cell-seq">客户名称</th>
+						<th class="cell-seq">订单类型</th>
+						<th class="cell-seq">支付类型</th>
+						<th class="cell-number">病区/病床</th>
+						<th class="cell-text">服务名称</th>
+						<th class="cell-seq">订单金额</th>
+						<th class="cell-seq">调整金额</th>
+						<th class="cell-seq">订单状态</th>
+						<th class="cell-seq">所属公司</th>
+						<th class="cell-seq">凭证类型</th>
+						<th class="cell-number">凭证号</th>
+						<th class="cell-text">开始时间</th>
+						<th class="cell-text">结束时间</th>
+						<th class="cell-con">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in orderList">
+						<td class="cell-text">{{item.orderNo}}</td>
+						<td class="cell-seq">{{item.realName}}</td>
+						<td class="cell-seq">{{item.orderType | OrderTypeFilter}}</td>
+						<td class="cell-seq">{{item.payType | PayTypeFilter}}</td>
+						<td class="cell-number">{{item.inpatientArea}}/{{item.inpatientWard}}</td>
+						<td class="cell-text">{{item.serviceName}}</td>
+						<td class="cell-seq">{{item.orderAmt+item.adjustAmt| number:2}}</td>
+						<td class="cell-seq">{{item.adjustAmt| number:2}}</td>
+						<td class="cell-seq">{{item.orderStatus |orderStateFilter}}</td>
+						<td class="cell-seq">{{item.instSysName}}</td>
+						<td class="cell-seq">{{item.proofType | proofTypeFilter}}</td>
+						<td class="cell-number">{{item.receiptNo}}{{item.invoiceNo}}</td>
+						<td class="cell-text">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-text">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-con">
+							<button type="button" class="btn btn-warning" ng-click="arrange(item)" ng-if="ops['O_ORDER_SCHEDULE']&&item.orderStatus==1">
+								<i class="fa fa-pencil-square-o fa-lg"></i>&nbsp排班
+							</button>							
+							<button type="button" class="btn btn-primary" ng-click="schedulePopup(item,1)" ng-if="ops['O_ORDER_DETAILS']&&item.orderStatus>2">
+								<i class="fa fa-eye"></i>&nbsp&nbsp详情
+							</button>
+							<button type="button" class="btn btn-success" ng-click="confirmPay(item)" ng-if="ops['O_ORDER_RECEIVABLES']&&item.orderStatus==4">
+								<i class="fa fa-check"></i>&nbsp&nbsp收款
+							</button>
+							<button type="button" class="btn btn-danger" ng-click="cancel(item)" ng-if="ops['O_ORDER_CANCEL']&&(item.orderStatus==1 || item.orderStatus==3)">
+								<i class="fa fa-scissors"></i>&nbsp&nbsp取消
+							</button>
+							<button type="button" class="btn btn-success" ng-click="schedulePopup(item,2)" ng-if="ops['O_ORDER_COMPLETE']&&item.orderStatus==5">
+								<i class="fa fa-check"></i>&nbsp&nbsp完成
+							</button>
+							<button type="button" class="btn btn-warning" ng-click="schedulePopup(item,3)" ng-if="ops['O_ORDER_ADJUST']&&item.orderStatus==6&&item.settleStatus!=3">
+								<i class="fa fa-pencil-square-o fa-lg"></i>&nbsp调整
+							</button>
+						</td>
+					</tr>					
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="defaultPage" ng-show="orderList== null">
+		<img src="img/nodata.png" /> <span>暂无数据</span>
+	</div>
+	<uib-pagination total-items="pagerConf.totalItems" ng-model="pagerConf.currentPage" max-size="pagerConf.maxSize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true"></uib-pagination>
+</div>
+
+<!--弹出层-->
+<script type="text/ng-template" id="schedulePopup.html"> 
+	<div class="content" style="margin:0px;" ng-if="data.tag==1">
+		<ul class="breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<li>业务维护</li>
+			</li>
+			<li>订单管理</li>
+			<li>排班查询</li>
+			<i class="fa fa-times" aria-hidden="true" ng-click="close()" style="float: right;font-size: 36px;color: #8aafe4;margin-right: -15px;margin-top: -5px;"></i>
+		</ul>
+		<div class="box" style="float: left;">
+			<div class="filterForm">
+				<ul class="clearfix">
+					<li><button type="button" class="searchbtn" ng-click="confirm()" ng-if="data.orderStatus==3"><i class="fa fa-check"></i>&nbsp&nbsp批量确认</button></li>
+				</ul>
+			</div>
+			<div class="signList">					
+				<table class="tablelist" style="min-width: auto;">
+					<thead>
+						<tr>
+							<th class="cell-seq"><input type="checkbox" ng-model="selectAll" ng-click="checkAll(selectAll)"></th>
+							<th class="cell-number">人员姓名</th>
+							<th class="cell-number">结算调整(元)</th>
+							<th class="cell-number">结算款(元)</th>
+							<th class="cell-number">排班状态</th>
+							<th class="cell-number">排班开始时间</th>
+							<th class="cell-number">排班结算时间</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in schList">
+							<td class="cell-seq"><input type="checkbox" ng-model="item.checked" ng-disabled="item.serviceStatus!=1"></td>
+							<td class="cell-number">{{item.realName}}</td>
+							<td class="cell-number">{{item.settleAdjustAmt | number:2}}</td>
+							<td class="cell-number">{{item.staffSettleAmt| number:2}}</td>
+							<td class="cell-number">{{item.serviceStatus | SchStateFilter}}</td>
+							<td class="cell-number">{{item.serviceStartTime | date:'yyyy-MM-dd HH:mm'}}</td>
+							<td class="cell-number">{{item.serviceEndTime | date:'yyyy-MM-dd HH:mm'}}</td>
+						</tr>					
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="content" style="margin:0;" ng-if="data.tag==2">
+		<ul class="breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<li>业务维护</li>
+			</li>
+			<li>订单管理</li>
+			<li>确认完成</li>
+			<i class="fa fa-times" aria-hidden="true" ng-click="close()" style="float: right;font-size: 36px;color: #8aafe4;margin-right: -15px;margin-top: -5px;"></i>
+		</ul>
+		<div class="box" style="float: left;">
+			<ng-form class="formgroup" name="serForm">			
+			<div class="formrow">
+				
+				<label class="labtext-left" style="width:93px;"><sup class="required-flag">*</sup>所属公司</label>
+				<select ng-model="data.instSysId" style="width: 100px;" required="required">
+					<option value="">请选择</option>
+					<option ng-repeat="sysItem in instSysList" value="{{sysItem.id}}">{{sysItem.instSysName}}</option>
+				</select>
+				<label class="labtext-left"><sup class="required-flag">*</sup>签单人</label> <input type="text"  ng-model="data.signingPerson"  maxlength="100" placeholder="请输入签单人" required="required"/>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left" style="width:93px;"><sup class="required-flag">*</sup>发票/收据</label>
+				<select ng-model="data.proofType" style="width: 100px;" required="required">
+					<option value="">请选择</option>
+					<option value="1">收据</option>
+					<option value="2">发票</option>
+				</select>
+				<label class="labtext-left"><sup class="required-flag">*</sup>发票号/收据号</label> <input type="text"  ng-model="data.proofNo"  maxlength="100" placeholder="请输入发票/收据号" required="required"/>
+			</div>
+			
+			<div class="fllab">
+				<input type="submit" class="submit" value="完成订单" ng-click="complete()" ng-disabled="serForm.$invalid" />
+			</div>
+		</ng-form>
+		</div>
+	</div>	
+	<div class="content" style="margin:0;" ng-if="data.tag==3">
+		<ul class="breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<li>业务维护</li>
+			</li>
+			<li>订单管理</li>
+			<li>调整金额</li>
+			<i class="fa fa-times" aria-hidden="true" ng-click="close()" style="float: right;font-size: 36px;color: #8aafe4;margin-right: -15px;margin-top: -5px;"></i>
+		</ul>
+		<div class="box" style="float: left;">
+			<ng-form class="formgroup" name="serForm">			
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>调整金额(元)</label> <input type="number"  ng-model="data.adjustAmt"  maxlength="100" placeholder="请输入调整金额" required="required"/>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>发票号/收据号</label> <input type="text"  ng-model="data.proofNo"  maxlength="100" placeholder="请输入发票/收据号" required="required"/>
+			</div>
+			<div class="fllab">
+				<input type="submit" class="submit" value="确认" ng-click="adjust()" ng-disabled="serForm.$invalid" />
+			</div>
+		</ng-form>
+		</div>
+	</div>
+</script>

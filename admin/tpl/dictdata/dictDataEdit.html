@@ -1,0 +1,28 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>系统管理</li>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.dictList">数据字典</a>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.dictList">{{cache.dictName}}</a>
+		</li>
+		<li>数据编辑</li>
+	</ul>
+	<div class="box">
+		<ng-form class="formgroup" name="aclRoleForm">
+			<div class="formrow">
+				<label class="labtext-left">数据名</label> <input type="text" name="dictName" ng-model="editData.dictDataName" required="required" maxlength="15" placeholder="请输入15位以内数据名"/>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">数据值</label> <input type="text" name="dictValue" ng-model="editData.dictDataValue" required="required" maxlength="15" placeholder="请输入15位以内数据值"/>
+			</div>
+			<div class="fllab">
+				<input type="submit" class="submit" value="保存" ng-click="save()" ng-disabled="aclRoleForm.$invalid" />
+			</div>
+		</ng-form>
+	</div>
+</div>

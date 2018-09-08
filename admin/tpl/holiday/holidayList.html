@@ -1,0 +1,52 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li><i class="fa fa-home"></i>
+			<li>信息维护</li>
+		</li>
+		<li>节假管理</li>
+	</ul>
+	<div class="box">
+		<div class="filterForm">
+			<ul class="clearfix">
+				<li>节假名称：<input type="text" placeholder="请输入节假名称" ng-model="data.holidayName"></li>
+				<li><button type="button" class="searchbtn" ng-click="query()" ng-if="ops['O_HOLIDAY_QUERY']"><i class="fa fa-search"></i>&nbsp查询</button></li>
+				<li><button type="button" class="addbtn" ng-click="add()" ng-if="ops['O_HOLIDAY_ADD']"><i class="fa fa-plus"></i>&nbsp新增</button></li>
+			</ul>
+		</div>
+		<div class="signList">
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th class="cell-number">节假名称</th>
+						<th class="cell-number">开始时间</th>
+						<th class="cell-number">结束时间</th>
+						<th class="cell-number">创建时间</th>
+						<th class="cell-number">修改时间</th>
+						<th class="cell-con">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in holidayList">
+						<td class="cell-number">{{item.holidayName}}</td>
+						<td class="cell-number">{{item.holidayStartTime| date:'yyyy-MM-dd'}}</td>
+						<td class="cell-number">{{item.holidayEndTime| date:'yyyy-MM-dd'}}</td>
+						<td class="cell-number">{{item.createTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-number">{{item.modifyTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-con">
+							<button type="button" class="btn btn-primary" ng-click="edit(item)" ng-if="ops['O_HOLIDAY_EDIT']">
+								<i class="fa fa-pencil-square-o fa-lg"></i>&nbsp编辑
+							</button>
+							<button type="button" class="btn btn-danger" ng-click="delete(item.id)" ng-if="ops['O_HOLIDAY_DELETE']">
+								<i class="fa fa-scissors"></i>&nbsp&nbsp删除
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="defaultPage" ng-show="holidayList== null">
+		<img src="img/nodata.png" /> <span>暂无数据</span>
+	</div>
+	<uib-pagination total-items="pagerConf.totalItems" ng-model="pagerConf.currentPage" max-size="pagerConf.maxSize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true"></uib-pagination>
+</div>

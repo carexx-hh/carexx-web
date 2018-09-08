@@ -1,0 +1,73 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li><i class="fa fa-home"></i>
+			<li>系统管理</li>
+		</li>
+		<li>单位管理</li>
+	</ul>
+	<div class="box">
+		<div class="filterForm">
+			<ul class="clearfix">
+				<li>单位名称：<input type="text" placeholder="请输入单位名称" ng-model="data.instName"></li>
+				<li>状态：
+					<select ng-model="data.instStatus">
+						<option value="">全部</option>
+						<option value="1">已启用</option>
+						<option value="0">未启用</option>
+					</select>
+				</li>
+				<li>类型：
+					<select ng-model="data.instType">
+						<option value="">全部</option>
+						<option value="1">医院</option>
+						<option value="2">社区</option>
+					</select>
+				</li>
+				<li><button type="button" class="searchbtn" ng-click="query()"><i class="fa fa-search"></i>&nbsp查询</button></li>
+				<li><button type="button" class="addbtn" ng-click="add()"><i class="fa fa-plus"></i>&nbsp新增</button></li>
+			</ul>
+		</div>
+		<div class="signList">
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th class="cell-text">名称</th>
+						<th class="cell-number">类型</th>
+						<th class="cell-number">地区</th>
+						<th class="cell-text">地址</th>
+						<th class="cell-number">状态</th>
+						<th class="cell-number">创建时间</th>
+						<th class="cell-number">修改时间</th>
+						<th class="cell-con">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="list in instList">
+						<td class="cell-text">{{list.instName}}</td>
+						<td class="cell-number">{{list.instType |InstTypeFilter}}</td>
+						<td class="cell-number">{{list.instRegion}}</td>
+						<td class="cell-text">{{list.instAddr}}</td>
+						<td class="cell-number">{{list.instStatus |UseStatusFilter}}</td>
+						<td class="cell-number">{{list.createTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-number">{{list.modifyTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-con">
+							<button type="button" class="btn btn-primary" ng-click="edit(list)">
+								<i class="fa fa-pencil-square-o fa-lg"></i>&nbsp编辑
+							</button>
+							<button type="button" class="btn btn-danger" ng-click="disable(list.id)" ng-if="list.instStatus==1">
+								<i class="fa fa-lock"></i>&nbsp&nbsp停用&nbsp
+							</button>
+							<button type="button" class="btn btn-success" ng-click="enable(list.id)" ng-if="list.instStatus==0">
+								<i class="fa fa-unlock-alt"></i>&nbsp&nbsp启用&nbsp
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="defaultPage" ng-show="instList== null">
+		<img src="img/nodata.png" /> <span>暂无数据</span>
+	</div>
+	<uib-pagination total-items="pagerConf.totalItems" ng-model="pagerConf.currentPage" max-size="pagerConf.maxSize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true"></uib-pagination>
+</div>

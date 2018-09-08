@@ -1,0 +1,83 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li><i class="fa fa-home"></i>
+			<li>业务管理</li>
+		</li>
+		<li>结算管理</li>
+	</ul>
+	<div class="box">
+		<div class="filterForm">
+			<ul class="clearfix">
+				<li>人员名称：<input type="text" placeholder="请输入人员名称" ng-model="data.staffName"></li>			
+				<li>所属公司：
+					<select ng-model="data.instSysId">
+							<option value="">全部</option>
+							<option ng-repeat="cpItem in instSysList" value="{{cpItem.id}}">{{cpItem.instSysName}}</option>
+					</select>
+				</li>
+				<li>人员性质：
+					<select ng-model="data.personType">
+							<option value="">全部</option>
+							<option value="1">在编</option>
+							<option value="2">加盟</option>
+					</select>
+				</li>
+				<li>工种：
+					<select ng-model="data.workTypeId">
+							<option value="">全部</option>
+							<option ng-repeat="wtItem in workTypeList" value="{{wtItem.id}}">{{wtItem.workTypeName}}</option>
+					</select>
+				</li>
+				<li>结算状态：
+					<select ng-model="data.settleStatus">
+							<option value="">全部</option>
+							<option value="1">已结算</option>
+							<option value="2">已关账</option>
+					</select>
+				</li>
+				<li>开始时间：
+					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceStartTime" />
+				</li>
+				<li>结束时间：
+					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceEndTime" />
+				</li>
+				
+				<li><button type="button" class="searchbtn" ng-click="query()" ng-if="ops['O_SER_SETTLE_QUERY']"><i class="fa fa-search"></i>&nbsp查询</button></li>
+				<li><button type="button" class="searchbtn" ng-click="reset()"><i class="fa fa-refresh"></i>&nbsp重置</button></li>
+				<li><button type="button" class="searchbtn" ng-click="exportReport()" ng-if="ops['O_SER_SETTLE_EXPORT']"><i class="fa fa-search"></i>&nbsp导出</button></li>
+			</ul>
+		</div>
+		<div class="signList">
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th class="cell-number">人员名称</th>	
+						<th class="cell-number">人员性质</th>
+						<th class="cell-number">服务人数</th>
+						<th class="cell-number">结算款合计(元)</th>
+						<th class="cell-number">结算调整合计(元)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in settleList">
+						<td class="cell-number">{{item.staffName}}</td>
+						<td class="cell-number">{{item.personType |PersonTypeFilter}}</td>
+						<td class="cell-number">{{item.serviceCustomerNum}}</td>							
+						<td class="cell-number">{{item.sumStaffSettleAmt| number:2}}</td>
+						<td class="cell-number">{{item.settleAdjustAmt| number:2}}</td>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr style="background-color: #D1EAF9;">
+						<td class="cell-text">总计</td>
+						<td class="cell-number"></td>
+						<td class="cell-number">{{totalPersonNum}}</td>
+						<td class="cell-number">{{totalSSAmt| number:2}}</td>
+						<td class="cell-number">{{totalISAmt| number:2}}</td>					
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>

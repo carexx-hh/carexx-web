@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
+</head>
+
+<body ng-app="jl-customer">
+<div id="mcover" onclick="document.getElementById('mcover').style.display='none';" style="display:none;position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    z-index: 20000;">
+  <img wf-src="img/share-mocktext.png" style="position: fixed;
+    right: 18px;
+    top: 5px;
+    width: 260px!important;
+    height: 180px!important;
+    z-index: 20001;"/>
+</div>
+<ion-nav-bar class="bar-calm">
+</ion-nav-bar>
+<ion-nav-view></ion-nav-view>
+</body>
+
+  <link href="vendor.css?t=20180214" rel="stylesheet">
+  <script src="vendor.js?t=20180214"></script>
+  <script src="templates.js?t=20180214"></script>
+  <script src="app.js?t=20180214"></script>
+  <link href="app.css?t=20180214" rel="stylesheet">
+
+  <script>
+      angular.module("constants", [])
+          .constant('cdn', null)
+          .constant('backend', 'https://m.carexx.cn')
+          .constant('kefuhome',null)
+          .constant('appVer', '1.0.0');
+  </script>
+</html>

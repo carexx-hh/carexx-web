@@ -1,0 +1,22 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>系统管理</li>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.workTypeList">工种信息</a>
+		</li>
+		<li>工种管理新增</li>
+	</ul>
+	<div class="box">
+		<ng-form class="formgroup" name="aclRoleForm">
+			<div class="formrow">
+				<label class="labtext-left">工种名称</label> <input type="text"  ng-model="data.workTypeName" required="required" maxlength="20" placeholder="请输入20位以内工种名称"/>
+			</div>
+			<div class="fllab">
+				<input type="submit" class="submit" value="保存" ng-click="save()" ng-disabled="aclRoleForm.$invalid" />
+			</div>
+		</ng-form>
+	</div>
+</div>

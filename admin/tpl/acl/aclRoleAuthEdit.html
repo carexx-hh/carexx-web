@@ -1,0 +1,38 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>系统管理</li>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.aclRoleList">角色管理</a>
+		</li>
+		<li>{{roleInfo.name}}</li>
+		<li>权限管理</li>
+	</ul>
+	<div class="box">
+		<div class="signList">
+			<table class="tablelist" ng-repeat="menu in roleAuth" ng-if="menu.id<90||(menu.id==90&&roleInfo.id<2)">
+				<thead>
+					<tr>
+						<th class="cell-checkbox"><input type="checkbox" ng-model="menu.checked" ng-click="checkRootMenu(menu)" /></th>
+						<th class="cell-text">{{menu.name}}</th>
+						<th class="cell-operate">操作权限</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="submenu in menu.subMenuList" ng-if="menu.id<90||(menu.id==90&&roleInfo.id<2)">
+						<td class="cell-checkbox"><input type="checkbox" ng-model="submenu.checked" ng-click="checkSubMenu(submenu)" /></td>
+						<td class="cell-text">{{submenu.name}}</td>
+						<td>
+							<span style="margin: 3px;font-size: 9px;" ng-repeat="oper in submenu.operList"><input type="checkbox" ng-model="oper.checked" ng-click="checkOper()" />{{oper.operName}}</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div style="text-align: center;margin: 10px;">
+				<input type="submit" class="submit" value="保存设置" ng-click="save()" />
+			</div>
+		</div>
+	</div>
+</div>
