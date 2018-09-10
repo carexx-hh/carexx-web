@@ -419,8 +419,12 @@ a.current {
 .formrow {
 	position: relative;
 	margin-bottom: 15px;
+	margin-top: 30px;
 }
 
+.formrow span {
+	margin-left: 100px;
+}
 .formrow:after {
 	clear: both;
 	height: 0;
@@ -1823,8 +1827,8 @@ a.current {
 	border-radius: 4px;
 	line-height: 36px;
 }
+
 .paysubmit {
-	margin: 100px;
 	color: #fff;
 	background-color: #4687cc;
 	width: 120px;
@@ -1844,6 +1848,10 @@ a.current {
 
 .fllab .submit {
 	margin-left: 135px;
+}
+
+.fllab .paysubmit {
+	margin-left: 250px;
 }
 
 .fllab .thumbnail {
