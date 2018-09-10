@@ -57,7 +57,7 @@ body {
 .user-info>li>a {
 	display: block;
 	padding: 28px 10px;
-	color: #222;
+	color: #FFFFFF;
 }
 
 .paneldown {
@@ -244,6 +244,16 @@ a.current {
 	margin: 30px 10px 10px 210px;
 	min-height: 800px;
 	padding: 30px 30px;
+	background-color: #FFF;
+	box-shadow: 1px 0px 10px rgba(0, 0, 0, .06);
+}
+
+.pay {
+	margin: 30px 10px 10px 210px;
+	min-height: 200px;
+	min-width: ;
+	padding: 30px 30px;
+	padding-left: 100px;
 	background-color: #FFF;
 	box-shadow: 1px 0px 10px rgba(0, 0, 0, .06);
 }
@@ -1813,6 +1823,15 @@ a.current {
 	border-radius: 4px;
 	line-height: 36px;
 }
+.paysubmit {
+	margin: 100px;
+	color: #fff;
+	background-color: #4687cc;
+	width: 120px;
+	border: none;
+	border-radius: 4px;
+	line-height: 36px;
+}
 
 .submit:hover {
 	background-color: #397bc1;
@@ -2309,7 +2328,9 @@ a.current {
 
 .modelbox .formrow {
 	margin-bottom: 30px;
+	
 }
+
 
 .formrow .labtext-left {
 	display: inline-block;

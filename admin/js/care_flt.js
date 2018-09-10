@@ -135,10 +135,16 @@ angular.module('app.filters', [])
 	.filter("PayTypeFilter", function() {
 		return function(payType) {
 			if(payType == 1) {
-				return "线上支付";
+				return "在线支付";
 			}
 			if(payType == 2) {
-				return "线下支付";
+				return "扫码支付";
+			}
+			if(payType == 3) {
+				return "公司转账";
+			}
+			if(payType == 4) {
+				return "现金支付";
 			}
 			return "未支付";
 		}

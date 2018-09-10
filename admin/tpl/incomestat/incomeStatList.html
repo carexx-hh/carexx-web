@@ -23,6 +23,15 @@
 							<option ng-repeat="cpItem in instSysList" value="{{cpItem.id}}">{{cpItem.instSysName}}</option>
 					</select>
 				</li>
+				<li>支付方式：
+					<select ng-model="data.payType">
+							<option value="">全部</option>
+							<option value="2">扫码支付</option>
+							<option value="4">现金支付</option>
+							<option value="3">公司转账</option>
+							<option value="1">在线支付</option>
+					</select>
+				</li>
 				<li>凭证类型：
 					<select ng-model="data.proofType">
 							<option value="">全部</option>
@@ -55,6 +64,7 @@
 					<tr>
 						<th class="cell-seq">序号</th>
 						<th class="cell-con">订单号</th>
+						<th class="cell-seq">支付类型</th>
 						<th class="cell-seq">客户姓名</th>					
 						<th class="cell-seq">签单人</th>
 						<th class="cell-number">病区/病床</th>
@@ -79,6 +89,7 @@
 					<tr ng-repeat="item in incomeList">
 						<td class="cell-seq">{{item.orderNum}}</td>	
 						<td class="cell-con">{{item.orderNo}}</td>
+						<td class="cell-seq">{{item.payType | PayTypeFilter}}</td>				
 						<td class="cell-seq">{{item.realName}}</td>						
 						<td class="cell-seq">{{item.signingPerson}}</td>
 						<td class="cell-number">{{item.inpatientArea}}/{{item.inpatientWard}}</td>
@@ -103,6 +114,7 @@
 					<tr>
 						<td class="cell-seq">合计</td>
 						<td class="cell-con"></td>
+						<td class="cell-seq"></td>		
 						<td class="cell-seq"></td>					
 						<td class="cell-seq"></td>
 						<td class="cell-number"></td>

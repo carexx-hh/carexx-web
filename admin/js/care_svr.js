@@ -328,8 +328,8 @@ angular.module('app.services', [])
 		return $http.post('customerorderschedule/batchconfirmcompleted',{ids:ids});
 	};
 	//确认支付
-	orderSvr.confirmPay = function(data) {
-		return $http.get('customerorder/throughPay/'+data.orderNo);
+	orderSvr.confirmpay = function(data) {
+		return $http.get('customerorder/throughPay/'+data.orderNo+"/"+data.payType);
 	};
 	//订单完成
 	orderSvr.complete = function(data) {

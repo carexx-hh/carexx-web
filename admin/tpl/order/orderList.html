@@ -36,8 +36,10 @@
 				<li>支付方式：
 					<select ng-model="data.payType">
 							<option value="">全部</option>
-							<option value="1">线上支付</option>
-							<option value="2">线下支付</option>
+							<option value="2">扫码支付</option>
+							<option value="4">现金支付</option>
+							<option value="3">公司转账</option>
+							<option value="1">在线支付</option>
 					</select>
 				</li>
 				<li>所属公司：
@@ -104,7 +106,7 @@
 							<button type="button" class="btn btn-primary" ng-click="schedulePopup(item,1)" ng-if="ops['O_ORDER_DETAILS']&&item.orderStatus>2">
 								<i class="fa fa-eye"></i>&nbsp&nbsp详情
 							</button>
-							<button type="button" class="btn btn-success" ng-click="confirmPay(item)" ng-if="ops['O_ORDER_RECEIVABLES']&&item.orderStatus==4">
+							<button type="button" class="btn btn-success" ng-click="schedulePopup(item,4)" ng-if="ops['O_ORDER_RECEIVABLES']&&item.orderStatus==4">
 								<i class="fa fa-check"></i>&nbsp&nbsp收款
 							</button>
 							<button type="button" class="btn btn-danger" ng-click="cancel(item)" ng-if="ops['O_ORDER_CANCEL']&&(item.orderStatus==1 || item.orderStatus==3)">
@@ -234,5 +236,26 @@
 			</div>
 		</ng-form>
 		</div>
+	</div>
+	<div class="pay" style="margin:0px;" ng-if="data.tag==4">
+		<ul class="breadcrumb">
+			<li>
+				<i class="fa fa-home"></i>
+				<li>业务维护</li>
+			</li>
+			<li>订单管理</li>
+			<li>收款方式</li>
+			<i class="fa fa-times" aria-hidden="true" ng-click="close()" style="float: right;font-size: 36px;color: #8aafe4;margin-right: -15px;margin-top: -5px;"></i>
+		</ul>
+			<ng-form class="formgroup" name="serForm">		
+				<div class="formrow">
+					<input class="payType" ng-model="data.payType" type="radio" value="2" name="payType" checked="checked" >扫码支付</input>
+					<input class="payType" ng-model="data.payType" type="radio" value="4" name="payType">现金支付</input>
+					<input class="payType" ng-model="data.payType" type="radio" value="3" name="payType">公司转账</input>
+				</div>
+			<div class="fllab">
+				<input type="submit" class="submit" value="确认" ng-click="confirmpay()" ng-disabled="serForm.$invalid" />
+			</div>
+		</ng-form>
 	</div>
 </script>

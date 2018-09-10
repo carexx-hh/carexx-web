@@ -348,6 +348,23 @@ angular.module('app.controllers', [])
 				});
 		}
 		
+		$scope.confirmpay=function(){				
+			showLoading();
+			OrderSvr.confirmpay($scope.data).success(function(res) {
+					hideLoading();
+					if(res.code == 200) {
+						alert('支付成功');
+						$uibModalInstance.dismiss('cancel');						
+					} else {
+						alert(res.errorMsg);
+						$uibModalInstance.dismiss('cancel');
+					}
+				})
+				.error(function() {
+					hideLoading();
+				});
+		}
+		
 		$scope.init();
 		$scope.getSchList(transmitData);
 		
@@ -1202,20 +1219,6 @@ angular.module('app.controllers', [])
 		$scope.arrange = function(list) {
 			LocalStorageProvider.setObject("order.item", list);
 			$state.go("/.orderSchedule")
-		}
-
-		$scope.confirmPay = function(item) {
-			if(window.confirm("是否确认收款？")) {
-				showLoading();
-				OrderSvr.confirmPay(item).success(function(res) {
-					hideLoading();
-					if(res.code == 200) {
-						$scope.query();
-					} else {
-						alert(res.errorMsg);
-					}
-				});
-			}
 		}
 
 		$scope.cancel = function(list) {
