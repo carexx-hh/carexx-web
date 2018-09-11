@@ -81,7 +81,7 @@
 						<th class="cell-number">凭证号</th>
 						<th class="cell-text">开始时间</th>
 						<th class="cell-text">结束时间</th>
-						<th class="cell-con">操作</th>
+						<th class="cell-text">操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -100,7 +100,7 @@
 						<td class="cell-number">{{item.receiptNo}}{{item.invoiceNo}}</td>
 						<td class="cell-text">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
 						<td class="cell-text">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
-						<td class="cell-con">
+						<td class="cell-text">
 							<button type="button" class="btn btn-warning" ng-click="arrange(item)" ng-if="ops['O_ORDER_SCHEDULE']&&item.orderStatus==1">
 								<i class="fa fa-pencil-square-o fa-lg"></i>&nbsp排班
 							</button>							
