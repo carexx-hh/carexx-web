@@ -33,6 +33,7 @@
 					<tr>
 						<th class="cell-text">服务项目</th>
 						<th class="cell-number">服务类别</th>
+						<th class="cell-text">服务介绍</th>
 						<th class="cell-number">状态</th>
 						<th class="cell-number">创建时间</th>
 						<th class="cell-number">修改时间</th>
@@ -43,6 +44,7 @@
 					<tr ng-repeat="item in serviceList">
 						<td class="cell-text">{{item.serviceName}}</td>
 						<td class="cell-number">{{item.workTypeName}}</td>
+						<td class="cell-text">{{item.serviceExplain}}</td>
 						<td class="cell-number">{{item.serviceStatus |UseStatusFilter}}</td>
 						<td class="cell-number">{{item.createTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
 						<td class="cell-number">{{item.modifyTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
