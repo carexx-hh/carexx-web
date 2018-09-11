@@ -424,6 +424,7 @@ a.current {
 
 .formrow span {
 	margin-left: 100px;
+	font-size: 20px;
 }
 .formrow:after {
 	clear: both;
@@ -2344,6 +2345,10 @@ a.current {
 	
 }
 
+.payTitle {
+	margin-left: 100px;
+	margin-top: 20px;
+}
 
 .formrow .labtext-left {
 	display: inline-block;
