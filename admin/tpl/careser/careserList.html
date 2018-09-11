@@ -25,9 +25,10 @@
 				<thead>
 					<tr>
 						<th class="cell-text">服务项目</th>
+						<th class="cell-number">服务介绍</th>
 						<th class="cell-number">服务类别</th>
 						<th class="cell-number">单价(元)</th>
-						<th class="cell-number">单位</th>
+						<th class="cell-unit">单位</th>
 						<th class="cell-number">创建时间</th>
 						<th class="cell-number">修改时间</th>
 						<th class="cell-con">操作</th>
@@ -36,6 +37,7 @@
 				<tbody>
 					<tr ng-repeat="item in careserList">
 						<td class="cell-text">{{item.serviceName}}</td>
+						<td class="cell-text">{{item.serviceExplain}}</td>
 						<td class="cell-number">{{item.workTypeName}}</td>
 						<td class="cell-number">{{item.servicePrice | number:2}}</td>
 						<td class="cell-number">{{item.serviceUnit |UnitFilter}}</td>

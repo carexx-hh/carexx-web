@@ -603,8 +603,13 @@ a.current {
 	width: 150px;
 }
 
+.tablelist .cell-unit {
+	text-align: center;
+	width: 50px;
+}
+
 .tablelist .cell-con {
-	width: 200px;
+	width: 150px;
 }
 
 .tablelist .cell-text {
