@@ -42,6 +42,7 @@ angular.module('app.controllers', [])
 		$rootScope.roleInfo = {};
 		$rootScope.roleMenuList = [];
 		$rootScope.ops = {};
+		$rootScope.careInst = {};
 
 		$scope.getUserInfo = function() {
 			AclUserSvr.getUserInfo().success(function(res) {
@@ -50,6 +51,7 @@ angular.module('app.controllers', [])
 					$rootScope.roleInfo = res.data.roleInfo;
 					$rootScope.roleMenuList = res.data.roleMenuList;
 					$rootScope.ops = res.data.roleOperInfo;
+					$rootScope.careInst = res.data.careInst;
 				}
 			});
 		};
