@@ -2688,6 +2688,7 @@ angular.module('app.controllers', [])
 		$scope.totalglf=0;
 		$scope.totaljstz = 0;
 		$scope.totalddtz = 0;
+		$scope.totalsxf = 0;
 		$scope.data.sortStatus=1;
 		$scope.data.serviceEndTime=$filter('date')(new Date, 'yyyy-MM-dd');
 		$scope.data.serviceStartTime=$filter('date')(new Date-(1000*60*60*24*30), 'yyyy-MM-dd');
@@ -2766,6 +2767,7 @@ angular.module('app.controllers', [])
 					$scope.totalglf = 0;
 					$scope.totaljstz = 0;
 					$scope.totalddtz = 0;
+					$scope.totalsxf = 0;
 					$scope.totalHolidayDay=0;
 					$scope.incomeList = res.data;
 					for(var i=0; i<$scope.incomeList.length;i++){
@@ -2776,6 +2778,7 @@ angular.module('app.controllers', [])
 						$scope.totaljstz =$scope.totaljstz+$scope.incomeList[i].settleAdjustAmt;
 						$scope.totalzje =$scope.totalzje+$scope.incomeList[i].orderAmt+$scope.incomeList[i].orderAdjustAmt;
 						$scope.totalddtz =$scope.totalddtz+$scope.incomeList[i].orderAdjustAmt;
+						$scope.totalsxf =$scope.totalsxf+$scope.incomeList[i].pounDage;
 						$scope.incomeList[i].orderNum=i+1;
 						$scope.totalHolidayDay =$scope.totalHolidayDay+$scope.incomeList[i].holiday
 					}

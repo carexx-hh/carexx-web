@@ -69,7 +69,7 @@
 						<th class="cell-seq">签单人</th>
 						<th class="cell-number">病区/病床</th>
 						<th class="cell-seq">工种</th>
-						<th class="cell-seq">护工姓名</th>
+						<th class="cell-seq">护理员</th>
 						<th class="cell-seq">所属公司</th>
 						<th class="cell-seq">凭证类型</th>
 						<th class="cell-text" ng-click="sort('proofNo')">凭证号<i class="fa fa-arrows-v" ></i></th>
@@ -82,6 +82,7 @@
 						<th class="cell-seq">结算款</th>
 						<th class="cell-seq">结算调整</th>
 						<th class="cell-seq">管理费</th>
+						<th class="cell-seq">微信手续费</th>
 						<th class="cell-con">备注</th>
 					</tr>
 				</thead>
@@ -107,6 +108,7 @@
 						<td class="cell-seq">{{item.staffSettleAmt| number:2}}</td>
 						<td class="cell-seq">{{item.settleAdjustAmt| number:2}}</td>
 						<td class="cell-seq">{{item.instSettleAmt+item.orderAdjustAmt| number:2}}</td>
+						<td class="cell-seq">{{item.pounDage| number:2}}</td>
 						<td class="cell-con">{{item.orderRemark}}</td>
 					</tr>					
 				</tbody>
@@ -132,6 +134,7 @@
 						<td class="cell-seq">{{totaljsk| number:2}}</td>
 						<td class="cell-seq">{{totaljstz| number:2}}</td>
 						<td class="cell-seq">{{totalglf| number:2}}</td>
+						<td class="cell-seq">{{totalsxf| number:2}}</td>
 						<td class="cell-con"></td>
 					</tr>					
 				</tfoot>
