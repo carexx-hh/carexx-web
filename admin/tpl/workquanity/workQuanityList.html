@@ -14,8 +14,8 @@
 				<li>结束时间：
 					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceEndTime" />
 				</li>
-				<li>人员名称：<input type="text" style="width:125px" placeholder="请输入人员名称" ng-model="data.staffName"></li>
-				<li>客户名称：<input type="text" style="width:125px" placeholder="请输入客户名称" ng-model="data.patientName"></li>
+				<li>人员姓名：<input type="text" style="width:125px" placeholder="请输入人员姓名" ng-model="data.staffName"></li>
+				<li>客户姓名：<input type="text" style="width:125px" placeholder="请输入客户姓名" ng-model="data.patientName"></li>
 				<li>人员性质：
 					<select ng-model="data.personType">
 							<option value="">全部</option>
@@ -46,18 +46,18 @@
 				<thead>
 					<tr>
 						<th class="cell-seq">人员编号</th>
-						<th class="cell-number">人员名称</th>						
+						<th class="cell-number">人员姓名</th>						
 						<th class="cell-number">服务项目</th>
 						<th class="cell-seq">工种</th>
 						<th class="cell-seq">人员性质</th>
-						<th class="cell-seq">客户名称</th>
+						<th class="cell-seq">客户姓名</th>
 						<th class="cell-seq">结算状态</th>
 						<th class="cell-text">开始时间</th>
 						<th class="cell-text">结束时间</th>
 						<th class="cell-seq">小时数</th>
 						<th class="cell-number">地址</th>					
 						<th class="cell-seq">结算款(元)</th>
-						<th class="cell-seq">调整金额(元)</th>
+						<th class="cell-number">调整金额(元)</th>
 						<th class="cell-seq">提成比例</th>
 						<th class="cell-text">操作</th>
 					</tr>
