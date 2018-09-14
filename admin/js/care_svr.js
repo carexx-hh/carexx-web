@@ -523,6 +523,16 @@ angular.module('app.services', [])
 	return incomeStatSvr;
 }])
 
+.factory('InstIncomeSvr', ['$http', function($http) {
+	var instIncomeSvr = {};
+	
+	instIncomeSvr.query = function(data) {
+		return $http.post('customerorder/inst_income_count',data);
+	};
+	
+	return instIncomeSvr;
+}])
+
 
 .factory('CareserSvr', ['$http', function($http) {
 	var careserSvr = {};

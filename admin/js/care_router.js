@@ -186,6 +186,10 @@ angular.module('app.routers', [])
 		url: 'billlist/list',
 		templateUrl: 'tpl/billlist/billList.html?v=20180302',
 		controller: "BillListCtrl"
+	}).state('/.instIncomeList', {/*机构收入统计*/
+		url: 'instIncome/list',
+		templateUrl: 'tpl/instIncome/instIncomeList.html?v=20180302',
+		controller: "instIncomeCtrl"
 	}).state('/.aclUserList', {
 		url: 'acluser/list',
 		templateUrl: 'tpl/acl/aclUserList.html?v=20180302',

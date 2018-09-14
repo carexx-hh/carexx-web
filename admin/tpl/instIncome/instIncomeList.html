@@ -1,0 +1,60 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li><i class="fa fa-home"></i>
+			<li>系统管理</li>
+		</li>
+		<li>机构收入统计</li>
+	</ul>
+	<div class="box">
+		<div class="filterForm">
+			<ul class="clearfix">
+				<li>单位名称：<input type="text" placeholder="请输入单位名称" ng-model="data.instName"></li>
+				<li>开始时间：
+					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceStartTime" />
+				</li>
+				<li>结束时间：
+					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceEndTime" />
+				</li>
+				
+				<li><button type="button" class="searchbtn" ng-click="query()" ng-if="ops['O_INST_INCOME_QUERY']"><i class="fa fa-search"></i>&nbsp查询</button></li>
+				<li><button type="button" class="searchbtn" ng-click="reset()"><i class="fa fa-refresh"></i>&nbsp重置</button></li>
+				<li><button type="button" class="searchbtn" ng-click="exportReport()" ng-if="ops['O_INST_INCOME_EXPORT']"><i class="fa fa-search"></i>&nbsp导出</button></li>
+			</ul>
+		</div>
+		<div class="signList">
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th class="cell-number">机构名称</th>	
+						<th class="cell-number">订单金额</th>
+						<th class="cell-number">调整金额</th>
+						<th class="cell-number">结算款</th>
+						<th class="cell-number">管理费</th>
+						<th class="cell-number">微信手续费</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in instIncomeList">
+						<td class="cell-number">{{item.instName}}</td>
+						<td class="cell-number">{{item.orderAmt| number:2}}</td>
+						<td class="cell-number">{{item.adjustAmt| number:2}}</td>							
+						<td class="cell-number">{{item.staffSettleAmt| number:2}}</td>
+						<td class="cell-number">{{item.instSettleAmt| number:2}}</td>
+						<td class="cell-number">{{item.pounDage| number:2}}</td>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr style="background-color: #D1EAF9;">
+						<td class="cell-text">总计</td>
+						<td class="cell-number">{{totalOAAmt| number:2}}</td>
+						<td class="cell-number">{{totalAAAmt| number:2}}</td>
+						<td class="cell-number">{{totalSAAmt| number:2}}</td>
+						<td class="cell-number">{{totalIAAmt| number:2}}</td>
+						<td class="cell-number">{{totalPDAmt| number:2}}</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>

@@ -2515,6 +2515,78 @@ angular.module('app.controllers', [])
 
 	})
 	
+	/*机构收入统计*/
+	.controller("instIncomeCtrl", function($scope, $state, InstIncomeSvr, LocalStorageProvider, GlobalConst , CompanySvr, WorkTypeSvr,$filter) {
+		$scope.data = {};
+		$scope.totalOAAmt = 0;
+		$scope.totalAAAmt = 0;
+		$scope.totalSAAmt=0;
+		$scope.totalIAAmt=0;
+		$scope.totalPDAmt=0;
+		$scope.data.serviceEndTime=$filter('date')(new Date, 'yyyy-MM-dd');
+		$scope.data.serviceStartTime=$filter('date')(new Date-(1000*60*60*24*30), 'yyyy-MM-dd');
+		
+		$scope.init = function() {
+			CompanySvr.listAll().success(function(res) {
+				if(res.code == 200) {
+					$scope.instSysList = res.data;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+			WorkTypeSvr.listAll().success(function(res) {
+				if(res.code == 200) {
+					$scope.workTypeList = res.data;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+
+		}
+
+		$scope.query = function() {
+			$scope.totalOAAmt = 0;
+			$scope.totalAAAmt = 0;
+			$scope.totalSAAmt=0;
+			$scope.totalIAAmt = 0;
+			$scope.totalPDAmt=0;
+			showLoading();
+			InstIncomeSvr.query($scope.data).success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					$scope.instIncomeList = res.data;
+					for(var i=0;i<$scope.instIncomeList.length;i++){
+						$scope.totalOAAmt=$scope.totalOAAmt+$scope.instIncomeList[i].orderAmt;
+						$scope.totalAAAmt=$scope.totalAAAmt+$scope.instIncomeList[i].adjustAmt;
+						$scope.totalSAAmt=$scope.totalSAAmt+$scope.instIncomeList[i].staffSettleAmt;
+						$scope.totalIAAmt=$scope.totalIAAmt+$scope.instIncomeList[i].instSettleAmt;
+						$scope.totalPDAmt=$scope.totalPDAmt+$scope.instIncomeList[i].pounDage;
+					}
+
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+		
+		$scope.reset= function(){
+			$scope.data = {};
+			
+		}
+		
+		$scope.exportReport= function(){
+			$scope.data.token=LocalStorageProvider.get(GlobalConst.AUTH_TOKEN_CACHE_NAME, "");
+			$scope.urlStr="customerorder/export_inst_income_count";
+			post($scope.urlStr,$scope.data);		
+		}
+		
+
+		$scope.init();
+		$scope.query();
+
+
+	})
+	
 	/*关账*/
 	.controller("BillListCtrl", function($scope, $state, BillListSvr, LocalStorageProvider,$uibModal,$filter) {
 		$scope.data = {};
