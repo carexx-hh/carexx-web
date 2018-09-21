@@ -8,13 +8,14 @@
 	<div class="box">
 		<div class="filterForm">
 			<ul class="clearfix">
-				<li>客户姓名：<input type="text" placeholder="请输入客户姓名" ng-model="data.realName"></li>
 				<li>开始时间：
 					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceStartTime" />
 				</li>
 				<li>结束时间：
 					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceEndTime" />
 				</li>
+				<li>客户姓名：<input type="text" placeholder="请输入客户姓名" ng-model="data.realName"></li>
+				<li>凭证号：<input type="text" placeholder="请输入凭证号" ng-model="data.proofNo"></li><br />
 				<li>订单状态：
 					<select ng-model="data.orderStatus">
 							<option value="">全部</option>
@@ -25,14 +26,14 @@
 							<option value="5">已支付</option>
 							<option value="6">已完成</option>
 					</select>
-				</li>
+				</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<li>订单类型：
 					<select ng-model="data.orderType">
 							<option value="">全部</option>
 							<option value="1">线上订单</option>
 							<option value="2">线下订单</option>
 					</select>
-				</li>
+				</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<li>支付方式：
 					<select ng-model="data.payType">
 							<option value="">全部</option>
@@ -42,21 +43,21 @@
 							<option value="3">公司转账</option>
 							
 					</select>
-				</li>
+				</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<li>所属公司：
 					<select ng-model="data.instSysId">
 							<option value="">全部</option>
 							<option ng-repeat="cpItem in instSysList" value="{{cpItem.id}}">{{cpItem.instSysName}}</option>
 					</select>
-				</li>
+				</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<li>凭证类型：
 					<select ng-model="data.proofType">
 							<option value="">全部</option>
 							<option value="1">收据</option>
 							<option value="2">发票</option>
 					</select>
-				</li>
-				<li>凭证号：<input type="text" placeholder="请输入凭证号" ng-model="data.proofNo"></li>
+				</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
 				<li><button type="button" class="searchbtn" ng-click="query()" ng-if="ops['O_ORDER_QUERY']"><i class="fa fa-search"></i>&nbsp查询</button></li>
 				<li><button type="button" class="addbtn" ng-click="add()" ng-if="ops['O_ORDER_ADD']"><i class="fa fa-plus"></i>&nbsp新增</button></li>
 				<li><button type="button" class="searchbtn" ng-click="reset()"><i class="fa fa-refresh"></i>&nbsp重置</button></li>
