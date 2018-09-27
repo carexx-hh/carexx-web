@@ -12,7 +12,7 @@
 	</ul>
 	<div class="box">
 		<div class="signList">
-			<table class="tablelist" ng-repeat="menu in roleAuth" ng-if="menu.id<90||(menu.id==90&&roleInfo.id<2)">
+			<table class="tablelist" ng-repeat="menu in roleAuth" ng-if="menu.id<90||(menu.id==90&&roleInfo.id<=3)">
 				<thead>
 					<tr>
 						<th class="cell-checkbox"><input type="checkbox" ng-model="menu.checked" ng-click="checkRootMenu(menu)" /></th>
@@ -21,7 +21,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="submenu in menu.subMenuList" ng-if="menu.id<90||(menu.id==90&&roleInfo.id<2)">
+					<tr ng-repeat="submenu in menu.subMenuList" ng-if="menu.id<90||(menu.id==90&&roleInfo.id<=3)">
 						<td class="cell-checkbox"><input type="checkbox" ng-model="submenu.checked" ng-click="checkSubMenu(submenu)" /></td>
 						<td class="cell-text">{{submenu.name}}</td>
 						<td>
