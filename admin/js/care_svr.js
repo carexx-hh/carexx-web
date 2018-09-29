@@ -319,6 +319,11 @@ angular.module('app.services', [])
 	orderSvr.schedule = function(data) {
 		return $http.post('customerorderschedule/add', data);
 	};
+	
+	orderSvr.outSchedule = function(data) {
+		return $http.post('customerorderschedule/add_outSend', data);
+	};
+	
 	//通过订单号查询排班信息
 	orderSvr.schAll = function(data) {
 		return $http.get('customerorderschedule/all_schedule/'+data.orderNo);

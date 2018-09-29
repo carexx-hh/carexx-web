@@ -1458,9 +1458,7 @@ angular.module('app.controllers', [])
 	.controller("OrderOutScheduleCtrl", function($scope, $state, OrderSvr, LocalStorageProvider, InstSettleSvr, $uibModal, $filter) {
 		$scope.handle = LocalStorageProvider.getObject("order.item");
 		$scope.data = {};
-		$scope.dataForState=[];
 		$scope.orderStatus=0;
-		$scope.dataForState.orderNo=$scope.handle.orderNo;
 		$scope.selectAll = false;
 		$scope.data.orderNo = $scope.handle.orderNo;
 		$scope.data.workTypeId = $scope.handle.workTypeId;
@@ -1490,23 +1488,6 @@ angular.module('app.controllers', [])
 					hideLoading();
 				});
 
-		}
-		
-		
-		$scope.getOrderState=function(){
-			$scope.dataForState.pageNo = $scope.pagerConf.currentPage;
-			$scope.dataForState.pageSize = $scope.pagerConf.maxSize;
-			OrderSvr.query($scope.dataForState).success(function(res) {
-				if(res.code == 200) {
-					$scope.pagerConf.totalItems = res.data.totalNum;
-					$scope.orderStatus = res.data.items[0].orderStatus;
-					if($scope.orderStatus==3){
-						alert('所有排班已完成');
-					}
-				} else {
-					alert(res.errorMsg);
-				}
-			});
 		}
 
 		$scope.getSchList = function() {
@@ -1556,8 +1537,8 @@ angular.module('app.controllers', [])
 		}
 
 		$scope.save = function() {
-			$scope.data.serviceStartTime = $scope.data.startDate + " " + $scope.handle.startTime;
-			$scope.data.serviceEndTime = $scope.data.endDate + " " + $scope.handle.endTime;
+			$scope.data.serviceStartTime = $scope.handle.serStartDate;
+			$scope.data.serviceEndTime = $scope.handle.serEndDate;
 			if(new Date($scope.data.serviceStartTime).getTime() < new Date($scope.handle.serStartDate).getTime()) {
 				alert("排班开始日期不能小于服务开始日期");
 				return false;
@@ -1567,12 +1548,11 @@ angular.module('app.controllers', [])
 				return false;
 			}
 			showLoading();
-			OrderSvr.schedule($scope.data).success(function(res) {
+			OrderSvr.outSchedule($scope.data).success(function(res) {
 				hideLoading();
 				if(res.code == 200) {
 					alert("排班成功");
-					$scope.getSchList();
-					$scope.getOrderState();
+					$state.go("/.orderList");
 				} else {
 					alert(res.errorMsg);
 				}
@@ -1632,6 +1612,7 @@ angular.module('app.controllers', [])
 					$scope.orderStatus = res.data.items[0].orderStatus;
 					if($scope.orderStatus==3){
 						alert('所有排班已完成');
+						$state.go("/.orderList");
 					}
 				} else {
 					alert(res.errorMsg);

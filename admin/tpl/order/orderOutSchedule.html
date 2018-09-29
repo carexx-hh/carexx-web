@@ -55,40 +55,6 @@
 			<div class="fllab">
 				<input type="submit" class="submit" value="保存" ng-click="save()" ng-disabled="serForm.$invalid || orderStatus==3" />
 			</div>
-			<div class="asstitle">
-				<label>排班历史</label>
-			</div>
-			<div class="box" style="float: left;">
-				<div class="signList">					
-					<table class="tablelist">
-						<thead>
-							<tr>
-								<th class="cell-number">姓名</th>
-								<th class="cell-number">性别</th>
-								<th class="cell-number">服务单位</th>
-								<th class="cell-number">管理费(元)</th>
-								<th class="cell-number">结算款(元)</th>
-								<th class="cell-number">排班开始时间</th>
-								<th class="cell-number">排班结算时间</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="item in schList">
-								<td class="cell-number">{{item.realName}}</td>
-								<td class="cell-number">{{item.sex | SexFilter}}</td>
-								<td class="cell-number">{{item.serviceInstName}}</td>
-								<td class="cell-number">{{item.instSettleAmt| number:2}}</td>
-								<td class="cell-number">{{item.staffSettleAmt| number:2}}</td>
-								<td class="cell-number">{{item.serviceStartTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-								<td class="cell-number">{{item.serviceEndTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>								
-							</tr>					
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div class="defaultPage" ng-show="schList== null">
-				<img src="img/nodata.png" /> <span>暂无数据</span>
-			</div>
 		</ng-form>
 	</div>
 </div>
