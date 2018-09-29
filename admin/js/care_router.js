@@ -174,6 +174,10 @@ angular.module('app.routers', [])
 		url: 'order/schedule',
 		templateUrl: 'tpl/order/orderSchedule.html?v=20180302',
 		controller: "OrderScheduleCtrl"
+	}).state('/.orderOutSchedule', {/*外派订单排班*/
+		url: 'order/out_schedule',
+		templateUrl: 'tpl/order/orderOutSchedule.html?v=20180302',
+		controller: "OrderOutScheduleCtrl"
 	}).state('/.workQuanityList', {/*工量计算*/
 		url: 'workquanity/list',
 		templateUrl: 'tpl/workquanity/workQuanityList.html?v=20180302',
