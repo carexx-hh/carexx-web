@@ -9,6 +9,13 @@
 		<div class="filterForm">
 			<ul class="clearfix">
 				<li>单位名称：<input type="text" placeholder="请输入单位名称" ng-model="data.instName"></li>
+				<li>服务地址：
+					<select ng-model="data.serviceAddress">
+							<option value="">全部</option>
+							<option value="1">医院</option>
+							<option value="2">社区</option>
+					</select>
+				</li>
 				<li>开始时间：
 					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceStartTime" />
 				</li>

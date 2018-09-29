@@ -23,6 +23,18 @@ angular.module('app.filters', [])
 			return "-";
 		}
 	})
+	
+	.filter("serviceAddressFilter", function() {
+		return function(serviceAddress) {
+			if(serviceAddress == 1) {
+				return "医院";
+			}
+			if(serviceAddress == 2) {
+				return "社区";
+			}
+			return "-";
+		}
+	})
 
 	.filter("orderStateFilter", function() {
 		return function(orderState) {

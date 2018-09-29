@@ -27,6 +27,13 @@
 							<option value="6">已完成</option>
 					</select>
 				</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<li>服务地址：
+					<select ng-model="data.serviceAddress">
+							<option value="">全部</option>
+							<option value="1">医院</option>
+							<option value="2">社区</option>
+					</select>
+				</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<li>订单类型：
 					<select ng-model="data.orderType">
 							<option value="">全部</option>
@@ -71,6 +78,7 @@
 					<tr>
 						<th class="cell-text">订单号</th>
 						<th class="cell-seq">客户姓名</th>
+						<th class="cell-seq">服务地址</th>
 						<th class="cell-seq">订单类型</th>
 						<th class="cell-seq">支付类型</th>
 						<th class="cell-number">病区/病床</th>
@@ -90,6 +98,7 @@
 					<tr ng-repeat="item in orderList">
 						<td class="cell-text">{{item.orderNo}}</td>
 						<td class="cell-seq">{{item.realName}}</td>
+						<td class="cell-seq">{{item.serviceAddress | serviceAddressFilter}}</td>
 						<td class="cell-seq">{{item.orderType | OrderTypeFilter}}</td>
 						<td class="cell-seq">{{item.payType | PayTypeFilter}}</td>
 						<td class="cell-number">{{item.inpatientArea}}/{{item.inpatientWard}}</td>
