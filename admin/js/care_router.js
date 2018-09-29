@@ -162,6 +162,10 @@ angular.module('app.routers', [])
 		url: 'order/add',
 		templateUrl: 'tpl/order/orderAdd.html?v=20180302',
 		controller: "OrderAddCtrl"
+	}).state('/.orderAddCommunity', {/*订单管理新增社区*/
+		url: 'order/add_community',
+		templateUrl: 'tpl/order/orderAddCommunity.html?v=20180302',
+		controller: "OrderAddCommunityCtrl"
 	}).state('/.orderEdit', {/*订单管理编辑*/
 		url: 'order/edit',
 		templateUrl: 'tpl/order/orderEdit.html?v=20180302',

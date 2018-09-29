@@ -59,7 +59,8 @@
 				</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
 				<li><button type="button" class="searchbtn" ng-click="query()" ng-if="ops['O_ORDER_QUERY']"><i class="fa fa-search"></i>&nbsp查询</button></li>
-				<li><button type="button" class="addbtn" ng-click="add()" ng-if="ops['O_ORDER_ADD']"><i class="fa fa-plus"></i>&nbsp新增</button></li>
+				<li><button type="button" class="addbtnLong" ng-click="add()" ng-if="ops['O_ORDER_ADD']"><i class="fa fa-plus"></i>&nbsp新增医院订单</button></li>
+				<li><button type="button" class="addbtnLong" ng-click="addCommunity()" ng-if="ops['O_ORDER_ADD_COMMUNITY']"><i class="fa fa-plus"></i>&nbsp新增社区订单</button></li>
 				<li><button type="button" class="searchbtn" ng-click="reset()"><i class="fa fa-refresh"></i>&nbsp重置</button></li>
 			</ul>
 		</div>

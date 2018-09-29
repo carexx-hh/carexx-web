@@ -7,7 +7,7 @@
 		<li>
 			<a href="javascript:void(0)" ui-sref="/.orderList">订单管理</a>
 		</li>
-		<li>新增医院订单</li>
+		<li>新增社区订单</li>
 	</ul>
 	<div class="box">
 		<ng-form class="formgroup" name="serForm">
@@ -24,30 +24,15 @@
 				<label class="labtext-left" style="width: 79px;">单价</label>
 				<input type="text" style="width: 90px;" ng-model="priceUnit"  readonly="readonly"/>
 			</div>
-			<div class="formrow">
-				<label class="labtext-left"><sup class="required-flag">*</sup>病区/病床</label> 
-				<select ng-model="data.inpatientAreaId" required="required" style="width:144px">	
-					<option value="">请选择</option>
-					<option ng-repeat="lesionItem in lesionList" value="{{lesionItem.id}}">{{lesionItem.inpatientArea}}</option>
-				</select>
-					/
-				<input type="text" style="width:144px" ng-model="data.inpatientWard" maxlength="20" placeholder="请输入病床" required="required"/>
+			<div class="formrow">				
+				<label class="labtext-left"><sup class="required-flag">*</sup>社区地址</label> 
+				<input type="text"  ng-model="data.inpatientWard" maxlength="20" placeholder="请输入病床" required="required"/>				
 			</div>
 			<div class="formrow">
 				<label class="labtext-left"><sup class="required-flag">*</sup>开始日期</label> <input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" required="required" onfocus="MyDatePicker({maxDate:'#F{$dp.$D(\'endRegDate\')}'})" ng-model="handle.startDate" />
-				<label class="labtext-left" style="width: 80px;"><sup class="required-flag">*</sup>开始时间</label>
-				<select ng-model="handle.startTime" required="required">	
-					<option value="08:00:00">08:00</option>
-					<option value="20:00:00">20:00</option>
-				</select>
 			</div>
 			<div class="formrow">				
 				<label class="labtext-left"><sup class="required-flag">*</sup>结束日期</label> <input type="text" id="endRegDate" style="width:110px" class="startdate" onchange="" required="required" onfocus="MyDatePicker({minDate:'#F{$dp.$D(\'startRegDate\')}'})" ng-model="handle.endDate" />
-				<label class="labtext-left" style="width: 80px;"><sup class="required-flag">*</sup>结束时间</label>
-				<select ng-model="handle.endTime" required="required">	
-					<option value="08:00:00">08:00</option>
-					<option value="20:00:00">20:00</option>
-				</select>
 			</div>
 			<div class="formrow">				
 				<label class="labtext-left">备注信息</label> 

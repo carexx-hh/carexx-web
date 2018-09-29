@@ -312,6 +312,10 @@ angular.module('app.services', [])
 		return $http.post('customerorder/add', data);
 	};
 	
+	orderSvr.addCommunity = function(data) {
+		return $http.post('customerorder/add_community', data);
+	};
+	
 	orderSvr.schedule = function(data) {
 		return $http.post('customerorderschedule/add', data);
 	};

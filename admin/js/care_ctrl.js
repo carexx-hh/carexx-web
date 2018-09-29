@@ -1217,6 +1217,10 @@ angular.module('app.controllers', [])
 		$scope.add = function() {
 			$state.go("/.orderAdd")
 		}
+		
+		$scope.addCommunity = function() {
+			$state.go("/.orderAddCommunity")
+		}
 
 		$scope.arrange = function(list) {
 			LocalStorageProvider.setObject("order.item", list);
@@ -1326,6 +1330,89 @@ angular.module('app.controllers', [])
 
 	})
 
+	/*订单管理新增社区*/
+	.controller("OrderAddCommunityCtrl", function($scope, $state, OrderSvr, LocalStorageProvider, $uibModal, ServiceSvr, CareserSvr, $filter,LesionSvr) {
+		$scope.data = {};
+		$scope.handle = {};
+		var transmitData = "";
+		$scope.handle.startTime = "00:00:00";
+		$scope.handle.endTime = "00:00:00";
+		$scope.data.orderStatus = "1";
+
+		$scope.choseCustomer = function() {
+			var modalInstance = $uibModal.open({
+				size: 'lg',
+				templateUrl: 'customerChoice.html', //script标签中定义的id
+				controller: 'CustomerChoiceCtrl', //modal对应的Controller
+				resolve: {
+					transmitData: function() { //data作为modal的controller传入的参数
+						return null; //用于传递数据
+					}
+				}
+			})
+			modalInstance.result.then( //then的第一个函数对应ok(),第二个函数对应cancel()
+				function(list) {
+					$scope.data.customerId = list.id;
+					$scope.data.customerName = list.realName;
+				},
+				function() {
+					console.log("用户取消操作");
+				}
+			);
+		}
+
+		$scope.init = function() {
+			CareserSvr.listAll().success(function(res) {
+				if(res.code == 200) {
+					$scope.serviceList = res.data;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+			
+			LesionSvr.listAll().success(function(res) {
+				if(res.code == 200) {
+					$scope.lesionList = res.data;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+
+		$scope.getServiceId = function(id) {
+			for(var i = 0; i < $scope.serviceList.length; i++) {
+				if(id == $scope.serviceList[i].serviceId) {
+					$scope.priceUnit = "" + $scope.serviceList[i].servicePrice + "/" + $filter('UnitFilter')($scope.serviceList[i].serviceUnit)
+				}else{
+					
+				}				
+			}
+			
+			if(id==''||typeof id=='undefined'){
+				$scope.priceUnit = ""
+			}
+		}
+
+		$scope.save = function() {
+			$scope.data.serviceStartTime = $scope.handle.startDate + " " + $scope.handle.startTime;
+			$scope.data.serviceEndTime = $scope.handle.endDate + " " + $scope.handle.endTime;
+			showLoading();
+			OrderSvr.addCommunity($scope.data).success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					alert("添加成功");
+					$state.go("/.orderList");
+				} else {
+					$scope.data.sex = "";
+					alert(res.errorMsg);
+				}
+			});
+		}
+
+		$scope.init();
+
+	})
+	
 	/*订单管理编辑*/
 	.controller("OrderEditCtrl", function($scope, $state, OrderSvr, LocalStorageProvider, $timeout, ServiceSvr) {
 		$scope.data = LocalStorageProvider.getObject("ser.item");
