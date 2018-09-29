@@ -1453,6 +1453,136 @@ angular.module('app.controllers', [])
 
 		$scope.init();
 	})
+	
+	/*社区订单排班*/
+	.controller("OrderOutScheduleCtrl", function($scope, $state, OrderSvr, LocalStorageProvider, InstSettleSvr, $uibModal, $filter) {
+		$scope.handle = LocalStorageProvider.getObject("order.item");
+		$scope.data = {};
+		$scope.dataForState=[];
+		$scope.orderStatus=0;
+		$scope.dataForState.orderNo=$scope.handle.orderNo;
+		$scope.selectAll = false;
+		$scope.data.orderNo = $scope.handle.orderNo;
+		$scope.data.workTypeId = $scope.handle.workTypeId;
+		$scope.data.serviceId = $scope.handle.serviceId;
+		$scope.data.instId = $scope.handle.instId;
+		$scope.data.orderAmt=$scope.handle.orderAmt;
+		$scope.handle.endTime = "00:00:00";
+		$scope.handle.serStartDate = $filter('date')($scope.handle.serviceStartTime, 'yyyy-MM-dd HH:mm:ss');
+		$scope.handle.serEndDate = $filter('date')($scope.handle.serviceEndTime, 'yyyy-MM-dd HH:mm:ss');
+		$scope.handle.endTimeLimit = $filter('date')($scope.handle.serviceEndTime, 'yyyy-MM-dd');
+		
+		$scope.pagerConf = {
+			maxSize: 10,
+			totalItems: 0,
+			currentPage: 1
+		};
+
+		$scope.init = function() {
+			InstSettleSvr.listAll($scope.data).success(function(res) {
+					if(res.code == 200) {
+						$scope.ratioList = res.data;
+					} else {
+						alert(res.errorMsg);
+					}
+				})
+				.error(function() {
+					hideLoading();
+				});
+
+		}
+		
+		
+		$scope.getOrderState=function(){
+			$scope.dataForState.pageNo = $scope.pagerConf.currentPage;
+			$scope.dataForState.pageSize = $scope.pagerConf.maxSize;
+			OrderSvr.query($scope.dataForState).success(function(res) {
+				if(res.code == 200) {
+					$scope.pagerConf.totalItems = res.data.totalNum;
+					$scope.orderStatus = res.data.items[0].orderStatus;
+					if($scope.orderStatus==3){
+						alert('所有排班已完成');
+					}
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+
+		$scope.getSchList = function() {
+			showLoading();
+			OrderSvr.schAll($scope.data).success(function(res) {
+					hideLoading();
+					if(res.code == 200) {
+						$scope.schList = res.data;
+						if($scope.schList.length == 0) {
+							$scope.handle.startDate = $filter('date')($scope.handle.serviceStartTime, 'yyyy-MM-dd');
+							$scope.handle.startTime = $filter('date')($scope.handle.serviceStartTime, 'HH:mm:ss');
+						} else {
+							for(var i = 0; i < $scope.schList.length; i++) {
+								$scope.handle.startDate = $filter('date')($scope.schList[i].serviceEndTime, 'yyyy-MM-dd');
+								$scope.handle.startTime = $filter('date')($scope.schList[i].serviceEndTime, 'HH:mm:ss');
+							}
+						}
+					} else {
+						alert(res.errorMsg);
+					}
+				})
+				.error(function() {
+					hideLoading();
+				});
+		}
+
+		$scope.staffChoice = function() {
+			var modalInstance = $uibModal.open({
+				size: 'lg',
+				templateUrl: 'staffChoice.html', //script标签中定义的id
+				controller: 'StaffChoiceCtrl', //modal对应的Controller
+				resolve: {
+					transmitData: function() { //data作为modal的controller传入的参数
+						return $scope.data; //用于传递数据
+					}
+				}
+			})
+			modalInstance.result.then( //then的第一个函数对应ok(),第二个函数对应cancel()
+				function(list) {
+					$scope.data.serviceStaffId = list.id;
+					$scope.data.staffName = list.realName;
+				},
+				function() {
+					console.log("用户取消操作");
+				}
+			);
+		}
+
+		$scope.save = function() {
+			$scope.data.serviceStartTime = $scope.data.startDate + " " + $scope.handle.startTime;
+			$scope.data.serviceEndTime = $scope.data.endDate + " " + $scope.handle.endTime;
+			if(new Date($scope.data.serviceStartTime).getTime() < new Date($scope.handle.serStartDate).getTime()) {
+				alert("排班开始日期不能小于服务开始日期");
+				return false;
+			}
+			if(new Date($scope.data.serviceEndTime).getTime() > new Date($scope.handle.serEndDate).getTime()) {
+				alert("排班结束日期不能大于服务结束日期");
+				return false;
+			}
+			showLoading();
+			OrderSvr.schedule($scope.data).success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					alert("排班成功");
+					$scope.getSchList();
+					$scope.getOrderState();
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+
+		$scope.init();
+		$scope.getSchList();
+		
+	})
 
 	/*订单排班*/
 	.controller("OrderScheduleCtrl", function($scope, $state, OrderSvr, LocalStorageProvider, InstSettleSvr, $uibModal, $filter) {
