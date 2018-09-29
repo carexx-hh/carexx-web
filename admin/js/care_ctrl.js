@@ -1224,7 +1224,11 @@ angular.module('app.controllers', [])
 
 		$scope.arrange = function(list) {
 			LocalStorageProvider.setObject("order.item", list);
-			$state.go("/.orderSchedule")
+			if(list.serviceAddress == 1){
+				$state.go("/.orderSchedule")
+			}else if(list.serviceAddress == 2){
+				$state.go("/.orderOutSchedule")
+			}
 		}
 
 		$scope.cancel = function(list) {
