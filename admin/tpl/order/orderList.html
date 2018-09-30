@@ -89,6 +89,7 @@
 						<th class="cell-seq">所属公司</th>
 						<th class="cell-seq">凭证类型</th>
 						<th class="cell-number">凭证号</th>
+						<th class="cell-number">手机号码</th>
 						<th class="cell-text">开始时间</th>
 						<th class="cell-text">结束时间</th>
 						<th class="cell-text">操作</th>
@@ -110,6 +111,7 @@
 						<td class="cell-seq">{{item.instSysName}}</td>
 						<td class="cell-seq">{{item.proofType | proofTypeFilter}}</td>
 						<td class="cell-number">{{item.receiptNo}}{{item.invoiceNo}}</td>
+						<td class="cell-number">{{item.phone}}</td>
 						<td class="cell-text">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
 						<td class="cell-text">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
 						<td class="cell-text">
