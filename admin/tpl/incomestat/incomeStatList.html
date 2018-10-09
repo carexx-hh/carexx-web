@@ -76,7 +76,7 @@
 						<th class="cell-seq">服务地址</th>
 						<th class="cell-seq">客户姓名</th>					
 						<th class="cell-seq">签单人</th>
-						<th class="cell-number">病区/病床</th>
+						<th class="cell-text">病区/病床(地址)</th>
 						<th class="cell-seq">工种</th>
 						<th class="cell-seq">护理员</th>
 						<th class="cell-seq">所属公司</th>
@@ -89,7 +89,7 @@
 						<th class="cell-seq">订单金额</th>
 						<th class="cell-seq">调整金额</th>
 						<th class="cell-seq">结算款</th>
-						<th class="cell-seq">结算调整</th>
+						<th class="cell-seq">结算款调整</th>
 						<th class="cell-seq">管理费</th>
 						<th class="cell-seq">微信手续费</th>
 						<th class="cell-con">备注</th>
@@ -103,7 +103,8 @@
 						<td class="cell-seq">{{item.serviceAddress | serviceAddressFilter}}</td>
 						<td class="cell-seq">{{item.realName}}</td>						
 						<td class="cell-seq">{{item.signingPerson}}</td>
-						<td class="cell-number">{{item.inpatientArea}}/{{item.inpatientWard}}</td>
+						<td class="cell-text" ng-if="item.serviceAddress==1">{{item.inpatientArea}}/{{item.inpatientWard}}</td>
+						<td class="cell-text" ng-if="item.serviceAddress==2">{{item.inpatientWard}}</td>
 						<td class="cell-seq">{{item.workTypeName}}</td>
 						<td class="cell-seq" ng-click="schedulePopup(item)"><a href="javascript:void(0)">{{item.staffName}}</a></td>
 						<td class="cell-seq">{{item.instSysName}}</td>

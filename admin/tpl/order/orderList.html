@@ -81,7 +81,7 @@
 						<th class="cell-seq">服务地址</th>
 						<th class="cell-seq">订单类型</th>
 						<th class="cell-seq">支付类型</th>
-						<th class="cell-number">病区/病床</th>
+						<th class="cell-text">病区/病床(地址)</th>
 						<th class="cell-text">服务名称</th>
 						<th class="cell-seq">订单金额</th>
 						<th class="cell-seq">调整金额</th>
@@ -102,8 +102,8 @@
 						<td class="cell-seq">{{item.serviceAddress | serviceAddressFilter}}</td>
 						<td class="cell-seq">{{item.orderType | OrderTypeFilter}}</td>
 						<td class="cell-seq">{{item.payType | PayTypeFilter}}</td>
-						<td class="cell-number" ng-if="item.serviceAddress==1">{{item.inpatientArea}}/{{item.inpatientWard}}</td>
-						<td class="cell-number" ng-if="item.serviceAddress==2">{{item.inpatientWard}}</td>
+						<td class="cell-text" ng-if="item.serviceAddress==1">{{item.inpatientArea}}/{{item.inpatientWard}}</td>
+						<td class="cell-text" ng-if="item.serviceAddress==2">{{item.inpatientWard}}</td>
 						<td class="cell-text">{{item.serviceName}}</td>
 						<td class="cell-seq">{{item.orderAmt+item.adjustAmt| number:2}}</td>
 						<td class="cell-seq">{{item.adjustAmt| number:2}}</td>
