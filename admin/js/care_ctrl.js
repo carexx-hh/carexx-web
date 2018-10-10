@@ -2722,6 +2722,10 @@ angular.module('app.controllers', [])
 		$scope.data = {};
 		$scope.totalOAAmt = 0;
 		$scope.totalAAAmt = 0;
+		$scope.totalOPAmt = 0;
+		$scope.totalSPAmt = 0;
+		$scope.totalCPAmt = 0;
+		$scope.totalCTAAmt = 0;
 		$scope.totalSAAmt=0;
 		$scope.totalIAAmt=0;
 		$scope.totalPDAmt=0;
@@ -2749,6 +2753,10 @@ angular.module('app.controllers', [])
 		$scope.query = function() {
 			$scope.totalOAAmt = 0;
 			$scope.totalAAAmt = 0;
+			$scope.totalOPAmt = 0;
+			$scope.totalSPAmt = 0;
+			$scope.totalCPAmt = 0;
+			$scope.totalCTAAmt = 0;
 			$scope.totalSAAmt=0;
 			$scope.totalIAAmt = 0;
 			$scope.totalPDAmt=0;
@@ -2760,6 +2768,10 @@ angular.module('app.controllers', [])
 					for(var i=0;i<$scope.instIncomeList.length;i++){
 						$scope.totalOAAmt=$scope.totalOAAmt+$scope.instIncomeList[i].orderAmt;
 						$scope.totalAAAmt=$scope.totalAAAmt+$scope.instIncomeList[i].adjustAmt;
+						$scope.totalOPAmt=$scope.totalOPAmt+$scope.instIncomeList[i].onlinePayAmt;
+						$scope.totalSPAmt=$scope.totalSPAmt+$scope.instIncomeList[i].scanPayAmt;
+						$scope.totalCPAmt=$scope.totalCPAmt+$scope.instIncomeList[i].cashPayAmt;
+						$scope.totalCTAAmt=$scope.totalCTAAmt+$scope.instIncomeList[i].companyTurnAccountAmt;
 						$scope.totalSAAmt=$scope.totalSAAmt+$scope.instIncomeList[i].staffSettleAmt;
 						$scope.totalIAAmt=$scope.totalIAAmt+$scope.instIncomeList[i].instSettleAmt;
 						$scope.totalPDAmt=$scope.totalPDAmt+$scope.instIncomeList[i].pounDage;

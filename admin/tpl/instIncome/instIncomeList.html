@@ -35,6 +35,10 @@
 						<th class="cell-number">机构名称</th>	
 						<th class="cell-number">订单金额</th>
 						<th class="cell-number">调整金额</th>
+						<th class="cell-number">线上支付</th>
+						<th class="cell-number">扫码支付</th>
+						<th class="cell-number">现金支付</th>
+						<th class="cell-number">公司转账</th>
 						<th class="cell-number">结算款</th>
 						<th class="cell-number">管理费</th>
 						<th class="cell-number">微信手续费</th>
@@ -44,7 +48,11 @@
 					<tr ng-repeat="item in instIncomeList">
 						<td class="cell-number">{{item.instName}}</td>
 						<td class="cell-number">{{item.orderAmt| number:2}}</td>
-						<td class="cell-number">{{item.adjustAmt| number:2}}</td>							
+						<td class="cell-number">{{item.adjustAmt| number:2}}</td>
+						<td class="cell-number">{{item.onlinePayAmt| number:2}}</td>
+						<td class="cell-number">{{item.scanPayAmt| number:2}}</td>
+						<td class="cell-number">{{item.cashPayAmt| number:2}}</td>
+						<td class="cell-number">{{item.companyTurnAccountAmt| number:2}}</td>
 						<td class="cell-number">{{item.staffSettleAmt| number:2}}</td>
 						<td class="cell-number">{{item.instSettleAmt| number:2}}</td>
 						<td class="cell-number">{{item.pounDage| number:2}}</td>
@@ -56,6 +64,10 @@
 						<td class="cell-text">总计</td>
 						<td class="cell-number">{{totalOAAmt| number:2}}</td>
 						<td class="cell-number">{{totalAAAmt| number:2}}</td>
+						<td class="cell-number">{{totalOPAmt| number:2}}</td>
+						<td class="cell-number">{{totalSPAmt| number:2}}</td>
+						<td class="cell-number">{{totalCPAmt| number:2}}</td>
+						<td class="cell-number">{{totalCTAAmt| number:2}}</td>
 						<td class="cell-number">{{totalSAAmt| number:2}}</td>
 						<td class="cell-number">{{totalIAAmt| number:2}}</td>
 						<td class="cell-number">{{totalPDAmt| number:2}}</td>
