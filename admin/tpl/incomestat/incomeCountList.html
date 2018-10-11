@@ -8,16 +8,10 @@
 	<div class="box">
 		<div class="filterForm">
 			<ul class="clearfix">
-				<li>人员姓名：<input type="text" placeholder="请输入人员姓名" ng-model="data.staffName"></li>
+				<li>护理员：<input type="text" placeholder="请输入护理员姓名" ng-model="data.staffName"></li>
 				<li>客户姓名：<input type="text" placeholder="请输入客户姓名" ng-model="data.realName"></li>
 				<li>签单人：<input type="text" placeholder="请输入签单人" ng-model="data.signingPerson"></li>
 				<li>凭证号：<input type="text" placeholder="请输入凭证号" ng-model="data.proofNo"></li><br />
-				<li>所属公司：
-					<select ng-model="data.instSysId">
-							<option value="">全部</option>
-							<option ng-repeat="cpItem in instSysList" value="{{cpItem.id}}">{{cpItem.instSysName}}</option>
-					</select>
-				</li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<li>支付方式：
 					<select ng-model="data.payType">
 							<option value="">全部</option>
