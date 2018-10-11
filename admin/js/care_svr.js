@@ -222,6 +222,10 @@ angular.module('app.services', [])
 		return $http.post('careinst/list',data);
 	};
 	
+	instListSvr.all = function(data) {
+		return $http.post('careinst/all',data);
+	};
+	
 	instListSvr.save = function(data) {
 		return $http.post('careinst/add', data);
 	};

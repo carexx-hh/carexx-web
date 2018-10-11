@@ -2966,7 +2966,7 @@ angular.module('app.controllers', [])
 	})
 	
 	//收入统计
-	.controller("incomeStatCtrl", function($scope, $state, LocalStorageProvider, GlobalConst , CompanySvr, WorkTypeSvr,IncomeStatSvr,LesionSvr,$uibModal,$filter) {
+	.controller("incomeStatCtrl", function($scope, $state, LocalStorageProvider, GlobalConst , CompanySvr, WorkTypeSvr,IncomeStatSvr,LesionSvr,InstListSvr,$uibModal,$filter) {
 		$scope.data = {};
 		$scope.totalday = 0;
 		$scope.totalzje = 0;
@@ -3039,7 +3039,14 @@ angular.module('app.controllers', [])
 					alert(res.errorMsg);
 				}
 			});
-
+			InstListSvr.all().success(function(res) {
+				if(res.code == 200) {
+					$scope.instList = res.data;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+			
 		}
 		
 		$scope.query= function(){
