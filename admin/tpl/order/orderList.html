@@ -115,23 +115,26 @@
 						<td class="cell-text">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
 						<td class="cell-text">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
 						<td class="cell-text">
-							<button type="button" class="btn btn-warning" ng-click="arrange(item)" ng-if="ops['O_ORDER_SCHEDULE']&&item.orderStatus==1">
-								<i class="fa fa-pencil-square-o fa-lg"></i>&nbsp排班
+							<button type="button" class="bttn btn-warning" ng-click="arrange(item)" ng-if="ops['O_ORDER_SCHEDULE']&&item.orderStatus==1">
+								排班
 							</button>							
-							<button type="button" class="btn btn-primary" ng-click="schedulePopup(item,1)" ng-if="ops['O_ORDER_DETAILS']&&item.orderStatus>2">
-								<i class="fa fa-eye"></i>&nbsp&nbsp详情
+							<button type="button" class="bttn btn-primary" ng-click="schedulePopup(item,1)" ng-if="ops['O_ORDER_DETAILS']&&item.orderStatus>2">
+								详情
 							</button>
-							<button type="button" class="btn btn-success" ng-click="schedulePopup(item,4)" ng-if="ops['O_ORDER_RECEIVABLES']&&item.orderStatus==4">
-								<i class="fa fa-check"></i>&nbsp&nbsp收款
+							<button type="button" class="bttn btn-danger" ng-click="cancel(item)" ng-if="ops['O_ORDER_CANCEL']&&(item.orderStatus==1 || item.orderStatus==3)">
+								取消
 							</button>
-							<button type="button" class="btn btn-danger" ng-click="cancel(item)" ng-if="ops['O_ORDER_CANCEL']&&(item.orderStatus==1 || item.orderStatus==3)">
-								<i class="fa fa-scissors"></i>&nbsp&nbsp取消
+							<button type="button" class="bttn btn-success" ng-click="schedulePopup(item,4)" ng-if="ops['O_ORDER_RECEIVABLES']&&item.orderStatus==4">
+								收款
 							</button>
-							<button type="button" class="btn btn-success" ng-click="schedulePopup(item,2)" ng-if="ops['O_ORDER_COMPLETE']&&item.orderStatus==5">
-								<i class="fa fa-check"></i>&nbsp&nbsp完成
+							<button type="button" class="bttn btn-success" ng-click="schedulePopup(item,2)" ng-if="ops['O_ORDER_COMPLETE']&&item.orderStatus==5">
+								完成
 							</button>
-							<button type="button" class="btn btn-warning" ng-click="schedulePopup(item,3)" ng-if="ops['O_ORDER_ADJUST']&&item.orderStatus==6&&item.settleStatus!=3">
-								<i class="fa fa-pencil-square-o fa-lg"></i>&nbsp调整
+							<button type="button" class="bttn btn-warning" ng-click="schedulePopup(item,3)" ng-if="ops['O_ORDER_ADJUST']&&item.orderStatus==6&&item.settleStatus!=3">
+								调整
+							</button>
+							<button type="button" class="bttn btn-danger" ng-click="cancel(item)" ng-if="ops['O_ORDER_CANCEL']&&item.orderStatus>3&&item.settleStatus!=3">
+								删除
 							</button>
 						</td>
 					</tr>					

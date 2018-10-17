@@ -387,8 +387,8 @@ a.current {
 	background-image: none;
 	border: 1px solid transparent;
 	white-space: nowrap;
-	padding: 4px 12px;
-	line-height: 28px;
+	padding: 6px 14px;
+	line-height: 20px;
 	border-radius: 4px;
 }
 
@@ -421,6 +421,25 @@ a.current {
 .btn-primary, .btn-primary:hover {
 	color: #fff;
 	background-color: #4687cc;
+	
+}
+
+/*订单管理按钮*/
+.bttn {
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: normal;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	padding: 6px 14px;
+	line-height: 20px;
+	border-radius: 4px;
+	float: left;
+	margin-left: 5px;
 }
 
 /*表单*/
@@ -569,7 +588,7 @@ a.current {
 
 .tablelist th, .tablelist td {
 	position: relative;
-	line-height: 32px;
+	line-height: 44px;
 	padding: 0 5px;
 }
 
