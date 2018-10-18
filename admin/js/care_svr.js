@@ -336,6 +336,11 @@ angular.module('app.services', [])
 	orderSvr.cancel = function(data) {
 		return $http.get('customerorder/cancel/'+data.orderNo);
 	};
+	
+	orderSvr.canceled = function(data) {
+		return $http.get('customerorder/delete/'+data.orderNo);
+	};
+	
 	//确认排班
 	orderSvr.confirm = function(ids) {
 		return $http.post('customerorderschedule/batchconfirmcompleted',{ids:ids});

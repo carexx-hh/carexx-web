@@ -202,6 +202,11 @@ input[type="checkbox"], input[type="radio"] {
 	box-sizing: border-box;
 	padding: 0;
 	vertical-align: middle;
+	position: absolute;
+    top: 1px;
+    left: 0;
+    width: 200px;
+    height: 18px;
 }
 
 input[type="number"]::-webkit-inner-spin-button {

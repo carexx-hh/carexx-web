@@ -1246,6 +1246,21 @@ angular.module('app.controllers', [])
 
 		}
 		
+		$scope.canceled = function(list) {
+			if(window.confirm("确定删除订单？")) {
+				showLoading();
+				OrderSvr.canceled(list).success(function(res) {
+					hideLoading();
+					if(res.code == 200) {
+						$scope.query();
+					} else {
+						alert(res.errorMsg);
+					}
+				});
+			}
+
+		}
+		
 		$scope.init();
 		$scope.$watch('pagerConf.currentPage', $scope.query);
 

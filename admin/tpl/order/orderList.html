@@ -20,7 +20,6 @@
 					<select ng-model="data.orderStatus">
 							<option value="">全部</option>
 							<option value="1">待排班</option>
-							<option value="2">已取消</option>
 							<option value="3">服务中</option>
 							<option value="4">待支付</option>
 							<option value="5">已支付</option>
@@ -133,7 +132,7 @@
 							<button type="button" class="bttn btn-warning" ng-click="schedulePopup(item,3)" ng-if="ops['O_ORDER_ADJUST']&&item.orderStatus==6&&item.settleStatus!=3">
 								调整
 							</button>
-							<button type="button" class="bttn btn-danger" ng-click="cancel(item)" ng-if="ops['O_ORDER_CANCEL']&&item.orderStatus>3&&item.settleStatus!=3">
+							<button type="button" class="bttn btn-danger" ng-click="canceled(item)" ng-if="ops['O_ORDER_CANCEL']&&item.orderStatus>3&&item.settleStatus!=3">
 								删除
 							</button>
 						</td>
@@ -267,7 +266,7 @@
 		</ul>
 			<ng-form class="formgroup" name="serForm">		
 				<div class="payTitle">
-					<h3>请您选择线下支付方式！！！</h3></div>
+					<h3>请您选择线下支付方式!</h3></div>
 				<div class="formrow">
 					<span><input class="payType" ng-model="data.payType" type="radio" value="2" name="payType" ng-checked="true">扫码支付</input></span>
 					<span><input class="payType" ng-model="data.payType" type="radio" value="4" name="payType">现金支付</input></span>
