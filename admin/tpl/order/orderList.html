@@ -132,7 +132,7 @@
 							<button type="button" class="bttn btn-warning" ng-click="schedulePopup(item,3)" ng-if="ops['O_ORDER_ADJUST']&&item.orderStatus==6&&item.settleStatus!=3">
 								调整
 							</button>
-							<button type="button" class="bttn btn-danger" ng-click="canceled(item)" ng-if="ops['O_ORDER_CANCEL']&&item.orderStatus>3&&item.settleStatus!=3">
+							<button type="button" class="bttn btn-danger" ng-click="canceled(item)" ng-if="ops['O_ORDER_DELETE']&&item.orderStatus>3&&item.settleStatus!=3">
 								删除
 							</button>
 						</td>
