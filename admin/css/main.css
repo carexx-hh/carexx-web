@@ -629,6 +629,11 @@ a.current {
 	text-align: center;
 }
 
+.tablelist .cell-ic-seq {
+	width: 55px;
+	text-align: center;
+}
+
 .tablelist .cell-number {
 	text-align: center;
 	width: 100px;

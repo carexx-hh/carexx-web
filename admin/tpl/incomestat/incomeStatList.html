@@ -70,21 +70,21 @@
 			<table class="tablelist" style="min-width: 2000px;">
 				<thead>
 					<tr>
-						<th class="cell-seq">序号</th>
+						<th class="cell-ic-seq">序号</th>
 						<th class="cell-con">订单号</th>
 						<th class="cell-seq">支付类型</th>
-						<th class="cell-seq">服务地址</th>
+						<th class="cell-ic-seq">地址</th>
 						<th class="cell-seq">客户姓名</th>					
-						<th class="cell-seq">签单人</th>
-						<th class="cell-text">病区/病床(地址)</th>
+						<th class="cell-ic-seq">签单人</th>
+						<th class="cell-con">病区/病床(地址)</th>
 						<th class="cell-seq">工种</th>
-						<th class="cell-seq">护理员</th>
-						<th class="cell-seq">所属公司</th>
-						<th class="cell-seq">凭证类型</th>
-						<th class="cell-text" ng-click="sort('proofNo')">凭证号<i class="fa fa-arrows-v" ></i></th>
-						<th class="cell-text" ng-click="sort('serviceStartTime')">开始时间&nbsp<i class="fa fa-arrows-v" ></i></th>
-						<th class="cell-text" ng-click="sort('serviceEndTime')">结束时间&nbsp<i class="fa fa-arrows-v" ></i></th>
-						<th class="cell-seq">总天数</th>
+						<th class="cell-ic-seq">护理员</th>
+						<th class="cell-ic-seq">公司</th>
+						<th class="cell-ic-seq">凭证</th>
+						<th class="cell-seq" ng-click="sort('proofNo')">凭证号<i class="fa fa-arrows-v" ></i></th>
+						<th class="cell-con" ng-click="sort('serviceStartTime')">开始时间&nbsp<i class="fa fa-arrows-v" ></i></th>
+						<th class="cell-con" ng-click="sort('serviceEndTime')">结束时间&nbsp<i class="fa fa-arrows-v" ></i></th>
+						<th class="cell-ic-seq">总天数</th>
 						<th class="cell-seq">节假日天数</th>
 						<th class="cell-seq">订单金额</th>
 						<th class="cell-seq">调整金额</th>
@@ -97,22 +97,22 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="item in incomeList">
-						<td class="cell-seq">{{item.orderNum}}</td>	
+						<td class="cell-ic-seq">{{item.orderNum}}</td>	
 						<td class="cell-con">{{item.orderNo}}</td>
 						<td class="cell-seq">{{item.payType | PayTypeFilter}}</td>	
-						<td class="cell-seq">{{item.serviceAddress | serviceAddressFilter}}</td>
+						<td class="cell-ic-seq">{{item.serviceAddress | serviceAddressFilter}}</td>
 						<td class="cell-seq">{{item.realName}}</td>						
-						<td class="cell-seq">{{item.signingPerson}}</td>
-						<td class="cell-text" ng-if="item.serviceAddress==1">{{item.inpatientArea}}/{{item.inpatientWard}}</td>
-						<td class="cell-text" ng-if="item.serviceAddress==2">{{item.inpatientWard}}</td>
+						<td class="cell-ic-seq">{{item.signingPerson}}</td>
+						<td class="cell-con" ng-if="item.serviceAddress==1">{{item.inpatientArea}}/{{item.inpatientWard}}</td>
+						<td class="cell-con" ng-if="item.serviceAddress==2">{{item.inpatientWard}}</td>
 						<td class="cell-seq">{{item.workTypeName}}</td>
-						<td class="cell-seq" ng-click="schedulePopup(item)"><a href="javascript:void(0)">{{item.staffName}}</a></td>
-						<td class="cell-seq">{{item.instSysName}}</td>
-						<td class="cell-seq">{{item.proofType | proofTypeFilter}}</td>
+						<td class="cell-ic-seq" ng-click="schedulePopup(item)"><a href="javascript:void(0)">{{item.staffName}}</a></td>
+						<td class="cell-ic-seq">{{item.instSysName}}</td>
+						<td class="cell-ic-seq">{{item.proofType | proofTypeFilter}}</td>
 						<td class="cell-seq">{{item.receiptNo}}{{item.invoiceNo}}</td>
-						<td class="cell-text">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
-						<td class="cell-text">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
-						<td class="cell-seq">{{item.serviceDuration| number:1}}</td>
+						<td class="cell-con">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-con">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-ic-seq">{{item.serviceDuration| number:1}}</td>
 						<td class="cell-seq">{{item.holiday| number:1}}</td>
 						<td class="cell-seq">{{item.orderAmt+item.orderAdjustAmt| number:2}}</td>
 						<td class="cell-seq">{{item.orderAdjustAmt| number:2}}</td>
@@ -125,21 +125,21 @@
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="cell-seq">合计</td>
+						<td class="cell-ic-seq">合计</td>
 						<td class="cell-con"></td>
 						<td class="cell-seq"></td>		
+						<td class="cell-ic-seq"></td>
 						<td class="cell-seq"></td>
-						<td class="cell-seq"></td>
-						<td class="cell-seq"></td>
-						<td class="cell-number"></td>
+						<td class="cell-ic-seq"></td>
+						<td class="cell-con"></td>
 						<td class="cell-seq"></td>						
+						<td class="cell-ic-seq"></td>
+						<td class="cell-ic-seq"></td>
+						<td class="cell-ic-seq"></td>
 						<td class="cell-seq"></td>
-						<td class="cell-seq"></td>
-						<td class="cell-seq"></td>
-						<td class="cell-seq"></td>
-						<td class="cell-text"></td>
-						<td class="cell-text"></td>
-						<td class="cell-seq">{{totalday| number:1}}</td>
+						<td class="cell-con"></td>
+						<td class="cell-con"></td>
+						<td class="cell-ic-seq">{{totalday| number:1}}</td>
 						<td class="cell-seq">{{totalHolidayDay| number:1}}</td>
 						<td class="cell-seq">{{totalzje| number:2}}</td>
 						<td class="cell-seq">{{totalddtz| number:2}}</td>
