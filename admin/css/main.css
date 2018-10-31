@@ -602,9 +602,9 @@ a.current {
 .tablelist td {
 	border: 1px solid #E9E9E9;
 	text-align: center;
-	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	word-break: break-all;
 }
 
 .tablelist tbody tr:nth-child(even) {
