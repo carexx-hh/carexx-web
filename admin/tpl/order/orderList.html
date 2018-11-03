@@ -111,8 +111,8 @@
 						<td class="cell-seq">{{item.proofType | proofTypeFilter}}</td>
 						<td class="cell-number">{{item.receiptNo}}{{item.invoiceNo}}</td>
 						<td class="cell-number">{{item.phone}}</td>
-						<td class="cell-con">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
-						<td class="cell-con">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-con">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm'}}</td>
+						<td class="cell-con">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm'}}</td>
 						<td class="cell-text">
 							<button type="button" class="bttn btn-warning" ng-click="arrange(item)" ng-if="ops['O_ORDER_SCHEDULE']&&item.orderStatus==1">
 								排班

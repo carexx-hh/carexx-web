@@ -71,8 +71,8 @@
 						<td class="cell-seq">{{item.personType |PersonTypeFilter}}</td>	
 						<td class="cell-seq">{{item.patientName}}</td>
 						<td class="cell-seq">{{item.settleStatus | SettleStatusFilter}}</td>
-						<td class="cell-text">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
-						<td class="cell-text">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-text">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm'}}</td>
+						<td class="cell-text">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm'}}</td>
 						<td class="cell-seq">{{item.serviceDuration}}</td>
 						<td class="cell-number">{{item.inpatientArea}}/{{item.inpatientWard}}</td>
 						<td class="cell-seq">{{item.staffSettleAmt| number:2}}</td>

@@ -110,8 +110,8 @@
 						<td class="cell-seq">{{item.instSysName}}</td>
 						<td class="cell-seq">{{item.proofType | proofTypeFilter}}</td>
 						<td class="cell-seq">{{item.receiptNo}}{{item.invoiceNo}}</td>
-						<td class="cell-text">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
-						<td class="cell-text">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-text">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm'}}</td>
+						<td class="cell-text">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm'}}</td>
 						<td class="cell-seq">{{item.serviceDuration| number:1}}</td>
 						<td class="cell-seq">{{item.holiday| number:1}}</td>
 						<td class="cell-seq">{{item.orderAmt+item.orderAdjustAmt| number:2}}</td>
