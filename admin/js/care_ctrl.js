@@ -453,6 +453,44 @@ angular.module('app.controllers', [])
 		$scope.$watch('pagerConf.currentPage', $scope.query);
 	})
 	
+	//外派社区人员选择弹出框
+	.controller('outStaffChoiceCtrl', function($scope, $uibModalInstance, StaffSvr, LocalStorageProvider, transmitData) {
+		$scope.data = {};
+		$scope.data.serviceId = transmitData.serviceId;
+		//在这里处理要进行的操作
+		$scope.choice = function(list) {
+			$uibModalInstance.close(list);
+		};
+		$scope.cancel = function() {
+			$uibModalInstance.dismiss('cancel');
+		}
+		$scope.close = function() {
+			$uibModalInstance.dismiss('cancel');
+		}
+		$scope.pagerConf = {
+			maxSize: 10,
+			totalItems: 0,
+			currentPage: 1
+		};
+
+		$scope.query = function() {
+			$scope.data.pageNo = $scope.pagerConf.currentPage;
+			$scope.data.pageSize = $scope.pagerConf.maxSize;
+			showLoading();
+			StaffSvr.queryByserId().success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					$scope.pagerConf.totalItems = res.data.totalNum;
+					$scope.staffList = res.data.items;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+
+		$scope.$watch('pagerConf.currentPage', $scope.query);
+	})
+	
 	//新增关账弹出框
 	.controller('BillAddCtrl', function($scope, $uibModalInstance, BillListSvr, LocalStorageProvider,$filter) {
 		$scope.data = {};
@@ -1529,11 +1567,11 @@ angular.module('app.controllers', [])
 				});
 		}
 
-		$scope.staffChoice = function() {
+		$scope.outstaffChoice = function() {
 			var modalInstance = $uibModal.open({
 				size: 'lg',
 				templateUrl: 'staffChoice.html', //script标签中定义的id
-				controller: 'StaffChoiceCtrl', //modal对应的Controller
+				controller: 'outStaffChoiceCtrl', //modal对应的Controller
 				resolve: {
 					transmitData: function() { //data作为modal的controller传入的参数
 						return $scope.data; //用于传递数据
