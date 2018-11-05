@@ -456,7 +456,6 @@ angular.module('app.controllers', [])
 	//外派社区人员选择弹出框
 	.controller('outStaffChoiceCtrl', function($scope, $uibModalInstance, StaffSvr, LocalStorageProvider, transmitData) {
 		$scope.data = {};
-		$scope.data.serviceId = transmitData.serviceId;
 		//在这里处理要进行的操作
 		$scope.choice = function(list) {
 			$uibModalInstance.close(list);
@@ -477,7 +476,7 @@ angular.module('app.controllers', [])
 			$scope.data.pageNo = $scope.pagerConf.currentPage;
 			$scope.data.pageSize = $scope.pagerConf.maxSize;
 			showLoading();
-			StaffSvr.queryByserId().success(function(res) {
+			StaffSvr.queryByserId($scope.data).success(function(res) {
 				hideLoading();
 				if(res.code == 200) {
 					$scope.pagerConf.totalItems = res.data.totalNum;
@@ -1175,7 +1174,7 @@ angular.module('app.controllers', [])
 	.controller("OrderListCtrl", function($scope, $state, OrderSvr, LocalStorageProvider, $uibModal,CompanySvr,$filter) {
 		$scope.data = {};
 		$scope.totalAmt=0;
-		$scope.data.serviceStartTime=$filter('date')(new Date-(1000*60*60*24*30), 'yyyy-MM-dd');
+		$scope.data.serviceStartTime=$filter('date')(new Date-(1000*60*60*24*60), 'yyyy-MM-dd');
 		
 		var transmitData = '';
 		$scope.selectAll = false;
@@ -2771,7 +2770,7 @@ angular.module('app.controllers', [])
 	})
 	
 	/*机构收入统计*/
-	.controller("instIncomeCtrl", function($scope, $state, InstIncomeSvr, LocalStorageProvider, GlobalConst , CompanySvr, WorkTypeSvr,$filter) {
+	.controller("instIncomeCtrl", function($scope, $state, InstIncomeSvr, LocalStorageProvider, GlobalConst , CompanySvr, WorkTypeSvr,ServiceSvr,$filter) {
 		$scope.data = {};
 		$scope.totalOAAmt = 0;
 		$scope.totalAAAmt = 0;
@@ -2786,6 +2785,13 @@ angular.module('app.controllers', [])
 		$scope.data.serviceStartTime=$filter('date')(new Date-(1000*60*60*24*30), 'yyyy-MM-dd');
 		
 		$scope.init = function() {
+			ServiceSvr.listAll().success(function(res) {
+				if(res.code == 200) {
+					$scope.serviceList = res.data;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
 			CompanySvr.listAll().success(function(res) {
 				if(res.code == 200) {
 					$scope.instSysList = res.data;
