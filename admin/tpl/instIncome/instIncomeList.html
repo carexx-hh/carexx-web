@@ -17,7 +17,7 @@
 					</select>
 				</li>
 				<li>服务名称：
-					<select ng-model="data.serviceId" required="required">	
+					<select ng-model="data.serviceId">	
 					<option value="">请选择</option>
 					<option ng-repeat="serItem in serviceList" value="{{serItem.id}}">{{serItem.serviceName}}</option>
 					</select>

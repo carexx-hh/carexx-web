@@ -1137,6 +1137,7 @@ angular.module('app.controllers', [])
 	.controller("CareserEditCtrl", function($scope, $state, CareserSvr, ServiceSvr, LocalStorageProvider, $timeout) {
 		$scope.data = LocalStorageProvider.getObject("ser.item");
 		$scope.data.serviceUnit = "" + LocalStorageProvider.getObject("ser.item").serviceUnit;
+		$scope.data.serviceAddress = "" + LocalStorageProvider.getObject("ser.item").serviceAddress;
 		$scope.into = function() {
 			showLoading();
 			ServiceSvr.listAll().success(function(res) {
@@ -1311,6 +1312,7 @@ angular.module('app.controllers', [])
 		$scope.handle.startTime = "08:00:00";
 		$scope.handle.endTime = "08:00:00";
 		$scope.data.orderStatus = "1";
+		$scope.data.serviceAddress = "1";
 
 		$scope.choseCustomer = function() {
 			var modalInstance = $uibModal.open({
@@ -1335,7 +1337,7 @@ angular.module('app.controllers', [])
 		}
 
 		$scope.init = function() {
-			CareserSvr.listAll().success(function(res) {
+			CareserSvr.listAll($scope.data).success(function(res) {
 				if(res.code == 200) {
 					$scope.serviceList = res.data;
 				} else {
@@ -1394,6 +1396,7 @@ angular.module('app.controllers', [])
 		$scope.handle.startTime = "00:00:00";
 		$scope.handle.endTime = "00:00:00";
 		$scope.data.orderStatus = "1";
+		$scope.data.serviceAddress = "2";
 
 		$scope.choseCustomer = function() {
 			var modalInstance = $uibModal.open({
@@ -1418,7 +1421,7 @@ angular.module('app.controllers', [])
 		}
 
 		$scope.init = function() {
-			CareserSvr.listAll().success(function(res) {
+			CareserSvr.listAll($scope.data).success(function(res) {
 				if(res.code == 200) {
 					$scope.serviceList = res.data;
 				} else {

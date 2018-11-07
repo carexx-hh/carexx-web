@@ -16,13 +16,20 @@
 				<input type="text" ng-model="data.serviceName"  readonly="readonly" />				
 			</div>
 			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>服务地址</label>
+				<select ng-model="data.serviceAddress" required="required">
+					<option value="1">医院</option>
+					<option value="2">社区</option>
+				</select>
+			</div>
+			<div class="formrow">
 				<label class="labtext-left"><sup class="required-flag">*</sup>单位</label>
 				<select ng-model="data.serviceUnit" required="required">	
-					<option value="">请选择</option>
+					<!--<option value="">请选择</option>-->
 					<!--<option value="1">时</option>-->
 					<option value="2">天</option>
 					<!--<option value="3">周</option>-->
-					<!--<option value="4">月</option>-->
+					<option value="4">月</option>
 					<!--<option value="5">年</option>-->
 				</select>
 			</div>
