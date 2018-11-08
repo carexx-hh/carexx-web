@@ -222,5 +222,17 @@ angular.module('app.routers', [])
 		url: 'aclrole/edit_auth',
 		templateUrl: 'tpl/acl/aclRoleAuthEdit.html?v=20180302',
 		controller: "AclRoleAuthEditCtrl"
+	}).state('/.serviceRatioList', {/*服务比例管理*/
+		url: 'serviceratio/list',
+		templateUrl: 'tpl/serviceratio/serviceRatioList.html?v=20180302',
+		controller: "ServiceratioListCtrl"
+	}).state('/.serviceRatioAdd', {/*服务比例新增*/
+		url: 'serviceratio/add',
+		templateUrl: 'tpl/serviceratio/serviceRatioAdd.html?v=20180302',
+		controller: "ServiceRatioAddCtrl"
+	}).state('/.serviceRatioEdit', {/*服务比例编辑*/
+		url: 'serviceratio/edit',
+		templateUrl: 'tpl/serviceratio/serviceRatioEdit.html?v=20180302',
+		controller: "ServiceRatioEditCtrl"
 	});
 });

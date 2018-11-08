@@ -3471,4 +3471,113 @@ angular.module('app.controllers', [])
 		};
 
 		$scope.init();
+	})
+	
+	/*服务比例*/
+	.controller("ServiceratioListCtrl", function($scope, $state, ServiceRatioListSvr, LocalStorageProvider) {
+		$scope.data = {};
+
+		$scope.pagerConf = {
+			maxSize: 10,
+			totalItems: 0,
+			currentPage: 1
+		};
+
+
+		$scope.query = function() {
+			$scope.data.pageNo = $scope.pagerConf.currentPage;
+			$scope.data.pageSize = $scope.pagerConf.maxSize;
+			showLoading();
+			ServiceRatioListSvr.query($scope.data).success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					$scope.pagerConf.totalItems = res.data.totalNum;
+					$scope.serviceRatioList = res.data.items;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+
+		$scope.add = function() {
+			$state.go("/.serviceRatioAdd")
+		}
+
+		$scope.edit = function(list) {
+			LocalStorageProvider.setObject("serviceratio.item", list);
+			$state.go('/.serviceRatioEdit');
+		}
+
+		$scope.disable = function(id) {
+			if(window.confirm("确定停用数据？")) {
+				showLoading();
+				ServiceRatioListSvr.disable(id).success(function(res) {
+					hideLoading();
+					if(res.code == 200) {
+						$scope.query();
+					} else {
+						alert(res.errorMsg);
+					}
+				});
+			}
+
+		}
+
+		$scope.enable = function(id) {
+			if(window.confirm("确定启用数据？")) {
+				showLoading();
+				ServiceRatioListSvr.enable(id).success(function(res) {
+					hideLoading();
+					if(res.code == 200) {
+						$scope.query();
+					} else {
+						alert(res.errorMsg);
+					}
+				});
+			}
+		}
+
+		$scope.$watch('pagerConf.currentPage', $scope.query);
+
+	})
+	
+	
+	/*服务比例新增*/
+	.controller("ServiceRatioAddCtrl", function($scope, $state, ServiceRatioListSvr, LocalStorageProvider) {
+		$scope.data = {};
+
+		$scope.save = function() {
+
+			showLoading();
+			ServiceRatioListSvr.save($scope.data).success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					alert("添加服务比例成功");
+					$state.go("/.serviceRatioList");
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+	})
+	
+	/*服务比例编辑*/
+	.controller("ServiceRatioEditCtrl", function($scope, $state, ServiceRatioListSvr, LocalStorageProvider, $timeout) {
+		$scope.data = LocalStorageProvider.getObject("serviceratio.item");
+		$scope.data.serviceAddress = "" + LocalStorageProvider.getObject("serviceratio.item").serviceAddress;
+
+
+		$scope.save = function() {
+			showLoading();
+			ServiceRatioListSvr.modify($scope.data).success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					alert("修改服务比例成功");
+					$state.go("/.serviceRatioList");
+
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
 	});

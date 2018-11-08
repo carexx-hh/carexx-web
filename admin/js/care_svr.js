@@ -606,4 +606,31 @@ angular.module('app.services', [])
 	};
 
 	return driverSvr;
+}])
+
+
+.factory('ServiceRatioListSvr', ['$http', function($http) {
+	var serviceRatioListSvr = {};
+	
+	serviceRatioListSvr.query = function(data) {
+		return $http.post('serviceratio/list',data);
+	};
+	
+	serviceRatioListSvr.save = function(data) {
+		return $http.post('serviceratio/add', data);
+	};
+	
+	serviceRatioListSvr.modify = function(data) {
+		return $http.post('serviceratio/modify', data);
+	};
+	
+	serviceRatioListSvr.disable = function(id) {
+		return $http.get('serviceratio/disable/'+id);
+	};
+	
+	serviceRatioListSvr.enable = function(id) {
+		return $http.get('serviceratio/enable/'+id);
+	};
+
+	return serviceRatioListSvr;
 }]);

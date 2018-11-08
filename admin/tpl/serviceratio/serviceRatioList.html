@@ -1,0 +1,53 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li><i class="fa fa-home"></i>
+			<li>系统管理</li>
+		</li>
+		<li>服务比例</li>
+	</ul>
+	<div class="box">
+		<div class="filterForm">
+			<ul class="clearfix">
+				<li><button type="button" class="addbtn" ng-click="add()"><i class="fa fa-plus"></i>&nbsp新增</button></li>
+			</ul>
+		</div>
+		<div class="signList">
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th class="cell-number">服务地址</th>
+						<th class="cell-number">服务比例</th>
+						<th class="cell-number">状态</th>
+						<th class="cell-number">创建时间</th>
+						<th class="cell-number">修改时间</th>
+						<th class="cell-con">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="list in serviceRatioList">
+						<td class="cell-number">{{list.serviceAddress |serviceAddressFilter}}</td>
+						<td class="cell-number">{{list.serviceRatio}}</td>
+						<td class="cell-number">{{list.serviceRatioStatus |UseStatusFilter}}</td>
+						<td class="cell-number">{{list.createTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-number">{{list.modifyTime| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+						<td class="cell-con">
+							<button type="button" class="btn btn-primary" ng-click="edit(list)">
+								<i class="fa fa-pencil-square-o fa-lg"></i>&nbsp编辑
+							</button>
+							<button type="button" class="btn btn-danger" ng-click="disable(list.id)" ng-if="list.serviceRatioStatus==1">
+								<i class="fa fa-lock"></i>&nbsp&nbsp停用&nbsp
+							</button>
+							<button type="button" class="btn btn-success" ng-click="enable(list.id)" ng-if="list.serviceRatioStatus==0">
+								<i class="fa fa-unlock-alt"></i>&nbsp&nbsp启用&nbsp
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="defaultPage" ng-show="instList== null">
+		<img src="img/nodata.png" /> <span>暂无数据</span>
+	</div>
+	<uib-pagination total-items="pagerConf.totalItems" ng-model="pagerConf.currentPage" max-size="pagerConf.maxSize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true"></uib-pagination>
+</div>
