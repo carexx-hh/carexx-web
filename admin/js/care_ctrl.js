@@ -2822,6 +2822,7 @@ angular.module('app.controllers', [])
 			$scope.totalSAAmt=0;
 			$scope.totalIAAmt = 0;
 			$scope.totalPDAmt=0;
+			$scope.totalSCAmt=0;
 			showLoading();
 			InstIncomeSvr.query($scope.data).success(function(res) {
 				hideLoading();
@@ -2837,6 +2838,7 @@ angular.module('app.controllers', [])
 						$scope.totalSAAmt=$scope.totalSAAmt+$scope.instIncomeList[i].staffSettleAmt;
 						$scope.totalIAAmt=$scope.totalIAAmt+$scope.instIncomeList[i].instSettleAmt;
 						$scope.totalPDAmt=$scope.totalPDAmt+$scope.instIncomeList[i].pounDage;
+						$scope.totalSCAmt=$scope.totalSCAmt+$scope.instIncomeList[i].serviceCharge;
 					}
 
 				} else {

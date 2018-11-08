@@ -48,6 +48,7 @@
 						<th class="cell-number">结算款</th>
 						<th class="cell-number">管理费</th>
 						<th class="cell-number">微信手续费</th>
+						<th class="cell-number">机构收入统计</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -62,6 +63,7 @@
 						<td class="cell-number">{{item.staffSettleAmt| number:2}}</td>
 						<td class="cell-number">{{item.instSettleAmt| number:2}}</td>
 						<td class="cell-number">{{item.pounDage| number:2}}</td>
+						<td class="cell-number">{{item.serviceCharge| number:2}}</td>
 						</td>
 					</tr>
 				</tbody>
@@ -77,6 +79,7 @@
 						<td class="cell-number">{{totalSAAmt| number:2}}</td>
 						<td class="cell-number">{{totalIAAmt| number:2}}</td>
 						<td class="cell-number">{{totalPDAmt| number:2}}</td>
+						<td class="cell-number">{{totalSCAmt| number:2}}</td>
 					</tr>
 				</tfoot>
 			</table>
