@@ -10,7 +10,11 @@
 		<li>服务项目新增</li>
 	</ul>
 	<div class="box">
-		<ng-form class="formgroup" name="serForm">			
+		<ng-form class="formgroup" name="serForm">
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>服务编号</label> 
+				<input type="text" name="serialNumber" ng-model="data.serialNumber"  placeholder="请输入服务编号" required="required" />
+			</div>
 			<div class="formrow">
 				<label class="labtext-left"><sup class="required-flag">*</sup>服务名称</label>
 				<select ng-model="data.serviceId" required="required">	

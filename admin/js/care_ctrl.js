@@ -1117,7 +1117,10 @@ angular.module('app.controllers', [])
 		}
 
 		$scope.save = function() {
-
+			if($scope.data.serialNumber <= 0 || $scope.data.serialNumber != Math.floor($scope.data.serialNumber)){
+				alert("服务编号必须为大于0整数");
+				return false;
+			}
 			showLoading();
 			CareserSvr.add($scope.data).success(function(res) {
 				hideLoading();
@@ -1136,6 +1139,7 @@ angular.module('app.controllers', [])
 	/*服务项目编辑*/
 	.controller("CareserEditCtrl", function($scope, $state, CareserSvr, ServiceSvr, LocalStorageProvider, $timeout) {
 		$scope.data = LocalStorageProvider.getObject("ser.item");
+		$scope.data.serialNumber = "" + LocalStorageProvider.getObject("ser.item").serialNumber;
 		$scope.data.serviceUnit = "" + LocalStorageProvider.getObject("ser.item").serviceUnit;
 		$scope.data.serviceAddress = "" + LocalStorageProvider.getObject("ser.item").serviceAddress;
 		$scope.into = function() {
@@ -1155,7 +1159,10 @@ angular.module('app.controllers', [])
 		}
 
 		$scope.save = function() {
-
+			if($scope.data.serialNumber <= 0 || $scope.data.serialNumber != Math.floor($scope.data.serialNumber)){
+				alert("服务编号必须为大于0整数");
+				return false;
+			}
 			showLoading();
 			CareserSvr.modify($scope.data).success(function(res) {
 				hideLoading();

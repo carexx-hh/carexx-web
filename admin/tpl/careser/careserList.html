@@ -31,6 +31,7 @@
 			<table class="tablelist">
 				<thead>
 					<tr>
+						<th class="cell-unit">编号</th>
 						<th class="cell-text">服务项目</th>
 						<th class="cell-number">服务介绍</th>
 						<th class="cell-number">服务地址</th>
@@ -44,6 +45,7 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="item in careserList">
+						<td class="cell-unit">{{item.serialNumber}}</td>
 						<td class="cell-text">{{item.serviceName}}</td>
 						<td class="cell-number">{{item.serviceExplain}}</td>
 						<td class="cell-number">{{item.serviceAddress | serviceAddressFilter}}</td>
