@@ -1316,8 +1316,8 @@ angular.module('app.controllers', [])
 		$scope.data = {};
 		$scope.handle = {};
 		var transmitData = "";
-		$scope.handle.startTime = "08:00:00";
-		$scope.handle.endTime = "08:00:00";
+		$scope.handle.startTime = "08:00";
+		$scope.handle.endTime = "08:00";
 		$scope.data.orderStatus = "1";
 		$scope.data.serviceAddress = "1";
 
@@ -1360,7 +1360,12 @@ angular.module('app.controllers', [])
 				}
 			});
 		}
-
+		
+		$scope.initEndTime = function() {
+			var hours = $filter('date')($scope.handle.startTime, 'HH:mm').substring(0,2);
+			alert(hours);
+		}
+		
 		$scope.getServiceId = function(id) {
 			for(var i = 0; i < $scope.serviceList.length; i++) {
 				if(id == $scope.serviceList[i].serviceId) {
