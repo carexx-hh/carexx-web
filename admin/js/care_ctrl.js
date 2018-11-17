@@ -217,6 +217,7 @@ angular.module('app.controllers', [])
 		$scope.voucherNo='';
 		$scope.data = transmitData;
 		$scope.data.adjustAmt=transmitData.adjustAmt;
+		$scope.data.payType=transmitData.payType;
 
 		if(transmitData.proofType=="1"){
 			$scope.data.proofNo=$scope.data.receiptNo;
