@@ -3593,4 +3593,47 @@ angular.module('app.controllers', [])
 				}
 			});
 		}
+	})
+	
+	/*人员排班*/
+	.controller("StaffScheduleListCtrl", function($scope, $state, StaffScheduleSvr, LocalStorageProvider, GlobalConst, WorkTypeSvr) {
+		$scope.data = {};
+
+		$scope.pagerConf = {
+			maxSize: 10,
+			totalItems: 0,
+			currentPage: 1
+		};
+		
+		$scope.init = function() {
+			showLoading();
+			WorkTypeSvr.listAll().success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					$scope.workTypeList = res.data;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+
+		$scope.query = function() {
+			$scope.data.pageNo = $scope.pagerConf.currentPage;
+			$scope.data.pageSize = $scope.pagerConf.maxSize;
+			showLoading();
+			StaffScheduleSvr.query($scope.data).success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					$scope.pagerConf.totalItems = res.data.totalNum;
+					$scope.staffList = res.data.items;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+		
+		
+		$scope.init();
+		$scope.$watch('pagerConf.currentPage', $scope.query);
+
 	});

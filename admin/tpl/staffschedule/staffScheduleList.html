@@ -1,0 +1,80 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li><i class="fa fa-home"></i>
+			<li>业务管理</li>
+		</li>
+		<li>人员排班</li>
+	</ul>
+	<div class="box">
+		<div class="filterForm">
+			<ul class="clearfix">
+				<li>姓名：<input type="text" placeholder="请输入姓名" ng-model="data.realName"></li>
+				<li>身份证号：<input type="text" placeholder="请输入身份证号" ng-model="data.idNo"></li>
+				<li>人员性质：
+					<select ng-model="data.personType">
+							<option value="">全部</option>
+							<option value="1">在编</option>
+							<option value="2">加盟</option>
+					</select>
+				</li>
+				<li>工作状态：
+					<select ng-model="data.jobStatus">
+							<option value="">全部</option>
+							<option value="1">在职</option>
+							<option value="2">离职</option>
+					</select>
+				</li>
+				<li>工种：
+					<select ng-model="data.workTypeId">
+							<option value="">全部</option>
+							<option ng-repeat="wtItem in workTypeList" value="{{wtItem.id}}">{{wtItem.workTypeName}}</option>
+					</select>
+				</li>
+				<li><button type="button" class="searchbtn" ng-click="query()" ng-if="ops['O_STAFF_SCHEDULE_QUERY']"><i class="fa fa-search"></i>&nbsp查询</button></li>
+			</ul>
+		</div>
+		<div class="signList">			
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th class="cell-number">姓名</th>
+						<th class="cell-number">工种</th>
+						<th class="cell-number">性别</th>
+						<th class="cell-idNo">身份证</th>
+						<th class="cell-number">电话</th>
+						<th class="cell-number">性质</th>
+						<th class="cell-number">状态</th>
+						<th class="cell-number">所属单位</th>
+						<th class="cell-number">服务单位</th>
+						<th class="cell-con">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in staffList">
+						<td class="cell-number">{{item.realName}}</td>
+						<td class="cell-number">{{item.workTypeName}}</td>
+						<td class="cell-number">{{item.sex | SexFilter}}</td>
+						<td class="cell-idNo">{{item.idNo}}</td>
+						<td class="cell-number">{{item.phone}}</td>
+						<td class="cell-number">{{item.personType |PersonTypeFilter}}</td>
+						<td class="cell-number">{{item.jobStatus |JobFilter}}</td>
+						<td class="cell-number">{{item.instName}}</td>
+						<td class="cell-number">{{item.serviceInstName}}</td>
+						<td class="cell-con">
+							<button type="button" class="btn btn-warning" ng-click="edit(item)" ng-if="ops['O_STAFF_SCHEDULE']">
+								<i class="fa fa-pencil-square-o fa-lg"></i>&nbsp排班
+							</button>
+							<button type="button" class="btn btn-primary" ng-click="delete(item.id)" ng-if="ops['O_STAFF_SCHEDULE_VIEW']">
+								<i class="fa fa-search"></i>&nbsp&nbsp查看
+							</button>							
+						</td>
+					</tr>					
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="defaultPage" ng-show="staffList== null">
+		<img src="img/nodata.png" /> <span>暂无数据</span>
+	</div>
+	<uib-pagination total-items="pagerConf.totalItems" ng-model="pagerConf.currentPage" max-size="pagerConf.maxSize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true"></uib-pagination>
+</div>

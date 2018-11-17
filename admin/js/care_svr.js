@@ -633,4 +633,18 @@ angular.module('app.services', [])
 	};
 
 	return serviceRatioListSvr;
+}])
+
+.factory('StaffScheduleSvr', ['$http', function($http) {
+	var staffScheduleSvr = {};
+	
+	staffScheduleSvr.query = function(data) {
+		return $http.post('inststaff/list',data);
+	};
+	
+	staffScheduleSvr.queryByserId = function(data) {
+		return $http.post('inststaff/list_by_serviceid',data);
+	};
+
+	return staffScheduleSvr;
 }]);

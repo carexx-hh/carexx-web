@@ -234,5 +234,9 @@ angular.module('app.routers', [])
 		url: 'serviceratio/edit',
 		templateUrl: 'tpl/serviceratio/serviceRatioEdit.html?v=20180302',
 		controller: "ServiceRatioEditCtrl"
+	}).state('/.staffScheduleList', {/*人员排班*/
+		url: 'staff/list',
+		templateUrl: 'tpl/staffschedule/staffScheduleList.html?v=20180302',
+		controller: "StaffScheduleListCtrl"
 	});
 });
