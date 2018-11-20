@@ -37,14 +37,17 @@
 				<label class="labtext-left"><sup class="required-flag">*</sup>开始日期</label> 
 				<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" required="required" onfocus="MyDatePicker({maxDate:'#F{$dp.$D(\'endRegDate\')}'})" ng-model="handle.startDate" />
 				<label class="labtext-left" style="width: 80px;"><sup class="required-flag">*</sup>开始时间</label>
-				<input type="text" id="startTime" style="width:80px" ng-model="handle.startTime" ng-blur="initEndTime()" />
+				<select ng-model="handle.startTime" required="required">	
+					<option value="08:00:00">08:00</option>
+					<option value="20:00:00">20:00</option>
+				</select>
 			</div>
 			<div class="formrow">				
 				<label class="labtext-left"><sup class="required-flag">*</sup>结束日期</label> <input type="text" id="endRegDate" style="width:110px" class="startdate" onchange="" required="required" onfocus="MyDatePicker({minDate:'#F{$dp.$D(\'startRegDate\')}'})" ng-model="handle.endDate" />
 				<label class="labtext-left" style="width: 80px;"><sup class="required-flag">*</sup>结束时间</label>
 				<select ng-model="handle.endTime" required="required">	
-					<option value="{{handle.thishour}}">{{handle.thishour}}</option>
-					<option value="{{handle.halfhour}}">{{handle.halfhour}}</option>
+					<option value="08:00:00">08:00</option>
+					<option value="20:00:00">20:00</option>
 				</select>
 			</div>
 			<div class="formrow">				

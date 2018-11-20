@@ -1317,8 +1317,8 @@ angular.module('app.controllers', [])
 		$scope.data = {};
 		$scope.handle = {};
 		var transmitData = "";
-		$scope.handle.startTime = "08:00";
-		$scope.handle.endTime = "08:00";
+		$scope.handle.startTime = "08:00:00";
+		$scope.handle.endTime = "08:00:00";
 		$scope.data.orderStatus = "1";
 		$scope.data.serviceAddress = "1";
 
