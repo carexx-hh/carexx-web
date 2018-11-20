@@ -24,6 +24,18 @@ angular.module('app.filters', [])
 		}
 	})
 	
+	.filter("JobTypeFilter", function() {
+		return function(jobType) {
+			if(jobType == 1) {
+				return "白班";
+			}
+			if(jobType == 2) {
+				return "夜班";
+			}
+			return "-";
+		}
+	})
+	
 	.filter("serviceAddressFilter", function() {
 		return function(serviceAddress) {
 			if(serviceAddress == 1) {

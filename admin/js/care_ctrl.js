@@ -2281,6 +2281,116 @@ angular.module('app.controllers', [])
 
 		$scope.into();
 	})
+	
+	/*班次管理*/
+	.controller("JobTypeListCtrl", function($scope, $state, JobTypeSvr, LocalStorageProvider) {
+		$scope.data = {};
+
+		$scope.pagerConf = {
+			maxSize: 10,
+			totalItems: 0,
+			currentPage: 1
+		};
+
+
+		$scope.query = function() {
+			$scope.data.pageNo = $scope.pagerConf.currentPage;
+			$scope.data.pageSize = $scope.pagerConf.maxSize;
+			showLoading();
+			JobTypeSvr.query($scope.data).success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					$scope.pagerConf.totalItems = res.data.totalNum;
+					$scope.jobTypeList = res.data.items;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+
+		$scope.add = function() {
+			$state.go("/.jobTypeAdd")
+		}
+
+		$scope.edit = function(list) {
+			LocalStorageProvider.setObject("inst.item", list);
+			$state.go('/.jobTypeEdit');
+		}
+		
+		$scope.$watch('pagerConf.currentPage', $scope.query);
+
+	})
+
+	/*班次新增*/
+	.controller("JobTypeAddCtrl", function($scope, $state, JobTypeSvr, LocalStorageProvider) {
+		$scope.data = {};
+
+		$scope.into = function() {
+			showLoading();
+			InstListSvr.listAll().success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					$scope.sysList = res.data;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+
+		$scope.save = function() {
+
+			showLoading();
+			InstListSvr.save($scope.data).success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					alert("添加单位成功");
+					$state.go("/.instList");
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+
+		$scope.into();
+	})
+
+	/*班次编辑*/
+	.controller("JobTypeEditCtrl", function($scope, $state, JobTypeSvr, LocalStorageProvider, $timeout) {
+		$scope.data = LocalStorageProvider.getObject("inst.item");
+		$scope.data.instType = "" + LocalStorageProvider.getObject("inst.item").instType;
+
+		$scope.into = function() {
+			showLoading();
+			InstListSvr.listAll().success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					$scope.sysList = res.data;
+					$timeout(function() {
+						$scope.data.instSysId = "" + LocalStorageProvider.getObject("inst.item").instSysId;
+					}, 100)
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+
+		}
+
+		$scope.save = function() {
+			showLoading();
+			InstListSvr.modify($scope.data).success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					alert("修改单位信息成功");
+					$state.go("/.instList");
+
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+
+		$scope.into();
+	})
 
 	/*数据字典*/
 	.controller("DictListCtrl", function($scope, $state, DictSvr, LocalStorageProvider) {

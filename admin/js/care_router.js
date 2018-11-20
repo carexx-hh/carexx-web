@@ -14,18 +14,30 @@ angular.module('app.routers', [])
 		url: 'dashboard',
 		templateUrl: 'tpl/dashboard.html?v=20180302',
 		controller: "DashboardCtrl"
-	}).state('/.instList', {/*单位管理*/
+	}).state('/.instList', {/*医院管理*/
 		url: 'inst/list',
 		templateUrl: 'tpl/inst/instList.html?v=20180302',
 		controller: "InstListCtrl"
-	}).state('/.instAdd', {/*单位管理新增*/
+	}).state('/.instAdd', {/*医院管理新增*/
 		url: 'inst/add',
 		templateUrl: 'tpl/inst/instAdd.html?v=20180302',
 		controller: "InstAddCtrl"
-	}).state('/.instEdit', {/*单位管理编辑*/
+	}).state('/.instEdit', {/*医院管理编辑*/
 		url: 'inst/edit',
 		templateUrl: 'tpl/inst/instEdit.html?v=20180302',
 		controller: "InstEditCtrl"
+	}).state('/.jobTypeList', {/*医院班次管理*/
+		url: 'jobtype/list',
+		templateUrl: 'tpl/jobtype/jobTypeList.html?v=20180302',
+		controller: "JobTypeListCtrl"
+	}).state('/.jobTypeAdd', {/*医院班次新增*/
+		url: 'jobtype/add',
+		templateUrl: 'tpl/jobtype/jobTypeAdd.html?v=20180302',
+		controller: "JobTypeAddCtrl"
+	}).state('/.jobTypeEdit', {/*医院班次编辑*/
+		url: 'jobtype/edit',
+		templateUrl: 'tpl/jobtype/jobTypeEdit.html?v=20180302',
+		controller: "JobTypeEditCtrl"
 	}).state('/.companyList', {/*公司管理*/
 		url: 'company/list',
 		templateUrl: 'tpl/company/companyList.html?v=20180302',

@@ -245,6 +245,28 @@ angular.module('app.services', [])
 	return instListSvr;
 }])
 
+.factory('JobTypeSvr', ['$http', function($http) {
+	var JobTypeSvr = {};
+	//查询所有班次
+	JobTypeSvr.query = function(data) {
+		return $http.post('customerordertime/list',data);
+	};
+	
+	instListSvr.byInstId = function(data) {
+		return $http.post('customerordertime/get_by_instId',data);
+	};
+	
+	JobTypeSvr.save = function(data) {
+		return $http.post('customerordertime/add', data);
+	};
+	
+	JobTypeSvr.modify = function(data) {
+		return $http.post('customerordertime/modify', data);
+	};
+
+	return JobTypeSvr;
+}])
+
 .factory('CompanySvr', ['$http', function($http) {
 	var companySvr = {};
 	//查询所有医院下公司
