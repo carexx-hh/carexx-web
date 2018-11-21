@@ -252,7 +252,7 @@ angular.module('app.services', [])
 		return $http.post('customerordertime/list',data);
 	};
 	
-	instListSvr.byInstId = function(data) {
+	JobTypeSvr.byInstId = function(data) {
 		return $http.post('customerordertime/get_by_instId',data);
 	};
 	

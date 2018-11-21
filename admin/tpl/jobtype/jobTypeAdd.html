@@ -2,74 +2,102 @@
 	<ul class="breadcrumb">
 		<li>
 			<i class="fa fa-home"></i>
-			<li>系统用户管理</li>
+			<li>系统管理</li>
 		</li>
-		<li>系统用户列表</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.jobTypeList">机构班次</a>
+		</li>
+		<li>新增机构班次</li>
+	</ul>
+	<div class="box">
+		<form class="formgroup" name="jobTypeForm">
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>服务机构</label>
+				<input type="text"  ng-model="data.instName" maxlength="20" placeholder="请选择服务机构" ng-click="choiceServiceInstId()" required="required" readonly="readonly"/>				
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>服务班次</label>
+				<select ng-model="data.jobType" required="required">
+					<option value="">请选择</option>
+					<option value="1">白班</option>
+					<option value="2">夜班</option>
+				</select>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>开始时间</label>
+				<input type="text" name="startTime" ng-model="data.startTime" style="width: 90px;" required="required" />
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>结束时间</label>
+				<select ng-model="data.endTime" required="required">	
+					<option value="{{}}">{{}}</option>
+					<option value="{{}}">{{}}</option>
+				</select>
+			</div>
+			<div class="fllab">
+				<input type="submit" class="submit" value="提交" ng-click="save()" ng-disabled="jobTypeForm.$invalid" />
+			</div>
+		</form>
+	</div>
+</div>
+<script type="text/ng-template" id="instChoice.html"> 
+<div class="content" style="margin:0;">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>信息维护</li>
+		</li>
+		<li>人员档案</li>
+		<li>人员档案新增</li>
+		<li>单位查询</li>
+		<i class="fa fa-times" aria-hidden="true" ng-click="close()" style="float: right;font-size: 36px;color: #8aafe4;margin-right: -15px;margin-top: -5px;"></i>
 	</ul>
 	<div class="box">
 		<div class="filterForm">
 			<ul class="clearfix">
-				<li>登录账号：<input type="text" placeholder="请输入登录账号" ng-model="data.account"></li>
-				<li>姓名：<input type="text" placeholder="请输入姓名" ng-model="data.name"></li>
-				<li>手机号：<input type="text" placeholder="请输入手机号" ng-model="data.mobile"></li>
-				<li>邮箱：<input type="text" placeholder="请输入邮箱" ng-model="data.email"></li>
-				<li>状态：
-					<select name="charge" ng-model="data.status" ng-change="query()">
+				<li>单位名称：<input type="text" placeholder="请输入单位名称" ng-model="data.instName"></li>				
+				<li>类型：
+					<select ng-model="data.instType">	
 						<option value="">全部</option>
-						<option value="1">正常</option>
-						<option value="2">已冻结</option>
-						<option value="3">已销户</option>
+						<option value="1">医院</option>
+						<option value="2">社区</option>
 					</select>
 				</li>
-				<li>创建日期：<input type="text" id="startRegDate" class="startdate" onchange="" onfocus="MyDatePicker({maxDate:'#F{$dp.$D(\'endRegDate\')||\'%y-%M-%d\'}'})" ng-model="data.startRegDate" /> 至
-					<input type="text" id="endRegDate" class="enddate" onchange="" onFocus="MyDatePicker({minDate:'#F{$dp.$D(\'startRegDate\',{d:0});}',maxDate:'%y-%M-%d'})" ng-model="data.endRegDate" />
-				</li>
-				<li><button type="button" class="searchbtn" ng-click="query()" >查询</button></li>
-				<li><button type="button" class="searchbtn" ng-click="reset()">重置</button></li>
+				<li><button type="button" class="searchbtn" ng-click="query()"><i class="fa fa-search"></i>&nbsp查询</button></li>
 			</ul>
 		</div>
 		<div class="signList">
-			<div class="operation">
-				<a href="javascript:void(0)" ng-click="add()" class="addSign" ng-if="ops['O_SYS_USER_ADD']"><i class="fa fa-plus"></i>新增</a>
-				<a href="javascript:void(0)" ng-click="refresh()" class="addSign"><i class="fa fa-refresh"></i>刷新</a>
-			</div>
-			<table class="tablelist">
+			<table class="tablelist" style="min-width: auto;">
 				<thead>
 					<tr>
-						<th class="cell-seq">序号</th>
-						<th class="cell-text">登录账号</th>
-						<th class="cell-text">姓名</th>
-						<th class="cell-text">角色</th>
-						<th class="cell-number">手机</th>
-						<th class="cell-text">邮箱</th>
-						<th class="cell-text">状态</th>
-						<th class="cell-text">创建时间</th>
-						<th class="cell-con">操作</th>
+						<th class="cell-text">名称</th>
+						<th class="cell-number">类型</th>
+						<th class="cell-number">所属公司</th>
+						<th class="cell-number">地区</th>
+						<th class="cell-text">地址</th>
+						<th class="cell-number">操作</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="item in items">
-						<td class="cell-seq">{{$index + 1}}</td>
-						<td class="cell-text">{{item.account}}</td>
-						<td class="cell-text">{{item.name}}</td>
-						<td class="cell-text">{{item.roleName}}</td>
-						<td class="cell-number">{{item.mobile}}</td>
-						<td class="cell-text">{{item.email}}</td>
-						<td class="cell-text">{{item.status | AclUserAcctStatusFilter}}</td>
-						<td class="cell-text">{{item.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
-						<td class="cell-con">
-							<a href="javascript:void(0)" ng-click="edit(item)" ng-if="ops['O_SYS_USER_EDIT']">编辑</a>
-							<a href="javascript:void(0)" ng-click="lock(item.id)" ng-if="ops['O_SYS_USER_STATUS_CTRL'] && item.status == 1">冻结</a>
-							<a href="javascript:void(0)" ng-click="unlock(item.id)" ng-if="ops['O_SYS_USER_STATUS_CTRL'] && item.status == 2">激活</a>
-							<a href="javascript:void(0)" ng-click="del(item.id)" ng-if="ops['O_SYS_USER_STATUS_CTRL'] && item.status == 2">删除</a>
+					<tr ng-repeat="list in instList">
+						<td class="cell-text">{{list.instName}}</td>
+						<td class="cell-number">{{list.instType |InstTypeFilter}}</td>
+						<td class="cell-number">{{list.instSysName}}</td>
+						<td class="cell-number">{{list.instRegion}}</td>
+						<td class="cell-text">{{list.instAddr}}</td>
+						<td class="cell-number">
+							<button type="button" class="btn btn-success" ng-click="choice(list)">
+								<i class="fa fa-check-square"></i>&nbsp选择
+							</button>							
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	<div class="defaultPage" ng-show="items == null">
+	<div class="defaultPage" ng-show="instList== null">
 		<img src="img/nodata.png" /> <span>暂无数据</span>
 	</div>
 	<uib-pagination total-items="pagerConf.totalItems" ng-model="pagerConf.currentPage" max-size="pagerConf.maxSize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true"></uib-pagination>
 </div>
+</script>

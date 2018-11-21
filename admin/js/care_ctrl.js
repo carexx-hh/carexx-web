@@ -2313,7 +2313,7 @@ angular.module('app.controllers', [])
 		}
 
 		$scope.edit = function(list) {
-			LocalStorageProvider.setObject("inst.item", list);
+			LocalStorageProvider.setObject("jobType.item", list);
 			$state.go('/.jobTypeEdit');
 		}
 		
@@ -2322,51 +2322,60 @@ angular.module('app.controllers', [])
 	})
 
 	/*班次新增*/
-	.controller("JobTypeAddCtrl", function($scope, $state, JobTypeSvr, LocalStorageProvider) {
+	.controller("JobTypeAddCtrl", function($scope, $state, JobTypeSvr, LocalStorageProvider, $uibModal) {
 		$scope.data = {};
-
-		$scope.into = function() {
-			showLoading();
-			InstListSvr.listAll().success(function(res) {
-				hideLoading();
-				if(res.code == 200) {
-					$scope.sysList = res.data;
-				} else {
-					alert(res.errorMsg);
+		$scope.data.startTime = "08:00";
+		
+		var instId = "";
+		$scope.choiceServiceInstId = function() {
+			var modalInstance = $uibModal.open({
+				size: 'lg',
+				templateUrl: 'instChoice.html', //script标签中定义的id
+				controller: 'InstChoiceCtrl', //modal对应的Controller
+				resolve: {
+					instId: function() { //data作为modal的controller传入的参数
+						return null; //用于传递数据
+					}
 				}
-			});
+			})
+			modalInstance.result.then( //then的第一个函数对应ok(),第二个函数对应cancel()
+				function(list) {
+					$scope.data.instId = list.id;
+					$scope.data.instName = list.instName;
+				},
+				function() {
+					console.log("用户取消操作");
+				}
+			);
 		}
 
 		$scope.save = function() {
-
 			showLoading();
-			InstListSvr.save($scope.data).success(function(res) {
+			JobTypeSvr.save($scope.data).success(function(res) {
 				hideLoading();
 				if(res.code == 200) {
-					alert("添加单位成功");
-					$state.go("/.instList");
+					alert("添加班次成功");
+					$state.go("/.jobTypeList");
 				} else {
 					alert(res.errorMsg);
 				}
 			});
 		}
-
-		$scope.into();
+		
 	})
 
 	/*班次编辑*/
 	.controller("JobTypeEditCtrl", function($scope, $state, JobTypeSvr, LocalStorageProvider, $timeout) {
-		$scope.data = LocalStorageProvider.getObject("inst.item");
-		$scope.data.instType = "" + LocalStorageProvider.getObject("inst.item").instType;
+		$scope.data = LocalStorageProvider.getObject("jobType.item");
 
 		$scope.into = function() {
 			showLoading();
-			InstListSvr.listAll().success(function(res) {
+			JobTypeSvr.query().success(function(res) {
 				hideLoading();
 				if(res.code == 200) {
-					$scope.sysList = res.data;
+					$scope.jobTypeList = res.data;
 					$timeout(function() {
-						$scope.data.instSysId = "" + LocalStorageProvider.getObject("inst.item").instSysId;
+						$scope.data.jobType = "" + LocalStorageProvider.getObject("jobType.item").jobType;
 					}, 100)
 				} else {
 					alert(res.errorMsg);
@@ -2377,11 +2386,11 @@ angular.module('app.controllers', [])
 
 		$scope.save = function() {
 			showLoading();
-			InstListSvr.modify($scope.data).success(function(res) {
+			JobTypeSvr.modify($scope.data).success(function(res) {
 				hideLoading();
 				if(res.code == 200) {
-					alert("修改单位信息成功");
-					$state.go("/.instList");
+					alert("修改班次信息成功");
+					$state.go("/.jobTypeList");
 
 				} else {
 					alert(res.errorMsg);
