@@ -61,7 +61,7 @@
 						<td class="cell-number">{{item.instName}}</td>
 						<td class="cell-number">{{item.serviceInstName}}</td>
 						<td class="cell-con">
-							<button type="button" class="btn btn-warning" ng-click="edit(item)" ng-if="ops['O_STAFF_SCHEDULE']">
+							<button type="button" class="btn btn-warning" ng-click="arrange(item)" ng-if="ops['O_STAFF_SCHEDULE']">
 								<i class="fa fa-pencil-square-o fa-lg"></i>&nbsp排班
 							</button>
 							<button type="button" class="btn btn-primary" ng-click="delete(item.id)" ng-if="ops['O_STAFF_SCHEDULE_VIEW']">

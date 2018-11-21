@@ -667,6 +667,10 @@ angular.module('app.services', [])
 	staffScheduleSvr.queryByserId = function(data) {
 		return $http.post('inststaff/list_by_serviceid',data);
 	};
+	
+	staffScheduleSvr.schedule = function(data) {
+		return $http.post('customerorderschedule/add', data);
+	};
 
 	return staffScheduleSvr;
 }]);

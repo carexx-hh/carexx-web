@@ -3751,8 +3751,54 @@ angular.module('app.controllers', [])
 			});
 		}
 		
+		$scope.arrange = function(list) {
+			LocalStorageProvider.setObject("staff.item", list);
+			$state.go('/.staffSchedule');
+		}
 		
 		$scope.init();
 		$scope.$watch('pagerConf.currentPage', $scope.query);
 
+	})
+	
+	/*人员排班*/
+	.controller("StaffScheduleCtrl", function($scope, $state, StaffScheduleSvr, LocalStorageProvider, InstSettleSvr, $uibModal, $filter) {
+		$scope.handle = LocalStorageProvider.getObject("staff.item");
+		$scope.data = {};
+		$scope.dataForState=[];
+		$scope.orderStatus=0;
+		$scope.dataForState.orderNo=$scope.handle.orderNo;
+		$scope.selectAll = false;
+		$scope.data.orderNo = $scope.handle.orderNo;
+		$scope.data.workTypeId = $scope.handle.workTypeId;
+		$scope.data.serviceId = $scope.handle.serviceId;
+		$scope.data.instId = $scope.handle.instId;
+		$scope.data.orderAmt=$scope.handle.orderAmt;
+		$scope.handle.endTime = "08:00:00";
+		$scope.handle.serStartDate = $filter('date')($scope.handle.serviceStartTime, 'yyyy-MM-dd HH:mm:ss');
+		$scope.handle.serEndDate = $filter('date')($scope.handle.serviceEndTime, 'yyyy-MM-dd HH:mm:ss');
+		$scope.handle.endTimeLimit = $filter('date')($scope.handle.serviceEndTime, 'yyyy-MM-dd');
+		
+		$scope.pagerConf = {
+			maxSize: 10,
+			totalItems: 0,
+			currentPage: 1
+		};
+		
+		$scope.init = function() {
+			InstSettleSvr.listAll($scope.data).success(function(res) {
+					if(res.code == 200) {
+						$scope.ratioList = res.data;
+					} else {
+						alert(res.errorMsg);
+					}
+				})
+				.error(function() {
+					hideLoading();
+				});
+
+		}
+		
+		
+		$scope.init();
 	});

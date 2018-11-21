@@ -225,6 +225,21 @@ angular.module('app.filters', [])
 		}
 	})
 	
+	.filter("JobTypeFilter", function() {
+		return function(jobType) {
+			if(jobType == 1) {
+				return "在职";
+			}
+			if(jobType == 2) {
+				return "离职";
+			}
+			if(jobType == 3) {
+				return "全天";
+			}
+			return "-";
+		}
+	})
+	
 	.filter("UseStatusFilter", function() {
 		return function(useStatus) {
 			if(useStatus == 1) {

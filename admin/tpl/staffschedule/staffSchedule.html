@@ -1,0 +1,67 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>业务维护</li>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.staffScheduleList">订单管理</a>
+		</li>
+		<li>人员排班</li>
+	</ul>
+
+	<div class="box">
+		<ng-form class="formgroup" name="serForm">
+			<div class="asstitle">
+				<label>人员信息</label>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">人员名称</label>
+				<input type="text"  ng-model="handle.realName" maxlength="20"  required="required" readonly="readonly"/>				
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">工种</label>
+				<input type="text" ng-model="handle.workTypeName" maxlength="20" required="required" readonly="readonly"/>	
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">服务单位</label>
+				<input type="text"  ng-model="handle.serviceInstName" maxlength="20"required="required" readonly="readonly"/>				
+			</div>
+			
+			<div class="asstitle">
+				<label>排班操作</label>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>排班开始日期</label> 
+				<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="handle.startDate" />
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>工作类型</label>
+				<input ng-model="handle.jobType" type="radio" value="1" name="jobType">白班&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</input>
+				<input ng-model="handle.jobType" type="radio" value="2" name="jobType">夜班&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</input>
+				<input ng-model="handle.jobType" type="radio" value="3" name="jobType">全天&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</input>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>服务订单</label>
+				<input type="text"  ng-model="handle.orderNo" maxlength="20" placeholder="请选择服务订单" ng-click="staffChoice()" required="required" readonly="readonly"/>				
+			</div>
+			<div class="formrow">
+				<label class="labtext-left">客户名称</label>
+				<input type="text" style="width: 100px;" ng-model="handle.realName" maxlength="10" required="required" readonly="readonly"/>
+				<label class="labtext-left" style="width: 80px;">服务名称</label>
+				<input type="text" style="width: 100px;" ng-model="handle.serviceName" maxlength="10" required="required" readonly="readonly"/>
+			</div>
+			<div class="formrow">
+				<label class="labtext-left"><sup class="required-flag">*</sup>结算比例</label>
+				<select ng-model="data.workTypeSettleId" required="required">	
+					<option value="">请选择</option>
+					<option ng-repeat="ratioItem in ratioList" value="{{ratioItem.id}}">{{ratioItem.settleRatio}}</option>
+				</select>				
+						
+			</div>
+			<div class="fllab">
+				<input type="submit" class="submit" value="保存" />
+			</div>
+		</ng-form>
+	</div>
+</div>
