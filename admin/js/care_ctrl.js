@@ -2395,6 +2395,7 @@ angular.module('app.controllers', [])
 
 		$scope.save = function() {
 			showLoading();
+			$scope.data.startTime = $scope.data.startTime + ":00";
 			JobTypeSvr.save($scope.data).success(function(res) {
 				hideLoading();
 				if(res.code == 200) {
@@ -2409,8 +2410,13 @@ angular.module('app.controllers', [])
 	})
 
 	/*班次编辑*/
-	.controller("JobTypeEditCtrl", function($scope, $state, JobTypeSvr, LocalStorageProvider, $timeout) {
+	.controller("JobTypeEditCtrl", function($scope, $state, JobTypeSvr, $filter, LocalStorageProvider, $timeout) {
 		$scope.data = LocalStorageProvider.getObject("jobType.item");
+		$scope.data.startDate = LocalStorageProvider.getObject("jobType.item").startTime;
+		$scope.data.endDate = LocalStorageProvider.getObject("jobType.item").endTime;
+		$scope.data.startTime = $scope.data.startTime.substring(0 , $scope.data.startTime.lastIndexOf(":"));
+		$scope.data.endTime = $scope.data.endTime.substring(0 , $scope.data.endTime.lastIndexOf(":"));
+		$scope.data.originTime = $scope.data.startDate.substring(0 , $scope.data.startDate.lastIndexOf(":"));
 
 		$scope.into = function() {
 			showLoading();
@@ -2418,14 +2424,44 @@ angular.module('app.controllers', [])
 				hideLoading();
 				if(res.code == 200) {
 					$scope.jobTypeList = res.data;
-					$timeout(function() {
-						$scope.data.jobType = "" + LocalStorageProvider.getObject("jobType.item").jobType;
-					}, 100)
 				} else {
 					alert(res.errorMsg);
 				}
 			});
 
+		}
+		
+		$scope.initTime = function(){
+			var hours = $filter('date')($scope.data.startTime, 'HH:mm').substring(0 , $scope.data.startTime.indexOf(":"));
+			var inthours = $filter('date')($scope.data.startTime, 'HH:mm').substring(0 , $scope.data.startTime.indexOf(":"));
+			var minute = $filter('date')($scope.data.startTime, 'HH:mm').substring($scope.data.startTime.indexOf(":")+1 , $scope.data.startTime.length);
+			alert(minute)
+			var hourslength = ($filter('date')($scope.data.startTime, 'HH:mm').substring(0 , $scope.data.startTime.indexOf(":"))).length;
+			var minutelength = ($filter('date')($scope.data.startTime, 'HH:mm').substring($scope.data.startTime.indexOf(":")+1 , $scope.data.startTime.length)).length;
+			inthours = parseInt(inthours);
+			if((hourslength > 2) || (minutelength != 2)){
+				alert("请输入正确的时间");
+				$scope.data.startTime = $scope.data.originTime;
+				return;
+			}
+			if(inthours < 0 || minute < 0 || minute > 59){
+				alert("请输入正确的时间");
+				$scope.data.startTime = $scope.data.originTime;
+				return;
+			}
+			if((inthours => 0) && (inthours < 12)){
+				$scope.data.endTime = inthours + 12 + ":" + minute;
+			}else if((inthours => 12) && (inthours < 24)){
+				$scope.data.halfTime = inthours - 12 + ":" + minute;
+				$scope.data.endTime = $scope.data.halfTime;
+				if(inthours < 22){
+					$scope.data.endTime = "0" + $scope.data.halfTime;
+				} 
+			}else{
+				alert("请输入正确的时间");
+				$scope.data.startTime = $scope.data.originTime;
+				return;
+			}
 		}
 
 		$scope.save = function() {

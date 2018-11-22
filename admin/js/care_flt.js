@@ -32,6 +32,9 @@ angular.module('app.filters', [])
 			if(jobType == 2) {
 				return "夜班";
 			}
+			if(jobType == 3) {
+				return "全天";
+			}
 			return "-";
 		}
 	})
@@ -220,21 +223,6 @@ angular.module('app.filters', [])
 			}
 			if(settleStatus == 3) {
 				return "已关账";
-			}
-			return "-";
-		}
-	})
-	
-	.filter("JobTypeFilter", function() {
-		return function(jobType) {
-			if(jobType == 1) {
-				return "在职";
-			}
-			if(jobType == 2) {
-				return "离职";
-			}
-			if(jobType == 3) {
-				return "全天";
 			}
 			return "-";
 		}

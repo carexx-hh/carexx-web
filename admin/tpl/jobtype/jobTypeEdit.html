@@ -13,15 +13,15 @@
 		<form class="formgroup" name="jobTypeForm">
 			<div class="formrow">
 				<label class="labtext-left">服务班次</label>
-				<input type="text"  ng-model="data.jobType | JobTypeFilter" maxlength="20" required="required" readonly="readonly"/>
+				<input type="text" style="width: 150px;"  ng-model="data.jobType | JobTypeFilter" maxlength="20" required="required" readonly="readonly"/>
 			</div>
 			<div class="formrow">
 				<label class="labtext-left"><sup class="required-flag">*</sup>开始时间</label>
-				<input type="text" name="startTime" ng-model="data.startTime" placeholder="请输入开始时间" required="required" />
+				<input type="text" style="width: 150px;" name="startTime" ng-model="data.startTime" ng-blur="initTime()" placeholder="请输入开始时间" required="required" />
 			</div>
 			<div class="formrow">
 				<label class="labtext-left"><sup class="required-flag">*</sup>结束时间</label>
-				<input type="text" name="endTime" ng-model="data.endTime" placeholder="请输入结束时间" required="required" />
+				<input type="text" style="width: 150px;" name="endTime" ng-model="data.endTime" placeholder="请输入结束时间" required="required" />
 			</div>
 			<div class="fllab">
 				<input type="submit" class="submit" value="提交" ng-click="save()" ng-disabled="jobTypeForm.$invalid" />
