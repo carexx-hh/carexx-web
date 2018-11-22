@@ -25,13 +25,14 @@
 			</div>
 			<div class="formrow">
 				<label class="labtext-left"><sup class="required-flag">*</sup>开始时间</label>
-				<input type="text" name="startTime" ng-model="data.startTime" style="width: 90px;" required="required" />
+				<input type="text" name="startTime" ng-model="data.startTime" style="width: 90px;" ng-blur="initTime()" required="required" />
 			</div>
 			<div class="formrow">
 				<label class="labtext-left"><sup class="required-flag">*</sup>结束时间</label>
-				<select ng-model="data.endTime" required="required">	
-					<option value="{{}}">{{}}</option>
-					<option value="{{}}">{{}}</option>
+				<select ng-model="data.endTime" required="required">
+					<option value="">请选择</option>
+					<option value="{{data.thisDate}}">{{data.thisTime}}</option>
+					<option value="{{data.halfDate}}">{{data.halfTime}}</option>
 				</select>
 			</div>
 			<div class="fllab">

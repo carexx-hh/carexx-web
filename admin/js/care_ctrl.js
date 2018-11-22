@@ -2322,9 +2322,13 @@ angular.module('app.controllers', [])
 	})
 
 	/*班次新增*/
-	.controller("JobTypeAddCtrl", function($scope, $state, JobTypeSvr, LocalStorageProvider, $uibModal) {
+	.controller("JobTypeAddCtrl", function($scope, $state, JobTypeSvr, $filter, LocalStorageProvider, $uibModal) {
 		$scope.data = {};
 		$scope.data.startTime = "08:00";
+		$scope.data.thisTime = "08:00";
+		$scope.data.halfTime = "20:00";
+		$scope.data.thisDate = "08:00:00";
+		$scope.data.halfDate = "20:00:00";
 		
 		var instId = "";
 		$scope.choiceServiceInstId = function() {
@@ -2347,6 +2351,46 @@ angular.module('app.controllers', [])
 					console.log("用户取消操作");
 				}
 			);
+		}
+
+		$scope.initTime = function(){
+			var hours = $filter('date')($scope.data.startTime, 'HH:mm').substring(0 , $scope.data.startTime.indexOf(":"));
+			var inthours = $filter('date')($scope.data.startTime, 'HH:mm').substring(0 , $scope.data.startTime.indexOf(":"));
+			var minute = $filter('date')($scope.data.startTime, 'HH:mm').substring($scope.data.startTime.indexOf(":")+1 , $scope.data.startTime.length);
+			var hourslength = ($filter('date')($scope.data.startTime, 'HH:mm').substring(0 , $scope.data.startTime.indexOf(":"))).length;
+			var minutelength = ($filter('date')($scope.data.startTime, 'HH:mm').substring($scope.data.startTime.indexOf(":")+1 , $scope.data.startTime.length)).length;
+			inthours = parseInt(inthours);
+			if((hourslength > 2) || (minutelength != 2)){
+				alert("请输入正确的时间");
+				$scope.data.startTime = "08:00";
+				return;
+			}
+			if(inthours < 0 || minute < 0 || minute > 59){
+				alert("请输入正确的时间");
+				$scope.data.startTime = "08:00";
+				return;
+			}
+			if((inthours => 0) && (inthours < 12)){
+				$scope.data.thisTime = hours + ":" + minute;
+				if(inthours < 10){
+					var thisTime = "0" + inthours + ":" + minute;
+				}
+				$scope.data.halfTime = inthours + 12 + ":" + minute;
+				$scope.data.thisDate = thisTime + ":00";
+				$scope.data.halfDate = $scope.data.halfTime + ":00";
+			}else if((inthours => 12) && (inthours < 24)){
+				$scope.data.thisTime = hours + ":" + minute;
+				$scope.data.halfTime = inthours - 12 + ":" + minute;
+				if(inthours < 22){
+					$scope.data.halfTime = "0" + $scope.data.halfTime;
+				}
+				$scope.data.thisDate = $scope.data.thisTime + ":00";
+				$scope.data.halfDate = $scope.data.halfTime + ":00";
+			}else{
+				alert("请输入正确的时间");
+				$scope.data.startTime = "08:00";
+				return;
+			}
 		}
 
 		$scope.save = function() {
