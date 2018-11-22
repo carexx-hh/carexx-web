@@ -2414,9 +2414,10 @@ angular.module('app.controllers', [])
 		$scope.data = LocalStorageProvider.getObject("jobType.item");
 		$scope.data.startDate = LocalStorageProvider.getObject("jobType.item").startTime;
 		$scope.data.endDate = LocalStorageProvider.getObject("jobType.item").endTime;
+		$scope.data.intstrTime = $scope.data.startDate.substring(0 , $scope.data.startDate.lastIndexOf(":"));
+		$scope.data.intendTime = $scope.data.endDate.substring(0 , $scope.data.endDate.lastIndexOf(":"));
 		$scope.data.startTime = $scope.data.startTime.substring(0 , $scope.data.startTime.lastIndexOf(":"));
 		$scope.data.endTime = $scope.data.endTime.substring(0 , $scope.data.endTime.lastIndexOf(":"));
-		$scope.data.originTime = $scope.data.startDate.substring(0 , $scope.data.startDate.lastIndexOf(":"));
 
 		$scope.into = function() {
 			showLoading();
@@ -2435,18 +2436,19 @@ angular.module('app.controllers', [])
 			var hours = $filter('date')($scope.data.startTime, 'HH:mm').substring(0 , $scope.data.startTime.indexOf(":"));
 			var inthours = $filter('date')($scope.data.startTime, 'HH:mm').substring(0 , $scope.data.startTime.indexOf(":"));
 			var minute = $filter('date')($scope.data.startTime, 'HH:mm').substring($scope.data.startTime.indexOf(":")+1 , $scope.data.startTime.length);
-			alert(minute)
 			var hourslength = ($filter('date')($scope.data.startTime, 'HH:mm').substring(0 , $scope.data.startTime.indexOf(":"))).length;
 			var minutelength = ($filter('date')($scope.data.startTime, 'HH:mm').substring($scope.data.startTime.indexOf(":")+1 , $scope.data.startTime.length)).length;
 			inthours = parseInt(inthours);
 			if((hourslength > 2) || (minutelength != 2)){
 				alert("请输入正确的时间");
-				$scope.data.startTime = $scope.data.originTime;
+				$scope.data.startTime = $scope.data.intstrTime;
+				$scope.data.endTime = $scope.data.intendTime;
 				return;
 			}
 			if(inthours < 0 || minute < 0 || minute > 59){
 				alert("请输入正确的时间");
-				$scope.data.startTime = $scope.data.originTime;
+				$scope.data.startTime = $scope.data.intstrTime;
+				$scope.data.endTime = $scope.data.intendTime;
 				return;
 			}
 			if((inthours => 0) && (inthours < 12)){
@@ -2459,13 +2461,16 @@ angular.module('app.controllers', [])
 				} 
 			}else{
 				alert("请输入正确的时间");
-				$scope.data.startTime = $scope.data.originTime;
+				$scope.data.startTime = $scope.data.intstrTime;
+				$scope.data.endTime = $scope.data.intendTime;
 				return;
 			}
 		}
 
 		$scope.save = function() {
 			showLoading();
+			$scope.data.startTime = $scope.data.startTime + ":00";
+			$scope.data.endTime = $scope.data.endTime + ":00";
 			JobTypeSvr.modify($scope.data).success(function(res) {
 				hideLoading();
 				if(res.code == 200) {
