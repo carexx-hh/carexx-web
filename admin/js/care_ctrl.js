@@ -3943,10 +3943,6 @@ angular.module('app.controllers', [])
 		$scope.query = function() {
 			$scope.data.pageNo = $scope.pagerConf.currentPage;
 			$scope.data.pageSize = $scope.pagerConf.maxSize;
-			
-			alert("workTypeId:"+$scope.data.workTypeId);
-			alert("serviceStartTime:"+$scope.data.serviceStartTime);
-			alert("jobType:"+$scope.data.jobType);
 			showLoading();
 			OrderSvr.staffSchedule($scope.data).success(function(res) {
 				hideLoading();

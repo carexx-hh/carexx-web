@@ -385,9 +385,6 @@ angular.module('app.services', [])
 	};
 	//人员排班查询订单
 	orderSvr.staffSchedule = function(data) {
-			alert("workTypeId22:"+data.workTypeId);
-			alert("serviceStartTime22:"+data.serviceStartTime);
-			alert("jobType22:"+data.jobType);
 		return $http.post('customerorder/list_by_worktypeid',data);
 	};
 
