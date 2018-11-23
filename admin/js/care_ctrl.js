@@ -3940,12 +3940,10 @@ angular.module('app.controllers', [])
 			showLoading();
 			OrderSvr.schedule($scope.data).success(function(res) {
 				hideLoading();
-				alert(res.code);
 				if(res.code == 200) {
 					alert("排班成功");
 					$scope.getSchList();
 				} else {
-					alert("111");
 					alert(res.errorMsg);
 				}
 			});
