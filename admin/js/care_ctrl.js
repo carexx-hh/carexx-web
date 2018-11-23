@@ -3864,7 +3864,7 @@ angular.module('app.controllers', [])
 	})
 		
 	/*人员排班订单*/
-	.controller("StaffScheduleCtrl", function($scope, $state, StaffScheduleSvr, LocalStorageProvider, InstSettleSvr, $uibModal, $filter) {
+	.controller("StaffScheduleCtrl", function($scope, $state, StaffScheduleSvr, OrderSvr, LocalStorageProvider, InstSettleSvr, $uibModal, $filter) {
 		$scope.handle = LocalStorageProvider.getObject("staff.item");
 		$scope.handle.jobType = 1;
 		
@@ -3875,7 +3875,10 @@ angular.module('app.controllers', [])
 		$scope.orderStatus=0;
 		$scope.dataForState.orderNo=$scope.handle.orderNo;
 		$scope.selectAll = false;
-		
+		$scope.data.orderNo = $scope.handle.orderNo;
+		$scope.data.workTypeId = $scope.handle.workTypeId;
+		$scope.data.serviceId = $scope.handle.serviceId;
+		$scope.data.instId = $scope.handle.instId;
 		
 		
 		
@@ -3928,6 +3931,25 @@ angular.module('app.controllers', [])
 			}
 		}
 		
+		
+		$scope.save = function() {
+			$scope.data.serviceStaffId = $scope.handle.id;
+			$scope.data.serviceStartTime = $scope.handle.serviceStartTime;
+			$scope.data.serviceStartTime = $scope.handle.serviceStartTime;
+			$scope.data.jobType = $scope.handle.jobType;
+			showLoading();
+			OrderSvr.schedule($scope.data).success(function(res) {
+				hideLoading();
+				alert(res.code);
+				if(res.code == 200) {
+					alert("排班成功");
+					$scope.getSchList();
+				} else {
+					alert("111");
+					alert(res.errorMsg);
+				}
+			});
+		}
 		$scope.init();
 	})
 	

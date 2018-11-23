@@ -343,7 +343,14 @@ angular.module('app.services', [])
 	};
 	
 	orderSvr.schedule = function(data) {
+		alert('orderNo:'+data.orderNo);
+		alert('orderAmt:'+data.orderAmt);
+		alert('serviceStaffId:'+data.serviceStaffId);
+		alert('serviceStartTime:'+data.serviceStartTime);
+		alert('jobType:'+data.jobType);
+		alert('workTypeSettleId:'+data.workTypeSettleId);
 		return $http.post('customerorderschedule/add', data);
+		
 	};
 	
 	orderSvr.outSchedule = function(data) {

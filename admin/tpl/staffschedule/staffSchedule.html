@@ -62,7 +62,7 @@
 						
 			</div>
 			<div class="fllab">
-				<input type="submit" class="submit" value="保存" />
+				<input type="submit" class="submit" value="保存" ng-click="save()" ng-disabled="serForm.$invalid || orderStatus==3" />
 			</div>
 		</ng-form>
 	</div>
