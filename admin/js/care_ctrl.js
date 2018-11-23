@@ -1313,12 +1313,10 @@ angular.module('app.controllers', [])
 	})
 
 	/*订单管理新增*/
-	.controller("OrderAddCtrl", function($scope, $state, OrderSvr, LocalStorageProvider, $uibModal, ServiceSvr, CareserSvr, $filter,LesionSvr) {
+	.controller("OrderAddCtrl", function($scope, $state, OrderSvr, JobTypeSvr, LocalStorageProvider, $uibModal, ServiceSvr, CareserSvr, $filter,LesionSvr) {
 		$scope.data = {};
 		$scope.handle = {};
 		var transmitData = "";
-		$scope.handle.startTime = "08:00:00";
-		$scope.handle.endTime = "08:00:00";
 		$scope.data.orderStatus = "1";
 		$scope.data.serviceAddress = "1";
 
@@ -1360,11 +1358,18 @@ angular.module('app.controllers', [])
 					alert(res.errorMsg);
 				}
 			});
-		}
-		
-		$scope.initEndTime = function() {
-			var hours = $filter('date')($scope.handle.startTime, 'HH:mm').substring(0,2);
-			alert(hours);
+
+			JobTypeSvr.byInstId($scope.data).success(function(res) {
+				if(res.code == 200) {
+					$scope.timeList = res.data;
+					for(var i = 0; i < $scope.timeList.length; i++) {
+						$scope.handle.startTime = $filter('date')($scope.timeList[0].startTime, 'HH:mm:ss');
+						$scope.handle.endTime = $filter('date')($scope.timeList[1].endTime, 'HH:mm:ss');
+					}
+				} else {
+					alert(res.errorMsg);
+				}
+			});
 		}
 		
 		$scope.getServiceId = function(id) {
