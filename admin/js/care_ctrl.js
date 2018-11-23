@@ -1638,7 +1638,7 @@ angular.module('app.controllers', [])
 	})
 
 	/*订单排班*/
-	.controller("OrderScheduleCtrl", function($scope, $state, OrderSvr, LocalStorageProvider, InstSettleSvr, $uibModal, $filter) {
+	.controller("OrderScheduleCtrl", function($scope, $state, OrderSvr, JobTypeSvr, LocalStorageProvider, InstSettleSvr, $uibModal, $filter) {
 		$scope.handle = LocalStorageProvider.getObject("order.item");
 		$scope.data = {};
 		$scope.dataForState=[];
@@ -1672,6 +1672,18 @@ angular.module('app.controllers', [])
 				.error(function() {
 					hideLoading();
 				});
+				
+			JobTypeSvr.byInstId($scope.data).success(function(res) {
+				if(res.code == 200) {
+					$scope.timeList = res.data;
+					for(var i = 0; i < $scope.timeList.length; i++) {
+						$scope.handle.startTime = $filter('date')($scope.timeList[0].startTime, 'HH:mm:ss');
+						$scope.handle.endTime = $filter('date')($scope.timeList[1].endTime, 'HH:mm:ss');
+					}
+				} else {
+					alert(res.errorMsg);
+				}
+			});
 
 		}
 		
