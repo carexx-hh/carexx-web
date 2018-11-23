@@ -3845,24 +3845,22 @@ angular.module('app.controllers', [])
 		$scope.$watch('pagerConf.currentPage', $scope.query);
 
 	})
-	
-	/*人员排班*/
+		
+	/*人员排班订单*/
 	.controller("StaffScheduleCtrl", function($scope, $state, StaffScheduleSvr, LocalStorageProvider, InstSettleSvr, $uibModal, $filter) {
 		$scope.handle = LocalStorageProvider.getObject("staff.item");
+		$scope.handle.jobType = 1;
+		
+		
 		$scope.data = {};
+		$scope.data.orderNo = '';
 		$scope.dataForState=[];
 		$scope.orderStatus=0;
 		$scope.dataForState.orderNo=$scope.handle.orderNo;
 		$scope.selectAll = false;
-		$scope.data.orderNo = $scope.handle.orderNo;
-		$scope.data.workTypeId = $scope.handle.workTypeId;
-		$scope.data.serviceId = $scope.handle.serviceId;
-		$scope.data.instId = $scope.handle.instId;
-		$scope.data.orderAmt=$scope.handle.orderAmt;
-		$scope.handle.endTime = "08:00:00";
-		$scope.handle.serStartDate = $filter('date')($scope.handle.serviceStartTime, 'yyyy-MM-dd HH:mm:ss');
-		$scope.handle.serEndDate = $filter('date')($scope.handle.serviceEndTime, 'yyyy-MM-dd HH:mm:ss');
-		$scope.handle.endTimeLimit = $filter('date')($scope.handle.serviceEndTime, 'yyyy-MM-dd');
+		
+		
+		
 		
 		$scope.pagerConf = {
 			maxSize: 10,
@@ -3884,6 +3882,82 @@ angular.module('app.controllers', [])
 
 		}
 		
+		$scope.orderChoice = function(list) {
+			if(list.serviceStartTime == null || list.jobType == null) {
+				alert("请选择时间和班次");
+			} else {
+				var modalInstance = $uibModal.open({
+					size: 'lg',
+					templateUrl: 'orderChoice.html', //script标签中定义的id
+					controller: 'OrderChoiceCtrl', //modal对应的Controller
+					resolve: {
+						transmitData: function() { //data作为modal的controller传入的参数
+							return $scope.handle; //用于传递数据
+						}
+					}
+				})
+				modalInstance.result.then( //then的第一个函数对应ok(),第二个函数对应cancel()
+					function(list) {
+						
+						$scope.data.orderNo = list.orderNo;
+						$scope.data.orderAmt = list.orderAmt;
+						$scope.data.realName = list.realName;
+						$scope.data.serviceName = list.serviceName;
+					},
+					function() {
+						console.log("用户取消操作");
+					}
+				);
+			}
+		}
 		
 		$scope.init();
+	})
+	
+	
+	//选择弹出框
+	.controller('OrderChoiceCtrl', function($scope, $uibModalInstance, OrderSvr, LocalStorageProvider, transmitData) {
+		$scope.data = {};
+		$scope.data.workTypeId = transmitData.workTypeId;
+		$scope.data.serviceStartTime = transmitData.serviceStartTime;
+		$scope.data.jobType = transmitData.jobType;
+		
+		
+		
+		//在这里处理要进行的操作
+		$scope.choice = function(list) {
+			$uibModalInstance.close(list);
+		};
+		$scope.cancel = function() {
+			$uibModalInstance.dismiss('cancel');
+		}
+		$scope.close = function() {
+			$uibModalInstance.dismiss('cancel');
+		}
+		$scope.pagerConf = {
+			maxSize: 10,
+			totalItems: 0,
+			currentPage: 1
+		};
+
+		$scope.query = function() {
+			$scope.data.pageNo = $scope.pagerConf.currentPage;
+			$scope.data.pageSize = $scope.pagerConf.maxSize;
+			
+			alert("workTypeId:"+$scope.data.workTypeId);
+			alert("serviceStartTime:"+$scope.data.serviceStartTime);
+			alert("jobType:"+$scope.data.jobType);
+			showLoading();
+			OrderSvr.staffSchedule($scope.data).success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					$scope.pagerConf.totalItems = res.data.totalNum;
+					$scope.orderList = res.data.items;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+		
+		$scope.$watch('pagerConf.currentPage', $scope.query);
 	});
