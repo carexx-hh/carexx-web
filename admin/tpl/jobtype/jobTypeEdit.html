@@ -12,7 +12,7 @@
 	<div class="box">
 		<form class="formgroup" name="jobTypeForm">
 			<div class="formrow">
-				<label class="labtext-left"><sup class="required-flag">*</sup>机构名称</label>
+				<label class="labtext-left">机构名称</label>
 				<input type="text" ng-model="data.instName" readonly="readonly" required="required" />
 			</div>
 			<div class="formrow">
@@ -24,8 +24,8 @@
 				<input type="text" style="width: 150px;" name="startTime" ng-model="data.startTime" ng-blur="initTime()" ng-mousemove="initTime()" placeholder="请输入开始时间" required="required" />
 			</div>
 			<div class="formrow">
-				<label class="labtext-left"><sup class="required-flag">*</sup>结束时间</label>
-				<input type="text" style="width: 150px;" name="endTime" ng-model="data.endTime" placeholder="请输入结束时间" required="required" readonly="readonly" />
+				<label class="labtext-left">结束时间</label>
+				<input type="text" style="width: 150px;" name="endTime" ng-model="data.endTime" required="required" readonly="readonly" />
 			</div>
 			<div class="fllab">
 				<input type="submit" class="submit" value="提交" ng-click="save()" ng-disabled="jobTypeForm.$invalid" />

@@ -2342,10 +2342,7 @@ angular.module('app.controllers', [])
 	.controller("JobTypeAddCtrl", function($scope, $state, JobTypeSvr, $filter, LocalStorageProvider, $uibModal) {
 		$scope.data = {};
 		$scope.data.startTime = "08:00";
-		$scope.data.thisTime = "08:00";
-		$scope.data.halfTime = "20:00";
-		$scope.data.thisDate = "08:00:00";
-		$scope.data.halfDate = "20:00:00";
+		$scope.data.endTime = "20:00";
 		
 		var instId = "";
 		$scope.choiceServiceInstId = function() {
@@ -2369,7 +2366,7 @@ angular.module('app.controllers', [])
 				}
 			);
 		}
-
+		
 		$scope.initTime = function(){
 			var hours = $filter('date')($scope.data.startTime, 'HH:mm').substring(0 , $scope.data.startTime.indexOf(":"));
 			var inthours = $filter('date')($scope.data.startTime, 'HH:mm').substring(0 , $scope.data.startTime.indexOf(":"));
@@ -2380,45 +2377,50 @@ angular.module('app.controllers', [])
 			if((hourslength > 2) || (minutelength != 2)){
 				alert("请输入正确的时间");
 				$scope.data.startTime = "08:00";
+				$scope.data.endTime = "20:00";
 				return;
 			}
 			if(inthours < 0 || minute < 0 || minute > 59){
 				alert("请输入正确的时间");
 				$scope.data.startTime = "08:00";
+				$scope.data.endTime = "20:00";
 				return;
 			}
 			if((inthours => 0) && (inthours < 12)){
-				$scope.data.thisTime = hours + ":" + minute;
 				if(inthours < 10){
-					var thisTime = "0" + inthours + ":" + minute;
+					$scope.data.startTime = "0" + inthours + ":" + minute;
 				}
-				$scope.data.halfTime = inthours + 12 + ":" + minute;
-				$scope.data.thisDate = thisTime + ":00";
-				$scope.data.halfDate = $scope.data.halfTime + ":00";
+				$scope.data.endTime = inthours + 12 + ":" + minute;
 			}else if((inthours => 12) && (inthours < 24)){
-				$scope.data.thisTime = hours + ":" + minute;
 				$scope.data.halfTime = inthours - 12 + ":" + minute;
+				$scope.data.endTime = $scope.data.halfTime;
 				if(inthours < 22){
-					$scope.data.halfTime = "0" + $scope.data.halfTime;
+					$scope.data.endTime = "0" + $scope.data.halfTime;
 				}
-				$scope.data.thisDate = $scope.data.thisTime + ":00";
-				$scope.data.halfDate = $scope.data.halfTime + ":00";
 			}else{
 				alert("请输入正确的时间");
 				$scope.data.startTime = "08:00";
+				$scope.data.endTime = "20:00";
 				return;
 			}
+		}
+		
+		$scope.subTime = function(){
+			$scope.data.startTime = $scope.data.startTime.substring(0 , $scope.data.startTime.lastIndexOf(":"));
+			$scope.data.endTime = $scope.data.endTime.substring(0 , $scope.data.endTime.lastIndexOf(":"));
 		}
 
 		$scope.save = function() {
 			showLoading();
 			$scope.data.startTime = $scope.data.startTime + ":00";
+			$scope.data.endTime = $scope.data.endTime + ":00";
 			JobTypeSvr.save($scope.data).success(function(res) {
 				hideLoading();
 				if(res.code == 200) {
 					alert("添加班次成功");
 					$state.go("/.jobTypeList");
 				} else {
+					$scope.subTime();
 					alert(res.errorMsg);
 				}
 			});
@@ -2483,6 +2485,11 @@ angular.module('app.controllers', [])
 				return;
 			}
 		}
+		
+		$scope.subTime = function(){
+			$scope.data.startTime = $scope.data.startTime.substring(0 , $scope.data.startTime.lastIndexOf(":"));
+			$scope.data.endTime = $scope.data.endTime.substring(0 , $scope.data.endTime.lastIndexOf(":"));
+		}
 
 		$scope.save = function() {
 			showLoading();
@@ -2493,8 +2500,8 @@ angular.module('app.controllers', [])
 				if(res.code == 200) {
 					alert("修改班次信息成功");
 					$state.go("/.jobTypeList");
-
 				} else {
+					$scope.subTime();
 					alert(res.errorMsg);
 				}
 			});
