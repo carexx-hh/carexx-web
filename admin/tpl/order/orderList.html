@@ -9,10 +9,18 @@
 		<div class="filterForm">
 			<ul class="clearfix">
 				<li>开始时间：
-					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceStartTime" />
+					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" value="(data.serviceStartTime | date:'yyyy-MM-dd')" ng-model="data.serviceStartTime" />
+					<select ng-model="data.startTime">
+						<option value="">全部</option>
+						<option ng-repeat="timeItem in timeList" value="{{timeItem.startTime | date:'HH:mm:ss'}}">{{timeItem.startTime | date:'HH:mm'}}</option>
+					</select>
 				</li>
 				<li>结束时间：
 					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceEndTime" />
+					<select ng-model="data.endTime">
+						<option value="">全部</option>
+						<option ng-repeat="timeItem in timeList" value="{{timeItem.endTime | date:'HH:mm:ss'}}">{{timeItem.endTime | date:'HH:mm'}}</option>
+					</select>
 				</li>
 				<li>客户姓名：<input type="text" placeholder="请输入客户姓名" ng-model="data.realName"></li>
 				<li>凭证号：<input type="text" placeholder="请输入凭证号" ng-model="data.proofNo"></li><br />

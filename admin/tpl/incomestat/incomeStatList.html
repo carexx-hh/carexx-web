@@ -56,9 +56,15 @@
 				</li><br />
 				<li>开始时间：
 					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceStartTime" />
+					<select ng-model="data.startTime" required="required">
+						<option ng-repeat="timeItem in timeList" value="{{timeItem.startTime | date:'HH:mm:ss'}}">{{timeItem.startTime | date:'HH:mm'}}</option>
+					</select>
 				</li>
 				<li>结束时间：
 					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceEndTime" />
+					<select ng-model="data.endTime" required="required">
+						<option ng-repeat="timeItem in timeList" value="{{timeItem.endTime | date:'HH:mm:ss'}}">{{timeItem.endTime | date:'HH:mm'}}</option>
+					</select>
 				</li>
 				<li><button type="button" class="searchbtn" ng-click="query()" ng-if="ops['O_INCOME_STAT_QUERY']"><i class="fa fa-search"></i>&nbsp查询</button></li>
 				<li><button type="button" class="searchbtn" ng-click="reset()"><i class="fa fa-refresh"></i>&nbsp重置</button></li>

@@ -1180,10 +1180,11 @@ angular.module('app.controllers', [])
 	})
 
 	/*订单管理*/
-	.controller("OrderListCtrl", function($scope, $state, OrderSvr, LocalStorageProvider, $uibModal,CompanySvr,$filter) {
+	.controller("OrderListCtrl", function($scope, $state, OrderSvr, JobTypeSvr, LocalStorageProvider, $uibModal,CompanySvr,$filter) {
 		$scope.data = {};
 		$scope.totalAmt=0;
 		$scope.data.serviceStartTime=$filter('date')(new Date-(1000*60*60*24*60), 'yyyy-MM-dd');
+		$scope.data.intstrTime = $scope.data.serviceStartTime;
 		
 		var transmitData = '';
 		$scope.selectAll = false;
@@ -1201,6 +1202,19 @@ angular.module('app.controllers', [])
 					alert(res.errorMsg);
 				}
 			});
+			
+			JobTypeSvr.byInstId($scope.data).success(function(res) {
+				if(res.code == 200) {
+					$scope.timeList = res.data;
+					for(var i = 0; i < $scope.timeList.length; i++) {
+						if($scope.timeList[i].jobType == 1){
+							$scope.data.startTime = $filter('date')($scope.timeList[i].startTime, 'HH:mm:ss');
+						}
+					}
+				} else {
+					alert(res.errorMsg);
+				}
+			});
 		}
 		$scope.reset = function() {
 			$scope.data = {};
@@ -1208,9 +1222,21 @@ angular.module('app.controllers', [])
 
 		$scope.query = function() {
 			$scope.data.pageNo = $scope.pagerConf.currentPage;
-			$scope.data.pageSize = $scope.pagerConf.maxSize;			
+			$scope.data.pageSize = $scope.pagerConf.maxSize;
+			if($scope.data.serviceStartTime != null && $scope.data.startTime != null){
+				$scope.data.intstrTime = $scope.data.serviceStartTime;
+				$scope.data.serviceStartTime = $scope.data.serviceStartTime +" "+ $scope.data.startTime;
+			}
+			if($scope.data.serviceEndTime != null && $scope.data.endTime != null){
+				$scope.data.intendTime = $scope.data.serviceEndTime;
+				$scope.data.serviceEndTime = $scope.data.serviceEndTime +" "+ $scope.data.endTime;
+			}
 			showLoading();
 			OrderSvr.query($scope.data).success(function(res) {
+				$scope.data.serviceStartTime = $scope.data.intstrTime;
+				if($scope.data.intendTime != null){
+					$scope.data.serviceEndTime = $scope.data.intendTime;
+				}
 				hideLoading();
 				if(res.code == 200) {
 					$scope.pagerConf.totalItems = res.data.totalNum;
@@ -3271,7 +3297,7 @@ angular.module('app.controllers', [])
 	})
 	
 	//收入统计
-	.controller("incomeStatCtrl", function($scope, $state, LocalStorageProvider, GlobalConst , CompanySvr, WorkTypeSvr,IncomeStatSvr,LesionSvr,InstListSvr,$uibModal,$filter) {
+	.controller("incomeStatCtrl", function($scope, $state, LocalStorageProvider, GlobalConst , JobTypeSvr, CompanySvr, WorkTypeSvr,IncomeStatSvr,LesionSvr,InstListSvr,$uibModal,$filter) {
 		$scope.data = {};
 		$scope.totalday = 0;
 		$scope.totalzje = 0;
@@ -3283,6 +3309,8 @@ angular.module('app.controllers', [])
 		$scope.data.sortStatus=1;
 		$scope.data.serviceEndTime=$filter('date')(new Date, 'yyyy-MM-dd');
 		$scope.data.serviceStartTime=$filter('date')(new Date-(1000*60*60*24*30), 'yyyy-MM-dd');
+		$scope.data.intstrTime = $scope.data.serviceStartTime;
+		$scope.data.intendTime = $scope.data.serviceEndTime;
 		
 		$scope.reset = function() {
 			$scope.data = {};
@@ -3351,12 +3379,35 @@ angular.module('app.controllers', [])
 					alert(res.errorMsg);
 				}
 			});
+			JobTypeSvr.byInstId($scope.data).success(function(res) {
+				if(res.code == 200) {
+					$scope.timeList = res.data;
+					for(var i = 0; i < $scope.timeList.length; i++) {
+						if($scope.timeList[i].jobType == 1){
+							$scope.data.startTime = $filter('date')($scope.timeList[i].startTime, 'HH:mm:ss');
+							$scope.data.endTime = $filter('date')($scope.timeList[i].endTime, 'HH:mm:ss');
+						}
+					}
+				} else {
+					alert(res.errorMsg);
+				}
+			});
 			
 		}
 		
 		$scope.query= function(){
+			if($scope.data.serviceStartTime != null && $scope.data.startTime != null){
+				$scope.data.intstrTime = $scope.data.serviceStartTime;
+				$scope.data.serviceStartTime = $scope.data.serviceStartTime +" "+ $scope.data.startTime;
+			}
+			if($scope.data.serviceEndTime != null && $scope.data.endTime != null){
+				$scope.data.intendTime = $scope.data.serviceEndTime;
+				$scope.data.serviceEndTime = $scope.data.serviceEndTime +" "+ $scope.data.endTime;
+			}
 			showLoading();
 			IncomeStatSvr.query($scope.data).success(function(res) {
+				$scope.data.serviceStartTime = $scope.data.intstrTime;
+				$scope.data.serviceEndTime = $scope.data.intendTime;
 				hideLoading();
 				if(res.code == 200) {
 					$scope.totalday = 0;
