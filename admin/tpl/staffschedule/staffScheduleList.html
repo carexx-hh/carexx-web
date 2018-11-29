@@ -64,7 +64,7 @@
 							<button type="button" class="btn btn-warning" ng-click="arrange(item)" ng-if="ops['O_STAFF_SCHEDULE']">
 								<i class="fa fa-pencil-square-o fa-lg"></i>&nbsp排班
 							</button>
-							<button type="button" class="btn btn-primary" ng-click="delete(item.id)" ng-if="ops['O_STAFF_SCHEDULE_VIEW']">
+							<button type="button" class="btn btn-primary" ng-click="staffSchedulePopup(item)" ng-if="ops['O_STAFF_SCHEDULE_VIEW']">
 								<i class="fa fa-search"></i>&nbsp&nbsp查看
 							</button>							
 						</td>
@@ -78,3 +78,62 @@
 	</div>
 	<uib-pagination total-items="pagerConf.totalItems" ng-model="pagerConf.currentPage" max-size="pagerConf.maxSize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true"></uib-pagination>
 </div>
+
+<!--弹出层-->
+<script type="text/ng-template" id="orderView.html">
+<div class="content" style="margin:0;">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>业务维护</li>
+		</li>
+		<li>人员排班</li>
+		<li>排班订单</li>
+		<li>订单查询</li>
+		<i class="fa fa-times" aria-hidden="true" ng-click="close()" style="float: right;font-size: 36px;color: #8aafe4;margin-right: -15px;margin-top: -5px;"></i>
+	</ul>
+	<div class="box">
+		<div class="filterForm">
+			<ul class="clearfix">
+				<li>开始时间：
+					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceStartTime" />
+				</li>
+				<li>结束时间：
+					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceEndTime" />
+				</li>
+				<li><button type="button" class="searchbtn" ng-click="query()"><i class="fa fa-scissors"></i>&nbsp查询</button></li>
+			</ul>
+		</div>
+		<div class="signList">
+			<table class="tablelist" style="min-width: auto;">
+				<thead>
+					<tr>
+						<th class="cell-con">订单号</th>
+						<th class="cell-seq">订单金额</th>
+						<th class="cell-seq">姓名</th>
+						<th class="cell-con">服务名称</th>
+						<th class="cell-number">结算款(元)</th>
+						<th class="cell-con">开始时间</th>
+						<th class="cell-con">结束时间</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in orderList">
+						<td class="cell-con">{{item.orderNo}}</td>
+						<td class="cell-seq">{{item.orderAmt+item.adjustAmt| number:2}}</td>
+						<td class="cell-seq">{{item.realName}}</td>
+						<td class="cell-con">{{item.serviceName}}</td>
+						<td class="cell-number">{{item.staffSettleAmt| number:2}}</td>
+						<td class="cell-con">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm'}}</td>
+						<td class="cell-con">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm'}}</td>
+					</tr>					
+				</tbody>
+			</table>
+		</div>
+	</div>	
+	<div class="defaultPage" ng-show="orderList== null">
+		<img src="img/nodata.png" /> <span>暂无数据</span>
+	</div>
+	<uib-pagination total-items="pagerConf.totalItems" ng-model="pagerConf.currentPage" max-size="pagerConf.maxSize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true"></uib-pagination>
+</div>
+</script>

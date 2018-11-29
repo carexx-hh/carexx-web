@@ -675,6 +675,9 @@ angular.module('app.services', [])
 	staffScheduleSvr.schedule = function(data) {
 		return $http.post('customerorderschedule/add', data);
 	};
-
+	
+	staffScheduleSvr.view = function(data) {
+		return $http.post('customerorder/staffschedule_list',data);
+	};
 	return staffScheduleSvr;
 }]);

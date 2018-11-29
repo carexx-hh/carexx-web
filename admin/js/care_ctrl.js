@@ -3875,7 +3875,7 @@ angular.module('app.controllers', [])
 	})
 	
 	/*人员排班*/
-	.controller("StaffScheduleListCtrl", function($scope, $state, StaffScheduleSvr, LocalStorageProvider, GlobalConst, WorkTypeSvr) {
+	.controller("StaffScheduleListCtrl", function($scope, $state, StaffScheduleSvr, LocalStorageProvider, GlobalConst, WorkTypeSvr, $uibModal) {
 		$scope.data = {};
 
 		$scope.pagerConf = {
@@ -3916,10 +3916,73 @@ angular.module('app.controllers', [])
 			$state.go('/.staffSchedule');
 		}
 		
+		$scope.staffSchedulePopup = function(item) {
+			$scope.staffScheduleItem = item;
+			var modalInstance = $uibModal.open({
+				size: 'lg',
+				templateUrl: 'orderView.html', //script标签中定义的id
+				controller: 'StaffSchedulePopupCtrl', //modal对应的Controller
+				resolve: {
+					transmitData: function() { //data作为modal的controller传入的参数
+						return $scope.staffScheduleItem; //用于传递数据
+					}
+				}
+			})
+			modalInstance.result.then( //then的第一个函数对应ok(),第二个函数对应cancel()
+				function() {
+
+				},
+				function() {
+					$scope.query();
+				}
+			);
+		}
+		
 		$scope.init();
 		$scope.$watch('pagerConf.currentPage', $scope.query);
 
 	})
+	
+		//人员排班弹出框
+	.controller('StaffSchedulePopupCtrl', function($scope, $uibModalInstance, StaffScheduleSvr, LocalStorageProvider, transmitData) {
+		$scope.handle = transmitData;
+		$scope.data = {};
+		$scope.data.staffId = $scope.handle.id;
+
+		$scope.close = function() {
+			$uibModalInstance.dismiss('cancel');
+		}
+		
+		$scope.init = function() {
+
+		}
+
+		$scope.pagerConf = {
+			maxSize: 10,
+			totalItems: 0,
+			currentPage: 1
+		};
+		
+		$scope.query = function() {
+			$scope.data.pageNo = $scope.pagerConf.currentPage;
+			$scope.data.pageSize = $scope.pagerConf.maxSize;
+			showLoading();
+			StaffScheduleSvr.view($scope.data).success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					$scope.pagerConf.totalItems = res.data.totalNum;
+					$scope.orderList = res.data.items;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+		
+		$scope.init();
+		$scope.$watch('pagerConf.currentPage', $scope.query);
+		
+	})
+	
 		
 	/*人员排班订单*/
 	.controller("StaffScheduleCtrl", function($scope, $state, StaffScheduleSvr, OrderSvr, LocalStorageProvider, InstSettleSvr, $uibModal, $filter) {
@@ -4016,8 +4079,6 @@ angular.module('app.controllers', [])
 		$scope.data.workTypeId = transmitData.workTypeId;
 		$scope.data.serviceStartTime = transmitData.serviceStartTime;
 		$scope.data.jobType = transmitData.jobType;
-		
-		
 		
 		//在这里处理要进行的操作
 		$scope.choice = function(list) {
