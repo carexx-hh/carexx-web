@@ -40,9 +40,10 @@
 						<th class="cell-text">登录账号</th>
 						<th class="cell-text">姓名</th>
 						<th class="cell-text">角色</th>
+						<th class="cell-text">所属机构</th>
 						<th class="cell-number">手机</th>
 						<th class="cell-text">邮箱</th>
-						<th class="cell-text">状态</th>
+						<th class="cell-seq">状态</th>
 						<th class="cell-text">创建时间</th>
 						<th class="cell-con">操作</th>
 					</tr>
@@ -53,9 +54,10 @@
 						<td class="cell-text">{{item.account}}</td>
 						<td class="cell-text">{{item.name}}</td>
 						<td class="cell-text">{{item.roleName}}</td>
+						<td class="cell-text">{{item.instName}}</td>
 						<td class="cell-number">{{item.mobile}}</td>
 						<td class="cell-text">{{item.email}}</td>
-						<td class="cell-text">{{item.status | AclUserAcctStatusFilter}}</td>
+						<td class="cell-seq">{{item.status | AclUserAcctStatusFilter}}</td>
 						<td class="cell-text">{{item.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
 						<td class="cell-con">
 							<a href="javascript:void(0)" ng-click="edit(item)" ng-if="ops['O_SYS_USER_EDIT']">编辑</a>
