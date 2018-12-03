@@ -1,26 +1,158 @@
-<link href="css/login.css" rel="stylesheet" type="text/css" />
-<link href="css/site.css" rel="stylesheet" type="text/css" />
-
-<div class="container bodyStyle">
-	<div class="row clearfix">
-		<div class="col-md-6 column">
-			<img src="../img/PClogo.png" class="systemlogo">
-			<ng-form name="loginForm">
-			
-			<input ng-model="data.acctNo" ng-keyup="onEnter($event)" type="text" class="loginuser" placeholder="请输入用户名" />
-			<input ng-model="data.loginPass" ng-keyup="onEnter($event)" type="password" class="loginpwd" placeholder="请输入密码" />
-			<input ng-click="submit()" class="loginbtn" value="登 录" type="button" />
-
+<style>
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	width: 100%;
+	height:100%;
+	background-color:#59D0FC;
+	background-image:url(../img/bg.png);
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+	background-attachment: fixed;
+	position: relative;
+}
+.logo{
+	width: 213px;
+	height: 88px;
+	position: absolute;
+	top: 84px;
+	left: 83px;
+	background: url(../img/logo.png);
+}
+.bottom_one{
+    font-size:53px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(254,254,254,1);
+    position: absolute;
+    top:685px;
+    left:183px;
+}
+.bottom_two{
+    font-size:24px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(254,254,254,1);
+    position: absolute;
+    top:754px;
+    left:1044px;
+}
+.bottom_three{
+    font-size:16px;
+    opacity:0.6;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(254,254,254,1);
+    position: absolute;
+    top:914px;
+    left:748px;   
+}
+.right{
+	width:577px;
+	height:861px;
+	position:absolute;
+	top:44px;
+	right:43px;
+	background:#fff ;
+	padding:0 66px;
+	box-sizing: border-box;
+}
+.login_title{
+	width:115px;
+    height:27px;
+    font-size:27px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(59,64,78,1);
+    float: left;
+    margin-left:165px;
+    margin-top:264px; 
+}
+.xian{
+	width:100px;
+    height:4px;
+    background:rgba(64,158,255,1);
+    border-radius:2px;
+    float: left;
+    margin-left:168px;
+    margin-top: 18px; 
+}
+.loginuser{
+	width: 382px;
+	height: 73px;
+	float: left;
+    margin-top: 54px;
+    border: none;
+    outline:medium;
+    border-bottom: 1px solid rgba(118,124,140,1);
+    line-height: 73px;
+    padding-left: 61px;
+    background:none;
+    margin-left: 31px;
+}
+.name{
+	width: 21px;
+	height: 21px;
+	position: absolute;
+	top:393px;
+	left: 119px;
+}
+.password{
+	width: 21px;
+	height: 21px;
+	position: absolute;
+	top:485px;
+	left: 119px;
+}
+.loginpwd{
+	width: 382px;
+	height: 73px;
+	float: left;
+    margin-top: 18px;
+    border: none;
+    outline:medium;
+    border-bottom: 1px solid rgba(118,124,140,1);
+    line-height: 73px;
+    padding-left: 61px;
+     background:none;
+    margin-left: 31px;
+}
+.loginbtn{
+	width:382px;
+    height:76px;
+    background:linear-gradient(90deg,rgba(64,158,255,1) 0%,rgba(89,208,252,1) 100%);
+    border-radius:38px;
+    float: left;
+    margin-top:93px;
+    font-size:24px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(255,255,255,1);
+    border: none;
+    outline:medium;
+    margin-left:32px;
+}
+ input:-webkit-autofill { box-shadow: 0 0 0px 1000px white inset !important;}
+</style>
+<body>
+	<div class="logo"></div>
+	<div class="bottom_one">BACKGROUND MANAGEMENT SYSTEM</div>
+	<div class="bottom_two">后台管理系统</div>
+	<div class="bottom_three">©上海上晖信息科技有限公司   沪ICP备15052761号</div>
+	<div class="right">
+		<span class="login_title">欢迎登录</span>
+		<div class="xian"></div>
+			<ng-form name="loginForm" autocomplete=”off”>
+			  <img src="../img/name.png" alt="" class="name">
+			  <img src="../img/password.png" alt="" class="password">
+			  <input ng-model="data.acctNo" autocomplete=”off” ng-keyup="onEnter($event)" type="text" class="loginuser" placeholder="请输入用户名"  placeholder-style='margin-left:10px;'/>
+			  <input ng-model="data.loginPass" autocomplete=”off” ng-keyup="onEnter($event)" type="password" class="loginpwd" placeholder="请输入密码" />
+			  <input ng-click="submit()" autocomplete=”off” class="loginbtn" value="登 录" type="button" />
 		</ng-form>
-		</div>
-		<div class="col-md-6 column">
-			<img src="../img/loginRight.png" class="imgright">
-		</div>
-		<div style="position: absolute; font-size: 14px; height: 25px; bottom: 10px; left: 10px; text-align: center; width: 98%;color:white;opacity: 0.6;">
-		©上海上晖信息科技有限公司   沪ICP备15052761号
-		</div>
 	</div>
-</div>
+</body>
 
 
 
