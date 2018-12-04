@@ -37,29 +37,33 @@
 			<table class="tablelist">
 				<thead>
 					<tr>
-						<th class="cell-number">姓名</th>
-						<th class="cell-number">工种</th>
-						<th class="cell-number">性别</th>
+						<th class="cell-seq">姓名</th>
+						<th class="cell-seq">工种</th>
+						<th class="cell-seq">性别</th>
 						<th class="cell-idNo">身份证</th>
 						<th class="cell-number">电话</th>
-						<th class="cell-number">性质</th>
-						<th class="cell-number">状态</th>
+						<th class="cell-seq">性质</th>
+						<th class="cell-seq">状态</th>
 						<th class="cell-number">所属单位</th>
 						<th class="cell-number">服务单位</th>
+						<th class="cell-seq">服务订单数</th>
+						
 						<th class="cell-con">操作</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="item in staffList">
-						<td class="cell-number">{{item.realName}}</td>
-						<td class="cell-number">{{item.workTypeName}}</td>
-						<td class="cell-number">{{item.sex | SexFilter}}</td>
+						<td class="cell-seq">{{item.realName}}</td>
+						<td class="cell-seq">{{item.workTypeName}}</td>
+						<td class="cell-seq">{{item.sex | SexFilter}}</td>
 						<td class="cell-idNo">{{item.idNo}}</td>
 						<td class="cell-number">{{item.phone}}</td>
-						<td class="cell-number">{{item.personType |PersonTypeFilter}}</td>
-						<td class="cell-number">{{item.jobStatus |JobFilter}}</td>
+						<td class="cell-seq">{{item.personType |PersonTypeFilter}}</td>
+						<td class="cell-seq">{{item.jobStatus |JobFilter}}</td>
 						<td class="cell-number">{{item.instName}}</td>
 						<td class="cell-number">{{item.serviceInstName}}</td>
+						<td class="cell-seq" id="num" ng-if="item.orderCount > 0" style="color: red;">{{item.orderCount}}</td>
+						<td class="cell-seq" id="num" ng-if="item.orderCount==0" style="color: green;">{{item.orderCount}}</td>
 						<td class="cell-con">
 							<button type="button" class="btn btn-warning" ng-click="arrange(item)" ng-if="ops['O_STAFF_SCHEDULE']">
 								<i class="fa fa-pencil-square-o fa-lg"></i>&nbsp排班
@@ -137,3 +141,4 @@
 	<uib-pagination total-items="pagerConf.totalItems" ng-model="pagerConf.currentPage" max-size="pagerConf.maxSize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true"></uib-pagination>
 </div>
 </script>
+
