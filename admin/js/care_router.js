@@ -254,5 +254,7 @@ angular.module('app.routers', [])
 		url: 'staffschedule/schedule',
 		templateUrl: 'tpl/staffschedule/staffSchedule.html?v=20180302',
 		controller: "StaffScheduleCtrl"
+	}).state('/.operationsList', {/*机构运维*/
+		templateUrl: 'tpl/instoperations/instOperationsList.html?v=20180302'
 	});
 });

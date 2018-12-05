@@ -1,0 +1,103 @@
+<style type="text/css">
+	#bt{
+		background: #FFFFFF;
+		width: 100%;
+		height:109px;
+		position: absolute;
+		top: 0;
+	}
+	.b_wa{
+		position: relative;
+	}
+</style>
+<div class="content">
+	<ul class="breadcrumb">
+		<li>
+			<i class="fa fa-home"></i>
+			<li>系统管理</li>
+		</li>
+		<li>
+			<a href="javascript:void(0)" ui-sref="/.operationsList">机构运维</a>
+		</li>
+	</ul>
+	<div class="box">
+		<div class="filterForm">
+			<ul class="clearfix">
+				<li>机&nbsp;&nbsp;&nbsp;构：
+					<select id="inst">	
+						<option value="1">妇产科医院（黄浦）</option>
+						<option value="2">妇产科医院（杨浦）</option>
+						<option value="3">一妇婴医院（东院）</option>
+						<option value="4">五官科医院（东院）</option>
+						<option value="5">华山医院（北院）</option>
+						<option value="6">华山医院（西院）</option>
+						<option value="7">中山医院（南院）</option>
+						<option value="8">公共卫生临床中心</option>
+						<option value="9">仁济医院（南院）</option>
+						<option value="10">金山医院</option>
+						<option value="11">新起点康复医院</option>
+					</select>
+				</li>
+				<li><button type="button" class="searchbtn" name="submit" value="submit" onclick="query();">&nbsp;确&nbsp;&nbsp;定</button></li>
+			</ul>
+			
+			<p style="display:none"><a id="iframe_a" href="" target="iframe_a"> </a></p>
+			<div class="b_wa">
+			<div id="bt"></div>
+			<iframe src="" name="iframe_a"  width="100%" height="800px" frameborder="0" class="iframe">
+			</iframe>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+function query(){
+//	var  myselect = document.getElementById("inst");
+//
+//	var index = myselect.selectedIndex ;
+//
+//	var instValue = myselect.options[index].value;
+//
+//	var instText = myselect.options[index].text;
+//	
+//	alert(instValue);	
+//	alert(instText);
+	
+	var  obj=document.getElementById("inst");
+
+         for (i=0;i<obj.length;i++) {//下拉框的长度就是它的选项数.
+
+            if (obj[i].selected== true ) {
+
+            var instValue=obj[i].value;//获取当前选择项的 值 .
+			}
+		}
+	if(instValue == 1) {
+		document.getElementById("iframe_a").href = "http://www.fudanmed.com:5000/fckly"; 
+	}else if(instValue == 2) {
+		document.getElementById("iframe_a").href = "http://www.fudanmed.com:5000/fckxy"; 
+	}else if(instValue == 3) {
+		document.getElementById("iframe_a").href = "http://www.fudanmed.com:5000/yfydy"; 
+	}else if(instValue == 4) {
+		document.getElementById("iframe_a").href = "http://www.fudanmed.com:5000/wgkpjdy"; 
+	}else if(instValue == 5) {
+		document.getElementById("iframe_a").href = "http://www.fudanmed.com:5000/hsby"; 
+	}else if(instValue == 6) {
+		document.getElementById("iframe_a").href = "http://www.fudanmed.com:5000/hsxy"; 
+	}else if(instValue == 7) {
+		document.getElementById("iframe_a").href = "http://www.fudanmed.com:5000/gw"; 
+	}else if(instValue == 8) {
+		document.getElementById("iframe_a").href = "http://www.fudanmed.com:5000/gw"; 
+	}else if(instValue == 9) {
+		document.getElementById("iframe_a").href = "http://www.fudanmed.com:5000/rjny"; 
+	}else if(instValue == 10) {
+		document.getElementById("iframe_a").href = "http://www.fudanmed.com:5000/jsxy"; 
+	}else if(instValue == 11) {
+		document.getElementById("iframe_a").href = "http://www.fudanmed.com:5000/xqdkf"; 
+	}else {
+		alert("该机构无网站");
+	}
+	document.getElementById("iframe_a").click();
+}
+</script>
