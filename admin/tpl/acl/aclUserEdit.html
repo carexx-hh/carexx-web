@@ -25,7 +25,7 @@
 				<input type="password" name="confirmLoginPass" ng-model="data.confirmLoginPass" placeholder="请输入6-20位登录密码" minlength="6" maxlength="20" required />
 				<label class="error" ng-show="aclUserForm.loginPass.$valid && aclUserForm.confirmLoginPass.$valid && data.loginPass != data.confirmLoginPass">两次密码输入不一致</label>
 			</div>
-			<div class="formrow" ng-if="userInfo.instId==0&&editMode == '0'">
+			<div class="formrow" ng-if="userInfo.instId <= 0&&editMode == '0'">
 				<label class="labtext-left">所在单位</label>
 				<input type="text"  ng-model="data.serInstName" maxlength="20" placeholder="请选择服务单位" ng-click="choiceServiceInstId()" required="required" readonly="readonly"/>				
 			</div>
