@@ -1093,7 +1093,7 @@ angular.module('tab-yuyue', []).controller('TabYuyueCtrl', function(Toast, $loca
       Toast.showMsg('请输入病区信息');
       return false;
     }
-    if ($scope.info.inpatientWard === void 0) {
+    if ($scope.info.accurateAddress === void 0) {
       Toast.showMsg('请输入病床信息');
       return false;
     }
@@ -1106,7 +1106,7 @@ angular.module('tab-yuyue', []).controller('TabYuyueCtrl', function(Toast, $loca
         instId: $localStorage.currentHos.id,
         serviceId: $localStorage.getProinfo.serviceId,
         inpatientAreaId: $scope.info.inpatientAreaId,
-        inpatientWard: $scope.info.inpatientWard,
+        accurateAddress: $scope.info.accurateAddress,
         patientName: $scope.info.patientName,
         serviceStartTime: $scope.serviceStartTime,
         serviceEndTime: $scope.serviceEndTime,
