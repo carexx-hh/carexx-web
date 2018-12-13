@@ -109,8 +109,8 @@
 						<td class="cell-ic-seq">{{item.serviceAddress | serviceAddressFilter}}</td>
 						<td class="cell-seq">{{item.realName}}</td>						
 						<td class="cell-ic-seq">{{item.signingPerson}}</td>
-						<td class="cell-con" ng-if="item.serviceAddress==1">{{item.inpatientArea}}/{{item.inpatientWard}}</td>
-						<td class="cell-con" ng-if="item.serviceAddress==2">{{item.inpatientWard}}</td>
+						<td class="cell-con" ng-if="item.serviceAddress==1">{{item.inpatientArea}}/{{item.accurateAddress}}</td>
+						<td class="cell-con" ng-if="item.serviceAddress==2">{{item.accurateAddress}}</td>
 						<td class="cell-seq">{{item.workTypeName}}</td>
 						<td class="cell-ic-seq" ng-click="schedulePopup(item)"><a href="javascript:void(0)">{{item.staffName}}</a></td>
 						<td class="cell-ic-seq">{{item.instSysName}}</td>

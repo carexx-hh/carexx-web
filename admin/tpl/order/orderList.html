@@ -109,8 +109,8 @@
 						<td class="cell-seq">{{item.serviceAddress | serviceAddressFilter}}</td>
 						<td class="cell-seq">{{item.orderType | OrderTypeFilter}}</td>
 						<td class="cell-seq">{{item.payType | PayTypeFilter}}</td>
-						<td class="cell-text" ng-if="item.serviceAddress==1">{{item.inpatientArea}}/{{item.inpatientWard}}</td>
-						<td class="cell-text" ng-if="item.serviceAddress==2">{{item.inpatientWard}}</td>
+						<td class="cell-text" ng-if="item.serviceAddress==1">{{item.inpatientArea}}/{{item.accurateAddress}}</td>
+						<td class="cell-text" ng-if="item.serviceAddress==2">{{item.accurateAddress}}</td>
 						<td class="cell-con">{{item.serviceName}}</td>
 						<td class="cell-seq">{{item.orderAmt+item.adjustAmt| number:2}}</td>
 						<td class="cell-seq">{{item.adjustAmt| number:2}}</td>

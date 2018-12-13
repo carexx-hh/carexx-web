@@ -52,14 +52,14 @@
 						<th class="cell-seq">人员性质</th>
 						<th class="cell-seq">客户姓名</th>
 						<th class="cell-seq">结算状态</th>
-						<th class="cell-text">开始时间</th>
-						<th class="cell-text">结束时间</th>
+						<th class="cell-con">开始时间</th>
+						<th class="cell-con">结束时间</th>
 						<th class="cell-seq">小时数</th>
-						<th class="cell-number">地址</th>					
+						<th class="cell-con">地址</th>					
 						<th class="cell-seq">结算款(元)</th>
-						<th class="cell-number">调整金额(元)</th>
+						<th class="cell-seq">调整金额(元)</th>
 						<th class="cell-seq">提成比例</th>
-						<th class="cell-text">操作</th>
+						<th class="cell-number">操作</th>
 					</tr>
 				</thead>
 				<tbody ng-repeat="staff in staffList">
@@ -71,10 +71,10 @@
 						<td class="cell-seq">{{item.personType |PersonTypeFilter}}</td>	
 						<td class="cell-seq">{{item.patientName}}</td>
 						<td class="cell-seq">{{item.settleStatus | SettleStatusFilter}}</td>
-						<td class="cell-text">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm'}}</td>
-						<td class="cell-text">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm'}}</td>
+						<td class="cell-con">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm'}}</td>
+						<td class="cell-con">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm'}}</td>
 						<td class="cell-seq">{{item.serviceDuration}}</td>
-						<td class="cell-number">{{item.inpatientArea}}/{{item.inpatientWard}}</td>
+						<td class="cell-con">{{item.inpatientArea}}/{{item.accurateAddress}}</td>
 						<td class="cell-seq">{{item.staffSettleAmt| number:2}}</td>
 						<td class="cell-seq">{{item.settleAdjustAmt| number:2}}</td>
 						<td class="cell-seq">{{item.settleRatio}}</td>
