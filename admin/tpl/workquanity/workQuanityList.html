@@ -74,7 +74,8 @@
 						<td class="cell-con">{{item.serviceStartTime| date:'yyyy-MM-dd HH:mm'}}</td>
 						<td class="cell-con">{{item.serviceEndTime| date:'yyyy-MM-dd HH:mm'}}</td>
 						<td class="cell-seq">{{item.serviceDuration}}</td>
-						<td class="cell-con">{{item.inpatientArea}}/{{item.accurateAddress}}</td>
+						<td class="cell-con" ng-if="item.serviceAddress==1">{{item.inpatientArea}}/{{item.accurateAddress}}</td>
+						<td class="cell-con" ng-if="item.serviceAddress==2">{{item.accurateAddress}}</td>
 						<td class="cell-seq">{{item.staffSettleAmt| number:2}}</td>
 						<td class="cell-seq">{{item.settleAdjustAmt| number:2}}</td>
 						<td class="cell-seq">{{item.settleRatio}}</td>
