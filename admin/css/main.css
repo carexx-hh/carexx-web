@@ -72,10 +72,6 @@ body {
 	position: relative;
 }
 
-.open>a {
-	background-color: #f1f4f7;
-}
-
 /*控制台*/
 .infoPanel {
 	display: none;
