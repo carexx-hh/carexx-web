@@ -20,8 +20,9 @@
 			<table class="tablelist">
 				<thead>
 					<tr>
-						<th class="cell-number">姓名</th>
-						<th class="cell-number">性别</th>
+						<th class="cell-number">客户名</th>
+						<th class="cell-number">下单人</th>
+						<th class="cell-ic-seq">性别</th>
 						<th class="cell-number">身份证</th>
 						<th class="cell-number">电话</th>
 						<th class="cell-number">地址</th>
@@ -33,7 +34,8 @@
 				<tbody>
 					<tr ng-repeat="item in custList">
 						<td class="cell-number">{{item.realName}}</td>
-						<td class="cell-number">{{item.sex | SexFilter}}</td>
+						<td class="cell-number">{{item.nickName}}</td>
+						<td class="cell-ic-seq">{{item.sex | SexFilter}}</td>
 						<td class="cell-number">{{item.idNo}}</td>
 						<td class="cell-number">{{item.phone}}</td>
 						<td class="cell-number">{{item.address}}</td>

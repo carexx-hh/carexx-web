@@ -39,15 +39,15 @@
 			<table class="tablelist">
 				<thead>
 					<tr>
-						<th class="cell-number">姓名</th>
-						<th class="cell-number">工种</th>
-						<th class="cell-seq">性别</th>
+						<th class="cell-seq">姓名</th>
+						<th class="cell-seq">工种</th>
+						<th class="cell-ic-seq">性别</th>
 						<th class="cell-idNo">身份证</th>
 						<th class="cell-number">电话</th>
-						<th class="cell-idNo">上岗证</th>
-						<th class="cell-idNo">健康证</th>
-						<th class="cell-seq">性质</th>
-						<th class="cell-seq">状态</th>
+						<th class="cell-number">上岗证</th>
+						<th class="cell-number">健康证</th>
+						<th class="cell-ic-seq">性质</th>
+						<th class="cell-ic-seq">状态</th>
 						<th class="cell-number">所属单位</th>
 						<th class="cell-number">服务单位</th>
 						<th class="cell-con">操作</th>
@@ -55,15 +55,15 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="item in staffList">
-						<td class="cell-number">{{item.realName}}</td>
-						<td class="cell-number">{{item.workTypeName}}</td>
-						<td class="cell-seq">{{item.sex | SexFilter}}</td>
+						<td class="cell-seq">{{item.realName}}</td>
+						<td class="cell-seq">{{item.workTypeName}}</td>
+						<td class="cell-ic-seq">{{item.sex | SexFilter}}</td>
 						<td class="cell-idNo">{{item.idNo}}</td>
 						<td class="cell-number">{{item.phone}}</td>
-						<td class="cell-idNo">{{item.workLicense}}</td>
-						<td class="cell-idNo">{{item.healthyLicense}}</td>
-						<td class="cell-seq">{{item.personType |PersonTypeFilter}}</td>
-						<td class="cell-seq">{{item.jobStatus |JobFilter}}</td>
+						<td class="cell-number">{{item.workLicense}}</td>
+						<td class="cell-number">{{item.healthyLicense}}</td>
+						<td class="cell-ic-seq">{{item.personType |PersonTypeFilter}}</td>
+						<td class="cell-ic-seq">{{item.jobStatus |JobFilter}}</td>
 						<td class="cell-number">{{item.instName}}</td>
 						<td class="cell-number">{{item.serviceInstName}}</td>
 						<td class="cell-con">
