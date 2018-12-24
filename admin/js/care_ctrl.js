@@ -3445,6 +3445,12 @@ angular.module('app.controllers', [])
 		$scope.exportReport= function(){
 			$scope.data.token=LocalStorageProvider.get(GlobalConst.AUTH_TOKEN_CACHE_NAME, "");
 			$scope.urlStr="customerorder/export_income_count";
+			if($scope.data.serviceStartTime != null && $scope.data.startTime != null){
+				$scope.data.serviceStartTime = $scope.data.serviceStartTime +" "+ $scope.data.startTime;
+			}
+			if($scope.data.serviceEndTime != null && $scope.data.endTime != null){
+				$scope.data.serviceEndTime = $scope.data.serviceEndTime +" "+ $scope.data.endTime;
+			}
 			post($scope.urlStr,$scope.data);		
 		}
 
