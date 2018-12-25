@@ -22,6 +22,12 @@
 					<option ng-repeat="serItem in serviceList" value="{{serItem.id}}">{{serItem.serviceName}}</option>
 					</select>
 				</li>
+				<li>工种：
+					<select ng-model="data.workTypeId">
+							<option value="">全部</option>
+							<option ng-repeat="wtItem in workTypeList" value="{{wtItem.id}}">{{wtItem.workTypeName}}</option>
+					</select>
+				</li>
 				<li>开始时间：
 					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceStartTime" />
 				</li>
