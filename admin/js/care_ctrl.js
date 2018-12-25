@@ -3396,12 +3396,12 @@ angular.module('app.controllers', [])
 		}
 		
 		$scope.query= function(){
+			$scope.data.intstrTime = $scope.data.serviceStartTime;
+			$scope.data.intendTime = $scope.data.serviceEndTime;
 			if($scope.data.serviceStartTime != null && $scope.data.startTime != null){
-				$scope.data.intstrTime = $scope.data.serviceStartTime;
 				$scope.data.serviceStartTime = $scope.data.serviceStartTime +" "+ $scope.data.startTime;
 			}
 			if($scope.data.serviceEndTime != null && $scope.data.endTime != null){
-				$scope.data.intendTime = $scope.data.serviceEndTime;
 				$scope.data.serviceEndTime = $scope.data.serviceEndTime +" "+ $scope.data.endTime;
 			}
 			showLoading();

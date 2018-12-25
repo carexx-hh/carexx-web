@@ -47,7 +47,7 @@
 					<tr>
 						<th class="cell-seq">人员编号</th>
 						<th class="cell-number">人员姓名</th>						
-						<th class="cell-number">服务项目</th>
+						<th class="cell-con">服务项目</th>
 						<th class="cell-seq">工种</th>
 						<th class="cell-seq">人员性质</th>
 						<th class="cell-seq">客户姓名</th>
@@ -66,7 +66,7 @@
 					<tr ng-repeat="item in staff.items">
 						<td class="cell-seq">{{item.staffId}}</td>
 						<td class="cell-number">{{item.staffName}}</td>						
-						<td class="cell-number">{{item.serviceName}}</td>
+						<td class="cell-con">{{item.serviceName}}</td>
 						<td class="cell-seq">{{item.workTypeName}}</td>
 						<td class="cell-seq">{{item.personType |PersonTypeFilter}}</td>	
 						<td class="cell-seq">{{item.patientName}}</td>
