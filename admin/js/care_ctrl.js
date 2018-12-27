@@ -3307,6 +3307,7 @@ angular.module('app.controllers', [])
 		$scope.totalddtz = 0;
 		$scope.totalsxf = 0;
 		$scope.data.sortStatus=1;
+		$scope.data.instId = 0;
 		$scope.data.serviceEndTime=$filter('date')(new Date, 'yyyy-MM-dd');
 		$scope.data.serviceStartTime=$filter('date')(new Date-(1000*60*60*24*30), 'yyyy-MM-dd');
 		$scope.data.intstrTime = $scope.data.serviceStartTime;
@@ -3349,6 +3350,22 @@ angular.module('app.controllers', [])
 			);
 		}
 		
+		$scope.initjob = function() {
+			JobTypeSvr.byInstId($scope.data).success(function(res) {
+				if(res.code == 200) {
+					$scope.timeList = res.data;
+					for(var i = 0; i < $scope.timeList.length; i++) {
+						if($scope.timeList[i].jobType == 1){
+							$scope.data.startTime = $filter('date')($scope.timeList[i].startTime, 'HH:mm:ss');
+							$scope.data.endTime = $filter('date')($scope.timeList[i].endTime, 'HH:mm:ss');
+						}
+					}
+					$scope.query();
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
 		
 		$scope.init = function() {
 			CompanySvr.listAll().success(function(res) {

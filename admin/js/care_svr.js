@@ -253,7 +253,7 @@ angular.module('app.services', [])
 	};
 	
 	JobTypeSvr.byInstId = function(data) {
-		return $http.post('customerordertime/get_by_instId',data);
+		return $http.post('customerordertime/get_by_instId/'+ data.instId);
 	};
 	
 	JobTypeSvr.save = function(data) {

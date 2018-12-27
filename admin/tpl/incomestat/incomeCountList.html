@@ -51,22 +51,18 @@
 				<li>开始时间：
 					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceStartTime" />
 					<select ng-model="data.startTime" required="required">
-						<option value="">请选择</option>
-						<option value="08:00:00">08:00</option>
-						<option value="20:00:00">20:00</option>
+						<option ng-repeat="timeItem in timeList" value="{{timeItem.startTime | date:'HH:mm:ss'}}">{{timeItem.startTime | date:'HH:mm'}}</option>
 					</select>
 				</li>
 				<li>结束时间：
 					<input type="text" id="startRegDate" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.serviceEndTime" />
 					<select ng-model="data.endTime" required="required">
-						<option value="">请选择</option>
-						<option value="08:00:00">08:00</option>
-						<option value="20:00:00">20:00</option>
+						<option ng-repeat="timeItem in timeList" value="{{timeItem.endTime | date:'HH:mm:ss'}}">{{timeItem.endTime | date:'HH:mm'}}</option>
 					</select>
 				</li>
 				<li>医院：
-					<select ng-model="data.instId">	
-						<option value="">全部</option>
+					<select ng-change="initjob()" ng-model="data.instId">	
+						<option value="0">全部</option>
 						<option ng-repeat="instItem in instList" value="{{instItem.id}}">{{instItem.instName}}</option>
 					</select>
 				</li>
