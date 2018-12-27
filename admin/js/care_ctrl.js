@@ -18,7 +18,7 @@ angular.module('app.controllers', [])
 			}
 			AclUserSvr.login($scope.data).success(function(res) {
 				if(res.code == 200) {
-					LocalStorageProvider.set(GlobalConst.AUTH_TOKEN_CACHE_NAME, res.data);
+					LocalStorageProvider.set(GlobalConst.AUTH_TOKEN_CACHE_NAME, res.data.token);
 					$state.go(GlobalConst.DEFAULT_WELCOME_URI);
 				} else {
 					alert(res.errorMsg);
