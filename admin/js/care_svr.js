@@ -253,6 +253,10 @@ angular.module('app.services', [])
 	};
 	
 	JobTypeSvr.byInstId = function(data) {
+		return $http.post('customerordertime/by_instId');
+	};
+	
+	JobTypeSvr.getByInstId = function(data) {
 		return $http.post('customerordertime/get_by_instId/'+ data.instId);
 	};
 	

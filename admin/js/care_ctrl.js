@@ -3351,7 +3351,7 @@ angular.module('app.controllers', [])
 		}
 		
 		$scope.initjob = function() {
-			JobTypeSvr.byInstId($scope.data).success(function(res) {
+			JobTypeSvr.getByInstId($scope.data).success(function(res) {
 				if(res.code == 200) {
 					$scope.timeList = res.data;
 					for(var i = 0; i < $scope.timeList.length; i++) {
@@ -3396,7 +3396,7 @@ angular.module('app.controllers', [])
 					alert(res.errorMsg);
 				}
 			});
-			JobTypeSvr.byInstId($scope.data).success(function(res) {
+			JobTypeSvr.getByInstId($scope.data).success(function(res) {
 				if(res.code == 200) {
 					$scope.timeList = res.data;
 					for(var i = 0; i < $scope.timeList.length; i++) {
