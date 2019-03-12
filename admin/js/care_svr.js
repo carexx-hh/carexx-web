@@ -608,6 +608,24 @@ angular.module('app.services', [])
 	return careserSvr;
 }])
 
+.factory('KnowledgeSvr', ['$http', function($http) {
+	var knowledgeSvr = {};
+	
+	knowledgeSvr.query = function(data) {
+		return $http.post('https://test-m.carexx.cn/repository/queryRepository',data);
+	};
+	
+	return knowledgeSvr;
+}])
+
+.factory('ContentSvr', ['$http', function($http) {
+	var contentSvr = {};
+	
+	contentSvr.modify = function(id) {
+		return $http.post('https://test-m.carexx.cn/repository/previewRepository/'+id);
+	};
+	return contentSvr;
+}])
 
 .factory('DriverSvr', ['$http', function($http) {
 	var driverSvr = {};

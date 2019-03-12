@@ -78,7 +78,7 @@ angular.module('CareApp', ['ui.router', 'ui.bootstrap', 'app.services', 'app.fil
 		$httpProvider.defaults.transformRequest = function(obj) {
 			var str = [];
 			for(var p in obj) {
-				if(obj[p] == null || obj[p] == 'null') {
+				if(obj[p] == null || obj[p] =='null') {
 					obj[p] = '';
 				}
 				str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));

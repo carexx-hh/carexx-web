@@ -222,7 +222,7 @@ angular.module('app.routers', [])
 		url: 'acluser/edit',
 		templateUrl: 'tpl/acl/aclUserEdit.html?v=20180302',
 		controller: "AclUserEditCtrl"
-	}).state('/.aclRoleList', {
+	}).state('/.aclRoleList', {/*角色管理*/
 		url: 'aclrole/list',
 		templateUrl: 'tpl/acl/aclRoleList.html?v=20180302',
 		controller: "AclRoleCtrl"
@@ -256,5 +256,13 @@ angular.module('app.routers', [])
 		controller: "StaffScheduleCtrl"
 	}).state('/.operationsList', {/*机构运维*/
 		templateUrl: 'tpl/instoperations/instOperationsList.html?v=20180302'
+	}).state('/.knowledgeBaseList', {/*知识库*/
+		url: 'knowledgebase/list',
+		templateUrl: 'tpl/knowledge_base/knowledge_base.html?v=20180302',
+		controller: "KnowledgeBaseListCtrl"
+	}).state('/.knowledgeContentList', {/*知识库阅读全文*/
+		url: 'knowledgebase/content',
+		templateUrl: 'tpl/knowledge_base/knowledge_content.html?v=20180302',
+		controller: "KnowledgeBaseContentCtrl"
 	});
 });

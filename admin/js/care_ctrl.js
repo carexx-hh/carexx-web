@@ -52,6 +52,7 @@ angular.module('app.controllers', [])
 					$rootScope.roleMenuList = res.data.roleMenuList;
 					$rootScope.ops = res.data.roleOperInfo;
 					$rootScope.careInst = res.data.careInst;
+					console.log('res.data.roleMenuList',res.data.roleMenuList)
 				}
 			});
 		};
@@ -1100,7 +1101,79 @@ angular.module('app.controllers', [])
 		$scope.$watch('pagerConf.currentPage', $scope.query);
 
 	})
+	
+	/*知识库*/
+	.controller("KnowledgeBaseListCtrl", function($scope, $state, KnowledgeSvr, WorkTypeSvr, LocalStorageProvider) {
+		$scope.data = {};
 
+		$scope.pagerConf = {
+			maxSize: 10,
+			totalItems: 0,
+			currentPage: 1
+		};
+
+		$scope.into = function() {
+			WorkTypeSvr.listAll().success(function(res) {
+				if(res.code == 200) {
+					$scope.knowledgeBaseList = res.data;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+
+		$scope.query = function() {
+			$scope.data.pageNo = $scope.pagerConf.currentPage;
+			$scope.data.pageSize = $scope.pagerConf.maxSize;
+			showLoading();
+			KnowledgeSvr.query($scope.data).success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					$scope.pagerConf.totalItems = res.data.totalNum;
+					$scope.knowledgeBaseList = res.data.items;
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+
+		$scope.edit = function(list) {
+			LocalStorageProvider.setObject("ser.item", list);
+			$state.go('/.knowledgeContentList');
+		}
+		
+        $scope.download = function(list) {
+			$state.go(window.open('http://pntv8tnvj.bkt.clouddn.com/'+LocalStorageProvider.getObject("ser.item").diseaseName+'.doc', '_blank'));
+		}
+		
+		$scope.into();
+		$scope.$watch('pagerConf.currentPage', $scope.query);
+
+	})
+	
+
+	
+	/*阅读全文*/
+	.controller("KnowledgeBaseContentCtrl", function($scope, $state, $sce, ContentSvr, WorkTypeSvr, LocalStorageProvider) {
+		$scope.data = LocalStorageProvider.getObject("ser.item");
+		$scope.data.id = "" + LocalStorageProvider.getObject("ser.item").id;
+		
+		$scope.query = function() {
+			showLoading();
+			ContentSvr.modify($scope.data.id).success(function(res) {
+				hideLoading();
+				if(res.code == 200) {
+					$scope.knowledgeContentList = $sce.trustAsHtml(res.data);
+				} else {
+					alert(res.errorMsg);
+				}
+			});
+		}
+		
+		$scope.query();
+		
+	})
+	
 	/*服务项目新增*/
 	.controller("CareserAddCtrl", function($scope, $state, CareserSvr, ServiceSvr, LocalStorageProvider) {
 		$scope.data = {};

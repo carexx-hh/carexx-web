@@ -1,0 +1,45 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li><i class="fa fa-home"></i>
+			<li>信息维护</li>
+		</li>
+		<li>知识库</li>
+	</ul>
+	<div class="box">
+		<div class="signList">
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th class="cell-unit">序号</th>
+						<th class="cell-text">病种</th>
+						<th class="cell-text">说明</th>
+						<th class="cell-ic-seq">公示年份</th>
+						<th class="cell-number">标准</th>
+						<th class="cell-unit">阅读</th>
+						<th class="cell-number">下载</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in knowledgeBaseList">
+						<td class="cell-unit">{{item.id}}</td>
+						<td class="cell-text">{{item.diseaseName}}</td>
+						<td class="cell-text">{{item.instructions}}</td>
+						<td class="cell-ic-seq">{{item.year}}</td>
+						<td class="cell-number">{{item.standard}}</td>
+						<td class="cell-con">
+							<button type="button" class="btn btn-primary" ng-click="edit(item)" ng-if="ops['O_KNOWLEDGE_BASE_PREVIEW']">
+								<i class="fa fa-pencil-square-o fa-lg"></i>&nbsp阅读全文
+							</button>
+							</td>
+							<td class="cell-con">
+							<button type="button" class="btn btn-danger" ng-click="download(item)" ng-if="ops['O_KNOWLEDGE_BASE_DOWN']">
+								<i class="fa fa-scissors"></i>&nbsp&nbsp下载文档
+							</button>
+						</td>
+					</tr>					
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<uib-pagination total-items="pagerConf.totalItems" ng-model="pagerConf.currentPage" max-size="pagerConf.maxSize" first-text="第一页" previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true"></uib-pagination>
+</div>
