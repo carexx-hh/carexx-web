@@ -1103,7 +1103,7 @@ angular.module('app.controllers', [])
 	})
 	
 	/*知识库*/
-	.controller("KnowledgeBaseListCtrl", function($scope, $state, KnowledgeSvr, WorkTypeSvr, LocalStorageProvider) {
+	.controller("KnowledgeBaseListCtrl", function($scope, $state, KnowledgeSvr, LocalStorageProvider) {
 		$scope.data = {};
 
 		$scope.pagerConf = {
@@ -1113,7 +1113,7 @@ angular.module('app.controllers', [])
 		};
 
 		$scope.into = function() {
-			WorkTypeSvr.listAll().success(function(res) {
+			KnowledgeSvr.query().success(function(res) {
 				if(res.code == 200) {
 					$scope.knowledgeBaseList = res.data;
 				} else {
@@ -1137,13 +1137,14 @@ angular.module('app.controllers', [])
 			});
 		}
 
-		$scope.edit = function(list) {
+		$scope.read = function(list) {
 			LocalStorageProvider.setObject("ser.item", list);
 			$state.go('/.knowledgeContentList');
 		}
 		
         $scope.download = function(list) {
-			$state.go(window.open('http://pntv8tnvj.bkt.clouddn.com/'+LocalStorageProvider.getObject("ser.item").diseaseName+'.doc', '_blank'));
+        	LocalStorageProvider.setObject("down.item", list);
+			$state.go(window.open('http://pntv8tnvj.bkt.clouddn.com/'+LocalStorageProvider.getObject("down.item").diseaseName+'.doc', '_blank'));
 		}
 		
 		$scope.into();
@@ -1154,13 +1155,13 @@ angular.module('app.controllers', [])
 
 	
 	/*阅读全文*/
-	.controller("KnowledgeBaseContentCtrl", function($scope, $state, $sce, ContentSvr, WorkTypeSvr, LocalStorageProvider) {
+	.controller("KnowledgeBaseContentCtrl", function($scope, $state, $sce, KnowledgeSvr, LocalStorageProvider) {
 		$scope.data = LocalStorageProvider.getObject("ser.item");
 		$scope.data.id = "" + LocalStorageProvider.getObject("ser.item").id;
 		
 		$scope.query = function() {
 			showLoading();
-			ContentSvr.modify($scope.data.id).success(function(res) {
+			KnowledgeSvr.read($scope.data.id).success(function(res) {
 				hideLoading();
 				if(res.code == 200) {
 					$scope.knowledgeContentList = $sce.trustAsHtml(res.data);

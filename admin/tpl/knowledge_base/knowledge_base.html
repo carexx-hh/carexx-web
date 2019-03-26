@@ -12,26 +12,26 @@
 					<tr>
 						<th class="cell-unit">序号</th>
 						<th class="cell-text">病种</th>
-						<th class="cell-text">说明</th>
+						<th class="big-cell-text">说明</th>
 						<th class="cell-ic-seq">公示年份</th>
-						<th class="cell-number">标准</th>
-						<th class="cell-unit">阅读</th>
-						<th class="cell-number">下载</th>
+						<th class="cell-ic-seq">标准</th>
+						<th class="cell-seq">阅读</th>
+						<th class="cell-seq">下载</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="item in knowledgeBaseList">
 						<td class="cell-unit">{{item.id}}</td>
 						<td class="cell-text">{{item.diseaseName}}</td>
-						<td class="cell-text">{{item.instructions}}</td>
+						<td class="big-cell-text">{{item.instructions}}</td>
 						<td class="cell-ic-seq">{{item.year}}</td>
-						<td class="cell-number">{{item.standard}}</td>
-						<td class="cell-con">
-							<button type="button" class="btn btn-primary" ng-click="edit(item)" ng-if="ops['O_KNOWLEDGE_BASE_PREVIEW']">
+						<td class="cell-ic-seq">{{item.standard}}</td>
+						<td class="cell-seq">
+							<button type="button" class="btn btn-primary" ng-click="read(item)" ng-if="ops['O_KNOWLEDGE_BASE_PREVIEW']">
 								<i class="fa fa-pencil-square-o fa-lg"></i>&nbsp阅读全文
 							</button>
 							</td>
-							<td class="cell-con">
+						<td class="cell-seq">
 							<button type="button" class="btn btn-danger" ng-click="download(item)" ng-if="ops['O_KNOWLEDGE_BASE_DOWN']">
 								<i class="fa fa-scissors"></i>&nbsp&nbsp下载文档
 							</button>

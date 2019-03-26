@@ -658,6 +658,15 @@ a.current {
 	width: 200px;
 }
 
+.tablelist .big-cell-text {
+	text-align: center;
+	line-height: 50px;
+	width: 400px;
+	overflow: hidden;
+  	text-overflow:ellipsis;
+  	white-space: nowrap;
+}
+
 .tablelist .cell-count {
 	width: 50px;
 }

@@ -612,19 +612,14 @@ angular.module('app.services', [])
 	var knowledgeSvr = {};
 	
 	knowledgeSvr.query = function(data) {
-		return $http.post('https://test-m.carexx.cn/repository/queryRepository',data);
+		return $http.post('repository/queryRepository',data);
+	};
+	
+	knowledgeSvr.read = function(id) {
+		return $http.get('repository/previewRepository/'+id);
 	};
 	
 	return knowledgeSvr;
-}])
-
-.factory('ContentSvr', ['$http', function($http) {
-	var contentSvr = {};
-	
-	contentSvr.modify = function(id) {
-		return $http.post('https://test-m.carexx.cn/repository/previewRepository/'+id);
-	};
-	return contentSvr;
 }])
 
 .factory('DriverSvr', ['$http', function($http) {
