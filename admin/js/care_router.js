@@ -256,7 +256,9 @@ angular.module('app.routers', [])
 		controller: "StaffScheduleCtrl"
 	}).state('/.operationsList', {/*机构运维*/
 		templateUrl: 'tpl/instoperations/instOperationsList.html?v=20180302'
-	}).state('/.knowledgeBaseList', {/*知识库*/
+	}).state('/.recureManageList', {/*康复管理*/
+        templateUrl: 'tpl/recure/recureManageList.html?v=20180302',
+    }).state('/.knowledgeBaseList', {/*知识库*/
 		url: 'knowledgebase/list',
 		templateUrl: 'tpl/knowledge_base/knowledge_base.html?v=20180302',
 		controller: "KnowledgeBaseListCtrl"
