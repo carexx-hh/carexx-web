@@ -1,0 +1,133 @@
+<div class="content">
+	<ul class="breadcrumb">
+		<li><i class="fa fa-home"></i>
+			<li>系统管理</li>
+		</li>
+		<li>医院管理</li>
+	</ul>
+	<div class="box">
+		<div class="filterForm">
+			<ul class="clearfix">
+				<!--<li>机&nbsp;&nbsp;&nbsp;构：-->
+					<!--<select ng-model="data.instId">-->
+						<!--<option value="">请选择</option>-->
+						<!--<option value="1">妇产科医院（黄浦）</option>-->
+						<!--<option value="2">妇产科医院（杨浦）</option>-->
+						<!--<option value="3">一妇婴医院（东院）</option>-->
+						<!--<option value="4">五官科医院（东院）</option>-->
+						<!--<option value="5">华山医院（北院）</option>-->
+						<!--<option value="6">华山医院（西院）</option>-->
+						<!--<option value="7">中山医院（南院）</option>-->
+						<!--<option value="8">公共卫生临床中心</option>-->
+						<!--<option value="9">仁济医院（南院）</option>-->
+						<!--<option value="10">金山医院</option>-->
+						<!--<option value="11">新起点康复医院</option>-->
+					<!--</select>-->
+				<!--</li>-->
+				<li>护理员：<input type="text" placeholder="请输入护理员姓名" ng-model="data.hly"></li>
+				<li>签单人：<input type="text" placeholder="请输入签单人姓名" ng-model="data.qdr"></li>
+				<li>开始时间：
+					<input type="text" style="width:110px" class="startdate" onchange="" onfocus="MyDatePicker()" ng-model="data.searchBeginDate" />
+				</li>
+				<li>结束时间：
+					<input type="text" style="width:110px" class="enddate" onchange="" onfocus="MyDatePicker()" ng-model="data.searchEndDate" />
+				</li>
+				<li><button type="button" class="searchbtn" ng-click="query()" ng-if="ops['M_STATISTICS_SINGLE_QUERY']"><i class="fa fa-search"></i>&nbsp查询</button></li>
+			</ul>
+		</div>
+		<div class="signList">
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th class="cell-seq">客户编号</th>
+						<th class="cell-seq">客户姓名</th>
+						<th class="cell-seq">类别</th>
+						<th class="cell-seq">所属公司</th>
+						<th class="cell-seq">序号</th>
+						<th class="cell-seq">编号</th>
+						<th class="cell-seq">服务单号</th>
+						<th class="cell-seq">签单人</th>
+						<th class="cell-seq">护理员</th>
+						<th class="cell-seq">收据号</th>
+						<th class="cell-seq">发票号</th>
+						<th class="cell-seq">正常天数</th>
+						<th class="cell-seq">节假日天数</th>
+						<th class="cell-seq">单价</th>
+						<th class="cell-seq">应收款</th>
+						<th class="cell-seq">支付方式</th>
+						<th class="cell-seq">折扣金额</th>
+						<th class="cell-seq">调整金额</th>
+						<th class="cell-seq">实收款</th>
+						<th class="cell-seq">预收款</th>
+						<th class="cell-seq">结算款支出</th>
+						<th class="cell-seq">结算款调整金额</th>
+						<th class="cell-seq">管理费</th>
+						<th class="cell-seq">备注</th>
+						<th class="cell-seq">上岗日期</th>
+						<th class="cell-seq">结束日期</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in statisticsList">
+						<td class="cell-seq">{{item.khbh}}</td>
+						<td class="cell-seq">{{item.khxm}}</td>
+						<td class="cell-seq">{{item.lb}}</td>
+						<td class="cell-seq">{{item.ssgs}}</td>
+						<td class="cell-seq">{{item.xh}}</td>
+						<td class="cell-seq">{{item.bh}}</td>
+						<td class="cell-seq">{{item.fwdh}}</td>
+						<td class="cell-seq">{{item.qdr}}</td>
+						<td class="cell-seq">{{item.hly}}</td>
+						<td class="cell-seq">{{item.sjh}}</a></td>
+						<td class="cell-seq">{{item.fph}}</td>
+						<td class="cell-seq">{{item.zcts}}</td>
+						<td class="cell-seq">{{item.jjrts}}</td>
+						<td class="cell-seq">{{item.dj}}</td>
+						<td class="cell-seq">{{item.ysk}}</td>
+						<td class="cell-seq">{{item.zffs}}</td>
+						<td class="cell-seq">{{item.zkje}}</td>
+						<td class="cell-seq">{{item.tzje}}</td>
+						<td class="cell-seq">{{item.ssk}}</td>
+						<td class="cell-seq">{{item.yyk}}</td>
+						<td class="cell-seq">{{item.jskzc}}</td>
+						<td class="cell-seq">{{item.jsktzje}}</td>
+						<td class="cell-seq">{{item.glf}}</td>
+						<td class="cell-seq">{{item.bz}}</td>
+						<td class="cell-seq">{{item.sgrq| date:'yyyy-MM-dd'}}</td>
+						<td class="cell-seq">{{item.jsrq| date:'yyyy-MM-dd'}}</td>
+					</tr>
+				</tbody>
+				<!--<tfoot>-->
+					<!--<tr>-->
+						<!--<td class="cell-seq">合计</td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+						<!--<td class="cell-seq"></td>-->
+					<!--</tr>-->
+				<!--</tfoot>-->
+			</table>
+		</div>
+	</div>
+</div>

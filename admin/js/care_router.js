@@ -266,5 +266,13 @@ angular.module('app.routers', [])
 		url: 'knowledgebase/content',
 		templateUrl: 'tpl/knowledge_base/knowledge_content.html?v=20180302',
 		controller: "KnowledgeBaseContentCtrl"
-	});
+	}).state('/.statisticsContentList', {/*统计明细*/
+        url: 'statistics/content',
+        templateUrl: 'tpl/statistics/statistics.html?v=20180302',
+        controller: "StatisticsContentCtrl"
+    }).state('/.statisticsContentSingleList', {/*统计明细*/
+        url: 'statisticsSingle/content',
+        templateUrl: 'tpl/statistics/statisticsSingle.html?v=20180302',
+        controller: "StatisticsContentSingleCtrl"
+    });
 });

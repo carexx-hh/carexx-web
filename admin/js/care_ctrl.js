@@ -1144,7 +1144,7 @@ angular.module('app.controllers', [])
 		
         $scope.download = function(list) {
         	LocalStorageProvider.setObject("down.item", list);
-			$state.go(window.open('http://pntv8tnvj.bkt.clouddn.com/'+LocalStorageProvider.getObject("down.item").diseaseName+'.doc', '_blank'));
+			$state.go(window.open('https://carexx-repository.oss-cn-hangzhou.aliyuncs.com/'+LocalStorageProvider.getObject("down.item").diseaseName+'.doc', '_blank'));
 		}
 		
 		$scope.into();
@@ -4209,4 +4209,93 @@ angular.module('app.controllers', [])
 		}
 		
 		$scope.$watch('pagerConf.currentPage', $scope.query);
-	});
+	})
+
+    //收入统计
+    .controller("StatisticsContentCtrl", function($scope, $state, LocalStorageProvider, GlobalConst ,
+                                                  StatisticsSvr,$uibModal,$filter) {
+        // $scope.data = {};
+        // $scope.totalday = 0;
+        // $scope.totalzje = 0;
+        // $scope.totaljsk=0;
+        // $scope.totalglf=0;
+        // $scope.totaljstz = 0;
+        // $scope.totalddtz = 0;
+        // $scope.totalsxf = 0;
+        // $scope.data.sortStatus=1;
+        // $scope.data.instId = 1;
+        // $scope.data.serviceEndTime=$filter('date')(new Date, 'yyyy-MM-dd');
+        // $scope.data.serviceStartTime=$filter('date')(new Date-(1000*60*60*24*30), 'yyyy-MM-dd');
+        // $scope.data.intstrTime = $scope.data.serviceStartTime;
+        // $scope.data.intendTime = $scope.data.serviceEndTime;
+        $scope.data.searchBeginDate=$filter('date')(new Date, 'yyyy-MM-dd');
+        $scope.data.searchEndDate=$filter('date')(new Date-(1000*60*60*24*30), 'yyyy-MM-dd');
+        $scope.query= function(){
+            // $scope.data.intstrTime = $scope.data.serviceStartTime;
+            // $scope.data.intendTime = $scope.data.serviceEndTime;
+            // if($scope.data.serviceStartTime != null && $scope.data.startTime != null){
+            //     $scope.data.serviceStartTime = $scope.data.serviceStartTime +" "+ $scope.data.startTime;
+            // }
+            // if($scope.data.serviceEndTime != null && $scope.data.endTime != null){
+            //     $scope.data.serviceEndTime = $scope.data.serviceEndTime +" "+ $scope.data.endTime;
+            // }
+            showLoading();
+            StatisticsSvr.query($scope.data).success(function(res) {
+                // $scope.data.serviceStartTime = $scope.data.intstrTime;
+                // $scope.data.serviceEndTime = $scope.data.intendTime;
+                hideLoading();
+                if(res.code == 200) {
+                	// console.log(res)
+                    // $scope.totalday = 0;
+                    // $scope.totalzje = 0;
+                    // $scope.totaljsk = 0;
+                    // $scope.totalglf = 0;
+                    // $scope.totaljstz = 0;
+                    // $scope.totalddtz = 0;
+                    // $scope.totalsxf = 0;
+                    // $scope.totalHolidayDay=0;
+                    $scope.statisticsList = res.data;
+                    for(var i=0; i<$scope.statisticsList.length;i++){
+                        // $scope.incomeList[i].serviceDuration=$scope.incomeList[i].serviceDuration/24;
+                        // $scope.totalday=$scope.totalday+$scope.incomeList[i].serviceDuration;
+                        // $scope.totaljsk =$scope.totaljsk+$scope.incomeList[i].staffSettleAmt;
+                        // $scope.totalglf =$scope.totalglf+$scope.incomeList[i].instSettleAmt+$scope.incomeList[i].orderAdjustAmt;
+                        // $scope.totaljstz =$scope.totaljstz+$scope.incomeList[i].settleAdjustAmt;
+                        // $scope.totalzje =$scope.totalzje+$scope.incomeList[i].orderAmt+$scope.incomeList[i].orderAdjustAmt;
+                        // $scope.totalddtz =$scope.totalddtz+$scope.incomeList[i].orderAdjustAmt;
+                        // $scope.totalsxf =$scope.totalsxf+$scope.incomeList[i].pounDage;
+                        // $scope.incomeList[i].orderNum=i+1;
+                        // $scope.totalHolidayDay =$scope.totalHolidayDay+$scope.incomeList[i].holiday
+                    }
+
+                } else {
+                    alert(res.errorMsg);
+                }
+            });
+        }
+
+        $scope.query();
+    })
+
+    //收入统计
+    .controller("StatisticsContentSingleCtrl", function($scope, $state, LocalStorageProvider, GlobalConst ,
+                                                  StatisticsSingleSvr,$uibModal,$filter) {
+        $scope.data.searchBeginDate=$filter('date')(new Date, 'yyyy-MM-dd');
+        $scope.data.searchEndDate=$filter('date')(new Date-(1000*60*60*24*30), 'yyyy-MM-dd');
+        $scope.query= function(){
+            showLoading();
+            StatisticsSvr.query($scope.data).success(function(res) {
+                hideLoading();
+                if(res.code == 200) {
+                    $scope.statisticsList = res.data;
+                    for(var i=0; i<$scope.statisticsList.length;i++){
+
+                    }
+                } else {
+                    alert(res.errorMsg);
+                }
+            });
+        }
+
+        $scope.query();
+    });
