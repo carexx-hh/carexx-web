@@ -50,6 +50,8 @@
 						<th class="cell-seq">护理员</th>
 						<th class="cell-seq">收据号</th>
 						<th class="cell-seq">发票号</th>
+						<th class="cell-seq">上岗日期</th>
+						<th class="cell-seq">结束日期</th>
 						<th class="cell-seq">正常天数</th>
 						<th class="cell-seq">节假日天数</th>
 						<th class="cell-seq">单价</th>
@@ -63,8 +65,6 @@
 						<th class="cell-seq">结算款调整金额</th>
 						<th class="cell-seq">管理费</th>
 						<th class="cell-seq">备注</th>
-						<th class="cell-seq">上岗日期</th>
-						<th class="cell-seq">结束日期</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -80,6 +80,8 @@
 						<td class="cell-seq">{{item.hly}}</td>
 						<td class="cell-seq">{{item.sjh}}</a></td>
 						<td class="cell-seq">{{item.fph}}</td>
+						<td class="cell-seq">{{item.sgrq| date:'yyyy-MM-dd'}}</td>
+						<td class="cell-seq">{{item.jsrq| date:'yyyy-MM-dd'}}</td>
 						<td class="cell-seq">{{item.zcts}}</td>
 						<td class="cell-seq">{{item.jjrts}}</td>
 						<td class="cell-seq">{{item.dj}}</td>
@@ -93,40 +95,38 @@
 						<td class="cell-seq">{{item.jsktzje}}</td>
 						<td class="cell-seq">{{item.glf}}</td>
 						<td class="cell-seq">{{item.bz}}</td>
-						<td class="cell-seq">{{item.sgrq| date:'yyyy-MM-dd'}}</td>
-						<td class="cell-seq">{{item.jsrq| date:'yyyy-MM-dd'}}</td>
 					</tr>
 				</tbody>
-				<!--<tfoot>-->
-					<!--<tr>-->
-						<!--<td class="cell-seq">合计</td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-						<!--<td class="cell-seq"></td>-->
-					<!--</tr>-->
-				<!--</tfoot>-->
+				<tfoot>
+					<tr>
+						<td class="cell-seq">合计</td>
+						<td class="cell-seq">{{totalcount}}人</td>
+						<td class="cell-seq"></td>
+						<td class="cell-seq"></td>
+						<td class="cell-seq"></td>
+						<td class="cell-seq"></td>
+						<td class="cell-seq"></td>
+						<td class="cell-seq"></td>
+						<td class="cell-seq"></td>
+						<td class="cell-seq"></td>
+						<td class="cell-seq"></td>
+						<td class="cell-seq"></td>
+						<td class="cell-seq"></td>
+						<td class="cell-number">{{totalzcts| number:2}}</td>
+						<td class="cell-number">{{totaljjrts| number:2}}</td>
+						<td class="cell-seq"></td>
+						<td class="cell-number">{{totalysk| number:2}}</td>
+						<td class="cell-number"></td>
+						<td class="cell-number">{{totalzkje| number:2}}</td>
+						<td class="cell-number">{{totaltzje| number:2}}</td>
+						<td class="cell-number">{{totalssk| number:2}}</td>
+						<td class="cell-number">{{totalyyk| number:2}}</td>
+						<td class="cell-number">{{totaljskzc| number:2}}</td>
+						<td class="cell-number">{{totaljsktzje| number:2}}</td>
+						<td class="cell-number">{{totalglf| number:2}}</td>
+						<td class="cell-seq"></td>
+					</tr>
+				</tfoot>
 			</table>
 		</div>
 	</div>

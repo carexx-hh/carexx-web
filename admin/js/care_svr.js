@@ -710,7 +710,7 @@ angular.module('app.services', [])
 }])
 
 .factory('StatisticsSingleSvr', ['$http', function($http) {
-    var statisticsContentCtrl = {};
+    var statisticsContentSingleCtrl = {};
 
     statisticsContentSingleCtrl.query = function(data) {
         return $http.post('statistics/queryStatisticsSingle',data);

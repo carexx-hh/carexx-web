@@ -4228,8 +4228,20 @@ angular.module('app.controllers', [])
         // $scope.data.serviceStartTime=$filter('date')(new Date-(1000*60*60*24*30), 'yyyy-MM-dd');
         // $scope.data.intstrTime = $scope.data.serviceStartTime;
         // $scope.data.intendTime = $scope.data.serviceEndTime;
-        $scope.data.searchBeginDate=$filter('date')(new Date, 'yyyy-MM-dd');
-        $scope.data.searchEndDate=$filter('date')(new Date-(1000*60*60*24*30), 'yyyy-MM-dd');
+        $scope.data = {};
+        $scope.totalzcts = 0;
+        $scope.totaljjrts = 0;
+        $scope.totalzkje = 0;
+        $scope.totaltzje = 0;
+        $scope.totalssk = 0;
+        $scope.totalyyk = 0;
+        $scope.totalysk = 0;
+        $scope.totaljskzc=0;
+        $scope.totaljsktzje=0;
+        $scope.totalglf=0;
+        $scope.totalcount=0;
+        $scope.data.searchEndDate=$filter('date')(new Date, 'yyyy-MM-dd');
+        $scope.data.searchBeginDate=$filter('date')(new Date-(1000*60*60*24*30), 'yyyy-MM-dd');
         $scope.query= function(){
             // $scope.data.intstrTime = $scope.data.serviceStartTime;
             // $scope.data.intendTime = $scope.data.serviceEndTime;
@@ -4245,26 +4257,47 @@ angular.module('app.controllers', [])
                 // $scope.data.serviceEndTime = $scope.data.intendTime;
                 hideLoading();
                 if(res.code == 200) {
-                	// console.log(res)
-                    // $scope.totalday = 0;
-                    // $scope.totalzje = 0;
-                    // $scope.totaljsk = 0;
-                    // $scope.totalglf = 0;
-                    // $scope.totaljstz = 0;
-                    // $scope.totalddtz = 0;
-                    // $scope.totalsxf = 0;
-                    // $scope.totalHolidayDay=0;
+                    $scope.totalzcts = 0;
+                    $scope.totaljjrts = 0;
+                    $scope.totalzkje = 0;
+                    $scope.totaltzje = 0;
+                    $scope.totalssk = 0;
+                    $scope.totalyyk = 0;
+                    $scope.totalysk = 0;
+                    $scope.totaljskzc=0;
+                    $scope.totaljsktzje=0;
+                    $scope.totalglf=0;
+                    $scope.totalcount=0;
                     $scope.statisticsList = res.data;
                     for(var i=0; i<$scope.statisticsList.length;i++){
+                        $scope.totalcount = $scope.totalcount + 1;
                         // $scope.incomeList[i].serviceDuration=$scope.incomeList[i].serviceDuration/24;
-                        // $scope.totalday=$scope.totalday+$scope.incomeList[i].serviceDuration;
-                        // $scope.totaljsk =$scope.totaljsk+$scope.incomeList[i].staffSettleAmt;
-                        // $scope.totalglf =$scope.totalglf+$scope.incomeList[i].instSettleAmt+$scope.incomeList[i].orderAdjustAmt;
-                        // $scope.totaljstz =$scope.totaljstz+$scope.incomeList[i].settleAdjustAmt;
-                        // $scope.totalzje =$scope.totalzje+$scope.incomeList[i].orderAmt+$scope.incomeList[i].orderAdjustAmt;
-                        // $scope.totalddtz =$scope.totalddtz+$scope.incomeList[i].orderAdjustAmt;
-                        // $scope.totalsxf =$scope.totalsxf+$scope.incomeList[i].pounDage;
-                        // $scope.incomeList[i].orderNum=i+1;
+                        $scope.totalzcts=$scope.totalzcts+Number($scope.statisticsList[i].zcts);
+                        $scope.totaljjrts =$scope.totaljjrts+Number($scope.statisticsList[i].jjrts);
+                        $scope.totalzkje =$scope.totalzkje+Number($scope.statisticsList[i].zkje);
+                        $scope.totaltzje =$scope.totaltzje+Number($scope.statisticsList[i].tzje);
+                        $scope.totalysk =$scope.totalysk+Number($scope.statisticsList[i].ysk);
+                        if($scope.statisticsList[i].ssk.length>1){
+                            $scope.totalssk =$scope.totalssk+Number($scope.statisticsList[i].ssk.substr(1));
+                        }
+                        if($scope.statisticsList[i].yyk.length>1){
+                            $scope.totalyyk =$scope.totalyyk+Number($scope.statisticsList[i].yyk.substr(1));
+                        }
+                        if($scope.statisticsList[i].jskzc.length>1){
+                            $scope.totaljskzc =$scope.totaljskzc+Number($scope.statisticsList[i].jskzc.substr(1));
+                        }
+                        if($scope.statisticsList[i].jsktzje.length>1){
+                            $scope.totaljsktzje =$scope.totaljsktzje+Number($scope.statisticsList[i].jsktzje.substr(1));
+                        }
+                        if($scope.statisticsList[i].glf.length>1){
+                            $scope.totalglf =$scope.totalglf+Number($scope.statisticsList[i].glf.substr(1));
+                        }
+                        // $scope.totalssk =$scope.totalssk+Number($scope.statisticsList[i].ssk);
+                        // $scope.totalyyk =$scope.totalyyk+Number($scope.statisticsList[i].yyk);
+                        // $scope.totaljskzc =$scope.totaljskzc+Number($scope.statisticsList[i].jskzc);
+                        // $scope.totaljsktzje =$scope.totaljsktzje+Number($scope.statisticsList[i].jsktzje);
+                        // $scope.totalglf =$scope.totalglf+Number($scope.statisticsList[i].glf);
+                        // $scope.statisticsList[i].orderNum=i+1;
                         // $scope.totalHolidayDay =$scope.totalHolidayDay+$scope.incomeList[i].holiday
                     }
 
@@ -4280,16 +4313,48 @@ angular.module('app.controllers', [])
     //收入统计
     .controller("StatisticsContentSingleCtrl", function($scope, $state, LocalStorageProvider, GlobalConst ,
                                                   StatisticsSingleSvr,$uibModal,$filter) {
-        $scope.data.searchBeginDate=$filter('date')(new Date, 'yyyy-MM-dd');
-        $scope.data.searchEndDate=$filter('date')(new Date-(1000*60*60*24*30), 'yyyy-MM-dd');
+        $scope.data = {};
+        $scope.totalzcts = 0;
+        $scope.totaljjrts = 0;
+        $scope.totalzkje = 0;
+        $scope.totaltzje = 0;
+        $scope.totalssk = 0;
+        $scope.totalyyk = 0;
+        $scope.totalysk = 0;
+        $scope.totaljskzc=0;
+        $scope.totaljsktzje=0;
+        $scope.totalglf=0;
+        $scope.totalcount=0;
+        $scope.data.searchEndDate=$filter('date')(new Date, 'yyyy-MM-dd');
+        $scope.data.searchBeginDate=$filter('date')(new Date-(1000*60*60*24*30), 'yyyy-MM-dd');
         $scope.query= function(){
             showLoading();
-            StatisticsSvr.query($scope.data).success(function(res) {
+            StatisticsSingleSvr.query($scope.data).success(function(res) {
                 hideLoading();
                 if(res.code == 200) {
                     $scope.statisticsList = res.data;
                     for(var i=0; i<$scope.statisticsList.length;i++){
-
+                        $scope.totalcount = $scope.totalcount + 1;
+                        $scope.totalzcts=$scope.totalzcts+Number($scope.statisticsList[i].zcts);
+                        $scope.totaljjrts =$scope.totaljjrts+Number($scope.statisticsList[i].jjrts);
+                        $scope.totalzkje =$scope.totalzkje+Number($scope.statisticsList[i].zkje);
+                        $scope.totaltzje =$scope.totaltzje+Number($scope.statisticsList[i].tzje);
+                        $scope.totalysk =$scope.totalysk+Number($scope.statisticsList[i].ysk);
+                        if($scope.statisticsList[i].ssk.length>1){
+                            $scope.totalssk =$scope.totalssk+Number($scope.statisticsList[i].ssk.substr(1));
+                        }
+                        if($scope.statisticsList[i].yyk.length>1){
+                            $scope.totalyyk =$scope.totalyyk+Number($scope.statisticsList[i].yyk.substr(1));
+                        }
+                        if($scope.statisticsList[i].jskzc.length>1){
+                            $scope.totaljskzc =$scope.totaljskzc+Number($scope.statisticsList[i].jskzc.substr(1));
+                        }
+                        if($scope.statisticsList[i].jsktzje.length>1){
+                            $scope.totaljsktzje =$scope.totaljsktzje+Number($scope.statisticsList[i].jsktzje.substr(1));
+                        }
+                        if($scope.statisticsList[i].glf.length>1){
+                            $scope.totalglf =$scope.totalglf+Number($scope.statisticsList[i].glf.substr(1));
+                        }
                     }
                 } else {
                     alert(res.errorMsg);
