@@ -651,8 +651,9 @@ angular.module('app.controllers', [])
 			if($scope.data.entrydate == null) {
 				$scope.data.entrydate = ""
 			}
-			if($scope.data.phone == null) {
-				$scope.data.phone = ""
+			if(!(/^1[34578]\d{9}$/.test($scope.data.phone))) {
+				alert("请输入正确的手机号码格式");
+				return false;
 			}
 			showLoading();
 			StaffSvr.add($scope.data).success(function(res) {
@@ -719,8 +720,9 @@ angular.module('app.controllers', [])
 			if($scope.data.entrydate == null) {
 				$scope.data.entrydate = ""
 			}
-			if($scope.data.phone == null) {
-				$scope.data.phone = ""
+			if(!(/^1[34578]\d{9}$/.test($scope.data.phone))) {
+				alert("请输入正确的手机号码格式");
+				return false;
 			}
 			showLoading();
 			StaffSvr.modify($scope.data).success(function(res) {
